@@ -1,124 +1,110 @@
+import {
+  Button,
+  DatePicker,
+  Divider,
+  Input,
+  InputNumber,
+  Segmented,
+  Select,
+  Switch,
+  Tag,
+} from 'antd';
 import { ReactElement } from 'react';
-import { BsSave, BsSendCheck } from 'react-icons/bs';
 import {
-  TbCancel,
-  TbEdit,
-  TbMail,
+  TbCirclePlus,
+  TbMailDown,
   TbMailPlus,
-  TbPencil,
-  TbUsers,
+  TbMailUp,
+  TbPin,
 } from 'react-icons/tb';
-
-import { Badge } from 'components/ui/badge.tsx';
-import { Button } from 'components/ui/button.tsx';
-import { DatePicker } from 'components/ui/date-picker.tsx';
-import { Input } from 'components/ui/input.tsx';
-import { Switch } from 'components/ui/switch.tsx';
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from 'components/ui/tabs.tsx';
-import { Textarea } from 'components/ui/textarea';
 
 import { PageHeader } from 'widgets/page-header';
 
 import { RecipientSelect } from 'entities/recipient-select';
 import { SecurityClassificationSelect } from 'entities/security-classification-select';
 
-import { DragAndDropUploader, Empty, Label, Table } from 'shared/ui';
+import { Label } from 'shared/ui';
 
 export function IncomingDocumentsCreatePage(): ReactElement {
   return (
     <div className={'space-y-4 pb-4'}>
       <PageHeader icon={TbMailPlus} title={'Создание входящего документа'} />
       <section className={'flex items-center justify-end gap-2'}>
-        <Badge variant={'outline'}>Черновик</Badge>
+        <Tag color="default">Черновик</Tag>
       </section>
-      <Tabs defaultValue="main">
-        <TabsList className={'w-full'}>
-          <TabsTrigger value={'main'}>Общее</TabsTrigger>
-          <TabsTrigger value={'files'}>Файлы</TabsTrigger>
-          <TabsTrigger value={'bundle'}>Связи</TabsTrigger>
-          <TabsTrigger value={'worker'}>Исполнители</TabsTrigger>
-        </TabsList>
-        <TabsContent value="main" className={'mt-4 space-y-4'}>
-          <section className={'grid grid-cols-4 items-center gap-2'}>
-            <Input placeholder={'Входящий номер'} disabled />
-            <Input placeholder={'Дата'} />
-            <DatePicker />
-            <RecipientSelect />
-            <SecurityClassificationSelect />
-          </section>
-          <section className={'flex gap-2'}>
-            <Input placeholder={'Дата исходящего'} />
-            <Input placeholder={'Исходящий номер'} />
-            <Input placeholder={'Отправитель'} />
-            <Input placeholder={'Организация'} />
-          </section>
-          <section className={'flex gap-2'}>
-            <Input type={'number'} placeholder={'Листов'} />
-            <Input type={'number'} placeholder={'Приложений'} />
-            <div className={'flex w-full items-center justify-start gap-2'}>
-              <Switch />
-              <span className={'text-right text-sm'}>Бумажный носитель</span>
-            </div>
-          </section>
-          <section className={'flex gap-2'}>
-            <Textarea placeholder={'Содержание'} />
-          </section>
-          <section className={'flex flex-col gap-2'}>
-            <Label title={'Ответ на исходящий'} icon={TbMail} />
-
-            <Table data={[]} columns={[]} />
-            <Button>Добавить</Button>
-          </section>
-          <section className={'flex flex-col gap-2'}>
-            <Label title={'Комментарий'} icon={TbEdit} />
-            <Textarea placeholder={''} />
-          </section>
-        </TabsContent>
-        <TabsContent value="files">
-          <section className={'mt-4 space-y-4'}>
-            <DragAndDropUploader onChange={() => {}} />
-            <Table data={[]} columns={[]} />
-          </section>
-        </TabsContent>
-        <TabsContent value={'bundle'} className={'mt-4 space-y-4'}>
-          <Button>Добавить новую связь</Button>
-          <Table data={[]} columns={[]} />
-        </TabsContent>
-        <TabsContent value="worker">
-          <section className={'mt-4 space-y-4'}>
-            <div className={'space-y-2'}>
-              <Label title={'Резолюция'} icon={TbPencil} />
-              <Textarea placeholder={'Резолюция'} />
-            </div>
-            <div className={'h-96 w-full space-y-2'}>
-              <Label title={'Список исполнителей'} icon={TbUsers} />
-              <Empty />
-              <Button className={'w-full'}>Добавить исполнителя</Button>
-            </div>
-          </section>
-        </TabsContent>
-      </Tabs>
-      <section className={'flex items-center justify-end gap-2'}>
-        <Button>
-          <BsSendCheck /> Сохранить и отправить
-        </Button>
-        <Button variant={'secondary'}>
-          <BsSave /> Сохранить
-        </Button>
-        <Button
-          variant={'outline'}
-          className={
-            'border-red-500 text-red-500 hover:bg-red-50 hover:text-red-500'
-          }
-        >
-          <TbCancel /> Отменить
-        </Button>
+      <div className={'mb-4'} />
+      <Segmented options={['Общее', 'Файлы', 'Связи']} block />
+      <div className={'mb-4'} />
+      <Label title={'Входящее'} icon={TbMailDown} />
+      <section className={'my-4 grid grid-cols-4 gap-2'}>
+        <Input
+          value={`ВХ-${Math.random().toFixed(2)}`}
+          className={'h-9'}
+          placeholder={'Входящий номер'}
+          disabled
+        />
+        <DatePicker
+          className={'h-9'}
+          placeholder={'Дата'}
+          format={'DD MMMM YYYY'}
+        />
+        <RecipientSelect />
+        <SecurityClassificationSelect />
       </section>
+      <Label title={'Исходяще'} icon={TbMailUp} />
+      <section className={'my-4 grid grid-cols-4 gap-2'}>
+        <DatePicker
+          className={'h-9'}
+          placeholder={'Дата'}
+          format={'DD MM YYYY'}
+        />
+        <Select showSearch className={'h-9'} placeholder={'Исходящий номер'} />
+        <Input placeholder={'Отправитель'} />
+        <Input placeholder={'Организация'} />
+      </section>
+      <Label title={'Дополнительно'} icon={TbCirclePlus} />
+      <section className={'my-4 grid grid-cols-4 gap-2'}>
+        <InputNumber
+          min={0}
+          className={'!w-full'}
+          type={'number'}
+          placeholder={'Листов'}
+        />
+        <InputNumber
+          min={0}
+          className={'!w-full'}
+          type={'number'}
+          placeholder={'Приложений'}
+        />
+        <div className={'flex items-center justify-center gap-2'}>
+          <Switch />
+          <span className={'text-sm'}>Бумажный носитель</span>
+        </div>
+      </section>
+      <section className={'grid grid-cols-1'}>
+        <Input.TextArea
+          placeholder={'Содержание'}
+          count={{
+            show: true,
+            max: 200,
+          }}
+        />
+      </section>
+      <Label title={'Заметка'} iconClass={'text-yellow-500'} icon={TbPin} />
+      <section className={'grid grid-cols-1'}>
+        <Input.TextArea
+          placeholder={'Заметка будет видна только Вам'}
+          count={{
+            show: true,
+            max: 200,
+          }}
+        />
+      </section>
+      <Divider />
+      <div className={'flex items-center justify-end gap-2'}>
+        <Button type={'primary'}>Сохранить</Button>
+        <Button danger>Отменить</Button>
+      </div>
     </div>
   );
 }

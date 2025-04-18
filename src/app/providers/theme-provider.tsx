@@ -41,7 +41,7 @@ export function ThemeProvider({
         .addEventListener('change', (e) => {
           const currentTheme = e.matches ? 'dark' : 'light';
           setTheme(currentTheme);
-          root.classList.add(currentTheme);
+          root.classList.add('light');
         });
 
       return;

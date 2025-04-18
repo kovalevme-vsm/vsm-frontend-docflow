@@ -8,7 +8,6 @@ import { DashboardPage } from 'pages/dashboard-page';
 import { IncomingDocumentsCreatePage } from 'pages/incoming-documents-create-page';
 import { IncomingDocumentsPage } from 'pages/incoming-documents-page';
 import { NotFoundRoutePath } from 'pages/not-found-route-path';
-import { OutgoingDocumentsPage } from 'pages/outgoing-documents-page';
 
 import { ROUTES } from 'shared/const';
 
@@ -29,10 +28,6 @@ createRoot(document.getElementById('root')!).render(
           <Route
             path={ROUTES.DOCUMENTS_INCOMING_CREATE}
             element={<IncomingDocumentsCreatePage />}
-          />
-          <Route
-            path={ROUTES.DOCUMENTS_OUTGOING}
-            element={<OutgoingDocumentsPage />}
           />
         </Route>
       </Route>

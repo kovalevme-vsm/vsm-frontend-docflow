@@ -1,8 +1,7 @@
+import { Button } from 'antd';
 import { ReactElement } from 'react';
 import { TbArrowBackUp } from 'react-icons/tb';
 import { useNavigate } from 'react-router';
-
-import { Button } from 'shared/ui';
 
 import notFound from '../assets/404.svg';
 
@@ -34,9 +33,9 @@ export function NotFoundRoutePath(): ReactElement {
         <Button
           onClick={() => navigate(-1)}
           className={'mt-4'}
-          icon={TbArrowBackUp}
-          variant={'primary'}
+          type={'primary'}
         >
+          <TbArrowBackUp />
           Назад
         </Button>
       </div>

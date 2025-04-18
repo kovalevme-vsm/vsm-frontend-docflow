@@ -1,6 +1,6 @@
+import { Button } from 'antd';
 import { motion } from 'framer-motion';
 import { ReactElement } from 'react';
-import { ApplicationLogo } from 'widgets/application-logo';
 import {
   TbCategory,
   TbDoorExit,
@@ -8,11 +8,13 @@ import {
   TbHelp,
   TbLayoutSidebarLeftCollapse,
   TbMailDown,
-  TbMailUp,
 } from 'react-icons/tb';
+
+import { ApplicationLogo } from 'widgets/application-logo';
 import { SidebarMenuItem } from 'widgets/sidebar-menu/ui/sidebar-menu-item.tsx';
-import { Button, TextButton } from 'shared/ui';
+
 import { ROUTES } from 'shared/const';
+import { TextButton } from 'shared/ui';
 
 export function SidebarMenu(): ReactElement {
   return (
@@ -39,11 +41,6 @@ export function SidebarMenu(): ReactElement {
                   icon: TbMailDown,
                   route: ROUTES.DOCUMENTS_INCOMING,
                 },
-                {
-                  title: 'Исходящие',
-                  icon: TbMailUp,
-                  route: ROUTES.DOCUMENTS_OUTGOING,
-                },
               ]}
             />
           </div>
@@ -53,7 +50,6 @@ export function SidebarMenu(): ReactElement {
           <TextButton title={'Помощь'} icon={TbHelp} />
           <TextButton title={'Выйти из системы'} icon={TbDoorExit} />
           <Button
-            icon={TbLayoutSidebarLeftCollapse}
             className={'mt-4 !flex xl:!hidden'}
             onClick={() => {
               const element = document.getElementById('vsm-doc-sidebar');
@@ -64,6 +60,7 @@ export function SidebarMenu(): ReactElement {
             }}
             block
           >
+            <TbLayoutSidebarLeftCollapse />
             Скрыть меню
           </Button>
         </div>
