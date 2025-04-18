@@ -1,4 +1,4 @@
-import { Recipient } from 'entities/recipient-select/ui/models/types';
+import { Sender } from 'entities/sender-select/models/types';
 
 import {
   dictionaryApiPath,
@@ -7,9 +7,9 @@ import {
 } from 'shared/lib/query';
 
 export const useGetSenderSelect = () => {
-  return useApiQuery<Recipient[]>({
-    apiPath: dictionaryApiPath.recipient,
-    queryKey: dictionaryQueryKey.recipient(),
+  return useApiQuery<Sender[]>({
+    apiPath: dictionaryApiPath.sender,
+    queryKey: dictionaryQueryKey.sender(),
     placeholderData: [
       {
         id: String(Math.random()),

@@ -23,6 +23,7 @@ import { PageHeader } from 'widgets/page-header';
 import { OrganizationSelect } from 'entities/organization-select/ui';
 import { RecipientSelect } from 'entities/recipient-select';
 import { SecurityClassificationSelect } from 'entities/security-classification-select';
+import { SenderSelect } from 'entities/sender-select';
 
 import { Label } from 'shared/ui';
 
@@ -60,7 +61,7 @@ export function IncomingDocumentsCreatePage(): ReactElement {
           format={'DD MM YYYY'}
         />
         <Select showSearch className={'h-9'} placeholder={'Исходящий номер'} />
-        <Input placeholder={'Отправитель'} />
+        <SenderSelect />
         <OrganizationSelect />
       </section>
       <Label title={'Дополнительно'} icon={TbCirclePlus} />

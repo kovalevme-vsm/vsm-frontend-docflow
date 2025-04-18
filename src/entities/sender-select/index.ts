@@ -1,1 +1,1 @@
-export { RecipientSelect } from 'entities/recipient-select/ui/ui';
+export { SenderSelect } from './ui/index';

@@ -1,10 +1,10 @@
 import { Select } from 'antd';
 import { ReactElement } from 'react';
 
-import { useGetRecipientSelect } from 'entities/recipient-select/ui/api/use-get-recipient';
+import { useGetSenderSelect } from 'entities/sender-select/api/use-get-sender';
 
-export function RecipientSelect(): ReactElement {
-  const { data, isPending } = useGetRecipientSelect();
+export function SenderSelect(): ReactElement {
+  const { data, isPending } = useGetSenderSelect();
   return (
     <Select
       fieldNames={{
@@ -14,7 +14,7 @@ export function RecipientSelect(): ReactElement {
       loading={isPending}
       options={data}
       allowClear
-      placeholder={'Получатель'}
+      placeholder={'Отправитель'}
     />
   );
 }
