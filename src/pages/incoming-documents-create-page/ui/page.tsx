@@ -20,6 +20,7 @@ import {
 
 import { PageHeader } from 'widgets/page-header';
 
+import { OrganizationSelect } from 'entities/organization-select/ui';
 import { RecipientSelect } from 'entities/recipient-select';
 import { SecurityClassificationSelect } from 'entities/security-classification-select';
 
@@ -60,7 +61,7 @@ export function IncomingDocumentsCreatePage(): ReactElement {
         />
         <Select showSearch className={'h-9'} placeholder={'Исходящий номер'} />
         <Input placeholder={'Отправитель'} />
-        <Input placeholder={'Организация'} />
+        <OrganizationSelect />
       </section>
       <Label title={'Дополнительно'} icon={TbCirclePlus} />
       <section className={'my-4 grid grid-cols-4 gap-2'}>

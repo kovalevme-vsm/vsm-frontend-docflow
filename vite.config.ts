@@ -11,6 +11,9 @@ export default defineConfig({
     host: '0.0.0.0',
     port: 3000,
   },
+  optimizeDeps: {
+    exclude: ['dayjs/locale/ru'],
+  },
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {

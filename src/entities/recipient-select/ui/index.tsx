@@ -1,7 +1,7 @@
 import { Select } from 'antd';
 import { ReactElement } from 'react';
 
-import { useGetRecipientSelect } from 'entities/recipient-select/ui/api/use-get-recipient';
+import { useGetRecipientSelect } from 'entities/recipient-select/api/use-get-recipient.ts';
 
 export function RecipientSelect(): ReactElement {
   const { data, isPending } = useGetRecipientSelect();

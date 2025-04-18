@@ -5,4 +5,5 @@ export const dictionaryQueryKey = {
     'securityClassification',
   ],
   recipient: () => [...dictionaryQueryKey.all, 'recipient'],
+  organization: () => [...dictionaryQueryKey.all, 'organization'],
 };
