@@ -11,14 +11,8 @@ import {
 
 import { Badge } from 'components/ui/badge.tsx';
 import { Button } from 'components/ui/button.tsx';
+import { DatePicker } from 'components/ui/date-picker.tsx';
 import { Input } from 'components/ui/input.tsx';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from 'components/ui/select.tsx';
 import { Switch } from 'components/ui/switch.tsx';
 import {
   Tabs,
@@ -26,9 +20,12 @@ import {
   TabsList,
   TabsTrigger,
 } from 'components/ui/tabs.tsx';
-import { Textarea } from 'components/ui/textarea.tsx';
+import { Textarea } from 'components/ui/textarea';
 
 import { PageHeader } from 'widgets/page-header';
+
+import { RecipientSelect } from 'entities/recipient-select';
+import { SecurityClassificationSelect } from 'entities/security-classification-select';
 
 import { DragAndDropUploader, Empty, Label, Table } from 'shared/ui';
 
@@ -50,17 +47,9 @@ export function IncomingDocumentsCreatePage(): ReactElement {
           <section className={'grid grid-cols-4 items-center gap-2'}>
             <Input placeholder={'Входящий номер'} disabled />
             <Input placeholder={'Дата'} />
-            <Input placeholder={'Адресат'} />
-            <Select>
-              <SelectTrigger className={'w-full'}>
-                <SelectValue placeholder={'Гриф'} />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value={'confidence'}>Конфиденциально</SelectItem>
-                <SelectItem value={'dsp'}>ДСП</SelectItem>
-                <SelectItem value={'kt'}>Коммерческая тайна</SelectItem>
-              </SelectContent>
-            </Select>
+            <DatePicker />
+            <RecipientSelect />
+            <SecurityClassificationSelect />
           </section>
           <section className={'flex gap-2'}>
             <Input placeholder={'Дата исходящего'} />

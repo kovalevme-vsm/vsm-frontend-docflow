@@ -1,8 +1,10 @@
 import { ReactElement } from 'react';
 import { TbFingerprint } from 'react-icons/tb';
+
+import { Button } from 'components/ui/button';
+import { Input } from 'components/ui/input';
+
 import { ApplicationLogo } from 'widgets/application-logo';
-import { Button } from '@/components/ui/button.tsx';
-import { Input } from '@/components/ui/input.tsx';
 
 export function AuthenticateForm(): ReactElement {
   return (

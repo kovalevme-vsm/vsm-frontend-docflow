@@ -1,11 +1,15 @@
 import { ReactElement } from 'react';
-import { PageHeader } from 'widgets/page-header';
-import { TbChevronLeft, TbChevronRight, TbMailDown } from 'react-icons/tb';
-import { IncomingDocumentTable } from 'entities/incoming-document-table';
-import { useNavigate } from 'react-router';
-import { ROUTES } from 'shared/const';
-import { Button } from '@/components/ui/button.tsx';
 import { IoMdAddCircleOutline } from 'react-icons/io';
+import { TbChevronLeft, TbChevronRight, TbMailDown } from 'react-icons/tb';
+import { useNavigate } from 'react-router';
+
+import { Button } from 'components/ui/button';
+
+import { PageHeader } from 'widgets/page-header';
+
+import { IncomingDocumentTable } from 'entities/incoming-document-table';
+
+import { ROUTES } from 'shared/const';
 
 export function IncomingDocumentsPage(): ReactElement {
   const navigate = useNavigate();

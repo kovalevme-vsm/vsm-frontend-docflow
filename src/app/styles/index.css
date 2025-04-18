@@ -7,6 +7,10 @@
     font-family: "Montserrat", sans-serif !important;
 }
 
+@theme {
+    --font-roboto: "Montserrat", sans-serif;
+}
+
 .background-color {
     @apply bg-gray-50 dark:bg-gray-950;
 }
