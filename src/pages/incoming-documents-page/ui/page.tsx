@@ -32,7 +32,7 @@ export function IncomingDocumentsPage(): ReactElement {
           aria-label="Previous"
         >
           <TbChevronLeft />
-          <span className="sr-only">Previous</span>
+          <span className="sr-only">Предыдущая</span>
         </button>
         <div className="flex items-center gap-x-1">
           <button
