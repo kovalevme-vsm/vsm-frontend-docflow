@@ -1,66 +1,132 @@
 import { ReactElement } from 'react';
 import { PageHeader } from 'widgets/page-header';
-import { TbMail, TbMailPlus, TbUsers } from 'react-icons/tb';
-import { Button, Input, Label, Table } from 'shared/ui';
+import {
+  TbCancel,
+  TbEdit,
+  TbMail,
+  TbMailPlus,
+  TbPencil,
+  TbUsers,
+} from 'react-icons/tb';
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from '@/components/ui/tabs.tsx';
+import { Badge } from '@/components/ui/badge.tsx';
+import { DragAndDropUploader, Empty, Label, Table } from 'shared/ui';
+import { Input } from '@/components/ui/input.tsx';
+import { Switch } from '@/components/ui/switch.tsx';
+import { Textarea } from '@/components/ui/textarea.tsx';
+import { Button } from '@/components/ui/button.tsx';
+import { BsSave, BsSendCheck } from 'react-icons/bs';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select.tsx';
 
 export function IncomingDocumentsCreatePage(): ReactElement {
   return (
-    <div className={'space-y-8'}>
+    <div className={'space-y-4 pb-4'}>
       <PageHeader icon={TbMailPlus} title={'Создание входящего документа'} />
-      <form className={'w-full space-y-4'}>
-        <section className={'flex gap-2'}>
-          <Input placeholder={'ВХ-1992_ОТ'} />
-          <Input placeholder={'Дата'} />
-          <Input placeholder={'Адресат'} />
-          <div className="flex items-center gap-x-3">
-            <label
-              htmlFor="hs-basic-with-description-unchecked"
-              className="relative inline-block h-6 w-11 cursor-pointer"
-            >
-              <input
-                type="checkbox"
-                id="hs-basic-with-description-unchecked"
-                className="peer sr-only"
-              />
-              <span className="absolute inset-0 rounded-full bg-gray-200 transition-colors duration-200 ease-in-out peer-checked:bg-blue-600 peer-disabled:pointer-events-none peer-disabled:opacity-50 dark:bg-neutral-700 dark:peer-checked:bg-blue-500"></span>
-              <span className="absolute start-0.5 top-1/2 size-5 -translate-y-1/2 rounded-full bg-white shadow-xs transition-transform duration-200 ease-in-out peer-checked:translate-x-full dark:bg-neutral-400 dark:peer-checked:bg-white"></span>
-            </label>
-            <label
-              htmlFor="hs-basic-with-description-unchecked"
-              className="text-sm text-gray-500 dark:text-neutral-400"
-            >
-              Конфиденциально
-            </label>
-          </div>
-        </section>
-        <section className={'flex w-full gap-2'}>
-          <Input placeholder={'Исходящий Номер'} />
-          <Input placeholder={'Дата исходящего номера'} />
-          <Input placeholder={'Отправитель'} />
-          <Input placeholder={'Организация'} />
-        </section>
-        <section className={'flex w-full gap-2'}>
-          <Input placeholder={'Содержание'} />
-        </section>
-        <section className={'flex w-1/2 gap-2'}>
-          <Input placeholder={'Количество листов'} />
-          <Input placeholder={'Количество листов приложений'} />
-        </section>
-        <Label title={'Исполнители'} icon={TbUsers} />
-        <Table data={[]} columns={[]} />
-        <Label title={'Связь с исходящими'} icon={TbMail} />
-        <Table data={[]} columns={[]} />
-        <Input placeholder={'Комментарий'} />
-      </form>
-      <div className={'flex flex-col justify-end gap-2 xl:flex-row'}>
-        <Button className={'w-full xl:w-fit'} variant={'primary'}>
-          Сохранить и отправить
+      <section className={'flex items-center justify-end gap-2'}>
+        <Badge variant={'outline'}>Черновик</Badge>
+      </section>
+      <Tabs defaultValue="main">
+        <TabsList className={'w-full'}>
+          <TabsTrigger value={'main'}>Общее</TabsTrigger>
+          <TabsTrigger value={'files'}>Файлы</TabsTrigger>
+          <TabsTrigger value={'bundle'}>Связи</TabsTrigger>
+          <TabsTrigger value={'worker'}>Исполнители</TabsTrigger>
+        </TabsList>
+        <TabsContent value="main" className={'mt-4 space-y-4'}>
+          <section className={'grid grid-cols-4 items-center gap-2'}>
+            <Input placeholder={'Входящий номер'} disabled />
+            <Input placeholder={'Дата'} />
+            <Input placeholder={'Адресат'} />
+            <Select>
+              <SelectTrigger className={'w-full'}>
+                <SelectValue placeholder={'Гриф'} />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value={'confidence'}>Конфиденциально</SelectItem>
+                <SelectItem value={'dsp'}>ДСП</SelectItem>
+                <SelectItem value={'kt'}>Коммерческая тайна</SelectItem>
+              </SelectContent>
+            </Select>
+          </section>
+          <section className={'flex gap-2'}>
+            <Input placeholder={'Дата исходящего'} />
+            <Input placeholder={'Исходящий номер'} />
+            <Input placeholder={'Отправитель'} />
+            <Input placeholder={'Организация'} />
+          </section>
+          <section className={'flex gap-2'}>
+            <Input type={'number'} placeholder={'Листов'} />
+            <Input type={'number'} placeholder={'Приложений'} />
+            <div className={'flex w-full items-center justify-start gap-2'}>
+              <Switch />
+              <span className={'text-right text-sm'}>Бумажный носитель</span>
+            </div>
+          </section>
+          <section className={'flex gap-2'}>
+            <Textarea placeholder={'Содержание'} />
+          </section>
+          <section className={'flex flex-col gap-2'}>
+            <Label title={'Ответ на исходящий'} icon={TbMail} />
+
+            <Table data={[]} columns={[]} />
+            <Button>Добавить</Button>
+          </section>
+          <section className={'flex flex-col gap-2'}>
+            <Label title={'Комментарий'} icon={TbEdit} />
+            <Textarea placeholder={''} />
+          </section>
+        </TabsContent>
+        <TabsContent value="files">
+          <section className={'mt-4 space-y-4'}>
+            <DragAndDropUploader onChange={() => {}} />
+            <Table data={[]} columns={[]} />
+          </section>
+        </TabsContent>
+        <TabsContent value={'bundle'} className={'mt-4 space-y-4'}>
+          <Button>Добавить новую связь</Button>
+          <Table data={[]} columns={[]} />
+        </TabsContent>
+        <TabsContent value="worker">
+          <section className={'mt-4 space-y-4'}>
+            <div className={'space-y-2'}>
+              <Label title={'Резолюция'} icon={TbPencil} />
+              <Textarea placeholder={'Резолюция'} />
+            </div>
+            <div className={'h-96 w-full space-y-2'}>
+              <Label title={'Список исполнителей'} icon={TbUsers} />
+              <Empty />
+              <Button className={'w-full'}>Добавить исполнителя</Button>
+            </div>
+          </section>
+        </TabsContent>
+      </Tabs>
+      <section className={'flex items-center justify-end gap-2'}>
+        <Button>
+          <BsSendCheck /> Сохранить и отправить
         </Button>
-        <Button className={'w-full xl:w-fit'}>Сохранить</Button>
-        <Button className={'w-full xl:w-fit'} variant={'dangerOutline'}>
-          Отменить
+        <Button variant={'secondary'}>
+          <BsSave /> Сохранить
         </Button>
-      </div>
+        <Button
+          variant={'outline'}
+          className={
+            'border-red-500 text-red-500 hover:bg-red-50 hover:text-red-500'
+          }
+        >
+          <TbCancel /> Отменить
+        </Button>
+      </section>
     </div>
   );
 }

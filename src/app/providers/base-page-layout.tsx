@@ -8,7 +8,9 @@ import { TbLayoutSidebarLeftExpand } from 'react-icons/tb';
 export function BasePageLayout(): ReactElement {
   return (
     <main
-      className={'flex h-dvh w-screen gap-4 bg-neutral-50 p-4 dark:bg-gray-950'}
+      className={
+        'flex h-dvh w-screen gap-4 overflow-y-auto bg-neutral-50 p-4 dark:bg-gray-950'
+      }
     >
       <SidebarMenu />
       <div className={'flex h-full w-full flex-1 flex-col'}>
