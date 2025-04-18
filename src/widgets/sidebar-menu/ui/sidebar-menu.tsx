@@ -18,7 +18,7 @@ export function SidebarMenu(): ReactElement {
   return (
     <motion.aside
       id={'vsm-doc-sidebar'}
-      className={`fixed top-0 z-10 hidden h-dvh w-fit space-y-16 border-r border-r-gray-200 bg-gray-50 pt-8 pr-4 shadow-[28px_0px_31px_-28px_rgba(0,_0,_0,_0.15)] xl:relative xl:block xl:h-full xl:pt-0 xl:pr-0 xl:shadow-none dark:border-r-gray-800 dark:bg-gray-950`}
+      className={`fixed top-0 z-10 hidden h-dvh w-fit space-y-16 border-r border-r-gray-200 bg-gray-50 pt-8 pr-4 shadow-[28px_0px_31px_-28px_rgba(0,_0,_0,_0.15)] xl:relative xl:sticky xl:block xl:h-full xl:pt-0 xl:pr-0 xl:shadow-none dark:border-r-gray-800 dark:bg-gray-950`}
     >
       <div className={'flex h-full flex-col justify-between'}>
         <div>

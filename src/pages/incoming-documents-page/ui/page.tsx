@@ -1,11 +1,11 @@
 import { ReactElement } from 'react';
 import { PageHeader } from 'widgets/page-header';
 import { TbChevronLeft, TbChevronRight, TbMailDown } from 'react-icons/tb';
-import { Button } from 'shared/ui';
-import { IoMdAddCircleOutline } from 'react-icons/io';
 import { IncomingDocumentTable } from 'entities/incoming-document-table';
 import { useNavigate } from 'react-router';
 import { ROUTES } from 'shared/const';
+import { Button } from '@/components/ui/button.tsx';
+import { IoMdAddCircleOutline } from 'react-icons/io';
 
 export function IncomingDocumentsPage(): ReactElement {
   const navigate = useNavigate();
@@ -15,10 +15,9 @@ export function IncomingDocumentsPage(): ReactElement {
       <div key={'actions'} className={'flex items-center justify-end'}>
         <Button
           onClick={() => navigate(ROUTES.DOCUMENTS_INCOMING_CREATE)}
-          variant={'primary'}
           className={'w-full xl:w-fit'}
-          icon={IoMdAddCircleOutline}
         >
+          <IoMdAddCircleOutline />
           Создать входящий документ
         </Button>
       </div>
