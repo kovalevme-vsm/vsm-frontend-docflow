@@ -9,7 +9,11 @@ import pluginQuery from '@tanstack/eslint-plugin-query';
 export default tseslint.config(
   { ignores: ['dist'] },
   {
-    extends: [js.configs.recommended, ...tseslint.configs.recommended, importPlugin.flatConfigs.recommended],
+    extends: [
+      js.configs.recommended,
+      ...tseslint.configs.recommended,
+      importPlugin.flatConfigs.recommended,
+    ],
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
       ecmaVersion: 2020,
@@ -34,7 +38,10 @@ export default tseslint.config(
     rules: {
       ...reactHooks.configs.recommended.rules,
       '@tanstack/query/exhaustive-deps': 'error',
-      'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
+      'react-refresh/only-export-components': [
+        'warn',
+        { allowConstantExport: true },
+      ],
       'import/named': 'off',
       'no-unused-vars': [
         'warn',
@@ -51,6 +58,7 @@ export default tseslint.config(
           alphabetize: { order: 'asc', caseInsensitive: true },
           'newlines-between': 'always',
           pathGroups: [
+            { group: 'internal', position: 'after', pattern: '@/**' },
             { group: 'internal', position: 'after', pattern: 'pages/**' },
             { group: 'internal', position: 'after', pattern: 'widgets/**' },
             { group: 'internal', position: 'after', pattern: 'features/**' },
@@ -58,7 +66,14 @@ export default tseslint.config(
             { group: 'internal', position: 'after', pattern: 'shared/**' },
           ],
           pathGroupsExcludedImportTypes: ['builtin'],
-          groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
+          groups: [
+            'builtin',
+            'external',
+            'internal',
+            'parent',
+            'sibling',
+            'index',
+          ],
         },
       ],
     },

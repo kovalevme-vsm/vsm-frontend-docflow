@@ -1,16 +1,19 @@
 import { createRoot } from 'react-dom/client';
+
 import './styles/index.css';
-import { DashboardPage } from 'pages/dashboard-page';
 import { Route, Routes } from 'react-router';
 
 import { AuthenticatePage } from 'pages/authenticate-page';
-import { IncomingDocumentsPage } from 'pages/incoming-documents-page';
-import { OutgoingDocumentsPage } from 'pages/outgoing-documents-page';
-import { ROUTES } from 'shared/const';
-import { NotFoundRoutePath } from 'pages/not-found-route-path';
+import { DashboardPage } from 'pages/dashboard-page';
 import { IncomingDocumentsCreatePage } from 'pages/incoming-documents-create-page';
+import { IncomingDocumentsPage } from 'pages/incoming-documents-page';
+import { NotFoundRoutePath } from 'pages/not-found-route-path';
+import { OutgoingDocumentsPage } from 'pages/outgoing-documents-page';
+
+import { ROUTES } from 'shared/const';
+
 import { BasePageLayout } from './layouts';
-import { Providers } from '@/app/providers';
+import { Providers } from './providers';
 
 createRoot(document.getElementById('root')!).render(
   <Providers>

@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-import { PageHeader } from 'widgets/page-header';
+import { BsSave, BsSendCheck } from 'react-icons/bs';
 import {
   TbCancel,
   TbEdit,
@@ -8,26 +8,29 @@ import {
   TbPencil,
   TbUsers,
 } from 'react-icons/tb';
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from '@/components/ui/tabs.tsx';
-import { Badge } from '@/components/ui/badge.tsx';
-import { DragAndDropUploader, Empty, Label, Table } from 'shared/ui';
-import { Input } from '@/components/ui/input.tsx';
-import { Switch } from '@/components/ui/switch.tsx';
-import { Textarea } from '@/components/ui/textarea.tsx';
-import { Button } from '@/components/ui/button.tsx';
-import { BsSave, BsSendCheck } from 'react-icons/bs';
+
+import { Badge } from 'components/ui/badge.tsx';
+import { Button } from 'components/ui/button.tsx';
+import { Input } from 'components/ui/input.tsx';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select.tsx';
+} from 'components/ui/select.tsx';
+import { Switch } from 'components/ui/switch.tsx';
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from 'components/ui/tabs.tsx';
+import { Textarea } from 'components/ui/textarea.tsx';
+
+import { PageHeader } from 'widgets/page-header';
+
+import { DragAndDropUploader, Empty, Label, Table } from 'shared/ui';
 
 export function IncomingDocumentsCreatePage(): ReactElement {
   return (
