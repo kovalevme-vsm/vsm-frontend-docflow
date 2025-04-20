@@ -1,6 +1,5 @@
-import { createRoot } from 'react-dom/client';
-
 import './styles/index.css';
+import { createRoot } from 'react-dom/client';
 import { Route, Routes } from 'react-router';
 
 import { AuthenticatePage } from 'pages/authenticate-page';

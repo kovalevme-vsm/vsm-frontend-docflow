@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion';
-
-import appLogoLight from '../assets/app_logo_light.png';
-import appLogoDark from '../assets/app_logo_dark.png';
 import { memo } from 'react';
+
+import appLogoDark from '../assets/app_logo_dark.png';
+import appLogoLight from '../assets/app_logo_light.png';
 
 type ApplicationLogoProps = {
   size?: 'small';
@@ -20,7 +20,7 @@ export const ApplicationLogo = memo(function ApplicationLogo({
         initial={{ x: 20, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ delay: 0, duration: 0.5 }}
-        alt={'ВСМ Симфония'}
+        alt={'ВСМ Документы'}
         src={appLogoLight}
         className={'h-full dark:hidden'}
       />
@@ -28,7 +28,7 @@ export const ApplicationLogo = memo(function ApplicationLogo({
         initial={{ x: 20, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ delay: 0, duration: 0.5 }}
-        alt={'ВСМ Симфония'}
+        alt={'ВСМ Документы'}
         src={appLogoDark}
         className={'hidden h-full dark:block'}
       />
@@ -42,7 +42,7 @@ export const ApplicationLogo = memo(function ApplicationLogo({
         <span
           className={`bg-gradient-to-tr from-[#132685] to-[#466dff] bg-clip-text ${size === 'small' ? 'text-base' : 'text-xl'} font-bold text-transparent dark:from-[#ffff] dark:to-[#ffff]`}
         >
-          ВСМ Симфония
+          ВСМ Документы
         </span>
         <span
           className={`${size === 'small' ? 'text-[9px]' : 'text-xs'} text-gray-950 dark:text-white`}
