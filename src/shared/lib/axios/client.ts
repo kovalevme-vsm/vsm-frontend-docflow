@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+import { ROUTES } from 'shared/const';
+
 export const apiClient = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
   withCredentials: true,
@@ -23,23 +25,27 @@ apiClient.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
-
+    const location = window.location.pathname;
     // Если ошибка 401 и это не запрос на /refresh
-    if (error.response.status === 401 && !originalRequest._retry) {
+    if (
+      error.response.status === 401 &&
+      !originalRequest._retry &&
+      location !== ROUTES.LOGIN
+    ) {
       originalRequest._retry = true;
 
       try {
         // Запрашиваем новый accessToken через refreshToken
         const token = localStorage.getItem('refreshToken') || null;
-        const { data } = await apiClient.post(
+        const { data } = await axios.post(
           'users/auth/refresh',
           { refresh: token },
-          { withCredentials: true } // Куки (refreshToken) отправится автоматически
+          { withCredentials: true, baseURL: import.meta.env.VITE_API_URL } // Куки (refreshToken) отправится автоматически
         );
-
         // Сохраняем новый accessToken
-        const newAccessToken = data.accessToken;
-        sessionStorage.setItem('accessToken', newAccessToken);
+        const newAccessToken = data.access;
+        sessionStorage.setItem('accessToken', data.access);
+        localStorage.setItem('refreshToken', data.refresh);
 
         // Повторяем исходный запрос с новым токеном
         originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
@@ -47,8 +53,7 @@ apiClient.interceptors.response.use(
       } catch (refreshError) {
         // Если refreshToken невалиден - разлогиниваем пользователя
         console.error('Refresh token failed', refreshError);
-        localStorage.removeItem('refreshToken');
-        window.location.href = '/login'; // Редирект на логин
+        window.location.href = ROUTES.LOGIN; // Редирект на логин
         return Promise.reject(refreshError);
       }
     }
