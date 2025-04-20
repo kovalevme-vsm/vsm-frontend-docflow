@@ -12,6 +12,7 @@ import { ROUTES } from 'shared/const';
 
 import { BasePageLayout } from './layouts';
 import { Providers } from './providers';
+import '@ant-design/v5-patch-for-react-19';
 
 createRoot(document.getElementById('root')!).render(
   <Providers>
