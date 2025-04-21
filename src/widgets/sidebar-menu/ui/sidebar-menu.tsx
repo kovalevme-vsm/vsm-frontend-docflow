@@ -6,6 +6,7 @@ import { TbCategory, TbLayoutSidebarLeftCollapse } from 'react-icons/tb';
 import { ApplicationLogo } from 'widgets/application-logo';
 import { SidebarMenuItem } from 'widgets/sidebar-menu/ui/sidebar-menu-item.tsx';
 import { SignOutButton } from 'widgets/sign-out-button';
+import { SystemCopyright } from 'widgets/system-copyright';
 
 import { ROUTES } from 'shared/const';
 
@@ -43,6 +44,9 @@ export function SidebarMenu(): ReactElement {
             <TbLayoutSidebarLeftCollapse />
             Скрыть меню
           </Button>
+          <div>
+            <SystemCopyright />
+          </div>
         </div>
       </div>
     </motion.aside>

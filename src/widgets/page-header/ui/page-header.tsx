@@ -2,8 +2,6 @@ import { motion } from 'framer-motion';
 import { createElement, ReactElement } from 'react';
 import { IconType } from 'react-icons';
 
-import { PageBackButton } from 'widgets/page-back-button';
-
 type PageHeaderProps = {
   backButtonActive?: boolean;
   icon: IconType;
@@ -13,7 +11,6 @@ type PageHeaderProps = {
 export function PageHeader(props: PageHeaderProps): ReactElement {
   return (
     <header className={'flex gap-2'}>
-      {props.backButtonActive && <PageBackButton />}
       <div
         className={
           'flex w-full items-center rounded-2xl bg-gray-100 px-4 py-2 dark:bg-gray-900'
