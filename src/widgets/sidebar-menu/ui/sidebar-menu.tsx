@@ -1,7 +1,12 @@
 import { Button } from 'antd';
 import { motion } from 'framer-motion';
 import { ReactElement } from 'react';
-import { TbCategory, TbLayoutSidebarLeftCollapse } from 'react-icons/tb';
+import {
+  TbBook,
+  TbCategory,
+  TbLayoutSidebarLeftCollapse,
+  TbSettings,
+} from 'react-icons/tb';
 
 import { ApplicationLogo } from 'widgets/application-logo';
 import { SidebarMenuItem } from 'widgets/sidebar-menu/ui/sidebar-menu-item.tsx';
@@ -24,6 +29,18 @@ export function SidebarMenu(): ReactElement {
               title={'Панель управления'}
               icon={TbCategory}
               route={ROUTES.DASHBOARD}
+            />
+            <SidebarMenuItem
+              title={'Настройки'}
+              icon={TbSettings}
+              route={ROUTES.SETTINGS_BASE}
+              children={[
+                {
+                  title: 'Справочники',
+                  route: ROUTES.SETTINGS_DICTIONARY,
+                  icon: TbBook,
+                },
+              ]}
             />
           </div>
         </div>

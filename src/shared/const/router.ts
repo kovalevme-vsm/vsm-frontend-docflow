@@ -1,5 +1,4 @@
 export const ROUTES = {
-  // Auth routes
   LOGIN: '/sign-in',
   DASHBOARD: '/',
 
@@ -7,6 +6,11 @@ export const ROUTES = {
   DOCUMENTS_BASE: '/documents',
   DOCUMENTS_INCOMING: '/documents/incoming',
   DOCUMENTS_INCOMING_CREATE: '/documents/incoming/create',
+
+  SETTINGS_BASE: '/settings',
+  SETTINGS_DICTIONARY: '/settings/dictionaries',
+  SETTINGS_DICTIONARY_LIST: (dictionaryType: string) =>
+    `/settings/dictionaries/${dictionaryType}`,
 
   // Fallback route
   NOT_FOUND: '*',
