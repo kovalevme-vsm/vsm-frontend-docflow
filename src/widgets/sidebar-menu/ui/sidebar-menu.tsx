@@ -3,18 +3,16 @@ import { motion } from 'framer-motion';
 import { ReactElement } from 'react';
 import {
   TbCategory,
-  TbDoorExit,
   TbFiles,
-  TbHelp,
   TbLayoutSidebarLeftCollapse,
   TbMailDown,
 } from 'react-icons/tb';
 
 import { ApplicationLogo } from 'widgets/application-logo';
 import { SidebarMenuItem } from 'widgets/sidebar-menu/ui/sidebar-menu-item.tsx';
+import { SignOutButton } from 'widgets/sign-out-button';
 
 import { ROUTES } from 'shared/const';
-import { TextButton } from 'shared/ui';
 
 export function SidebarMenu(): ReactElement {
   return (
@@ -47,8 +45,7 @@ export function SidebarMenu(): ReactElement {
         </div>
 
         <div className={'mb-4 space-y-2 xl:mb-0'}>
-          <TextButton title={'Помощь'} icon={TbHelp} />
-          <TextButton title={'Выйти из системы'} icon={TbDoorExit} />
+          <SignOutButton />
           <Button
             className={'mt-4 !flex xl:!hidden'}
             onClick={() => {
