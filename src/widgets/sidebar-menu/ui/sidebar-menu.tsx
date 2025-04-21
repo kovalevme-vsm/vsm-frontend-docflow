@@ -1,12 +1,7 @@
 import { Button } from 'antd';
 import { motion } from 'framer-motion';
 import { ReactElement } from 'react';
-import {
-  TbCategory,
-  TbFiles,
-  TbLayoutSidebarLeftCollapse,
-  TbMailDown,
-} from 'react-icons/tb';
+import { TbCategory, TbLayoutSidebarLeftCollapse } from 'react-icons/tb';
 
 import { ApplicationLogo } from 'widgets/application-logo';
 import { SidebarMenuItem } from 'widgets/sidebar-menu/ui/sidebar-menu-item.tsx';
@@ -28,18 +23,6 @@ export function SidebarMenu(): ReactElement {
               title={'Панель управления'}
               icon={TbCategory}
               route={ROUTES.DASHBOARD}
-            />
-            <SidebarMenuItem
-              title={'Документы'}
-              icon={TbFiles}
-              route={ROUTES.DOCUMENTS_BASE}
-              children={[
-                {
-                  title: 'Входящие',
-                  icon: TbMailDown,
-                  route: ROUTES.DOCUMENTS_INCOMING,
-                },
-              ]}
             />
           </div>
         </div>

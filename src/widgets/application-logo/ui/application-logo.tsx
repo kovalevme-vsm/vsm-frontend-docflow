@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion';
 import { memo } from 'react';
 
-import appLogoDark from '../assets/app_logo_dark.png';
-import appLogoLight from '../assets/app_logo_light.png';
+import appLogoDark from '../assets/vsm_docflow_dark.png';
+import appLogoLight from '../assets/vsm_docflow_light.png';
 
 type ApplicationLogoProps = {
   size?: 'small';
@@ -22,7 +22,7 @@ export const ApplicationLogo = memo(function ApplicationLogo({
         transition={{ delay: 0, duration: 0.5 }}
         alt={'ВСМ Документы'}
         src={appLogoLight}
-        className={'h-full dark:hidden'}
+        className={'h-11/12 dark:hidden'}
       />
       <motion.img
         initial={{ x: 20, opacity: 0 }}

@@ -1,9 +1,11 @@
 import { ReactElement } from 'react';
-import { SidebarMenu } from 'widgets/sidebar-menu';
-import { Outlet } from 'react-router';
-import { UserHeaderCard } from 'widgets/user-header-card';
-import { IconButton } from 'shared/ui';
 import { TbLayoutSidebarLeftExpand } from 'react-icons/tb';
+import { Outlet } from 'react-router';
+
+import { SidebarMenu } from 'widgets/sidebar-menu';
+import { UserHeaderCard } from 'widgets/user-header-card';
+
+import { IconButton } from 'shared/ui';
 
 export function BasePageLayout(): ReactElement {
   return (
