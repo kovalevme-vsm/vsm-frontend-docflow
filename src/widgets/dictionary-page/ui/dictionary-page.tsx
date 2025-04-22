@@ -164,6 +164,7 @@ export function DictionaryPage<T extends { id: string | number }>({
         rowKey="id"
         size={'small'}
         loading={isLoading}
+        scroll={{ x: 'max-content' }}
       />
       <Modal
         open={modalOpen}
