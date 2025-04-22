@@ -1,38 +1,61 @@
-import { Button } from 'antd';
-import { ReactElement, useState } from 'react';
+import { Form, Input } from 'antd';
+import { ReactElement } from 'react';
 import { CgOrganisation } from 'react-icons/cg';
-import { TbChevronLeft, TbPlus } from 'react-icons/tb';
-import { useNavigate } from 'react-router';
 
-import { CreateOrganizationModal } from 'widgets/create-organization-modal';
-import { OrganizationTable } from 'widgets/organization-table';
-import { PageHeader } from 'widgets/page-header';
+import { dictionaryApi } from 'pages/dictionary-organization-page/api';
 
-import { IconButton } from 'shared/ui';
+import { DictionaryPage } from 'widgets/dictionary-page/ui/dictionary-page.tsx';
+
+import { dictionaryQueryKey } from 'shared/lib/query';
 
 export function DictionaryOrganizationPage(): ReactElement {
-  const navigate = useNavigate();
-  const [modalOpen, setModalOpen] = useState(false);
+  const organizationColumns = [
+    { title: 'Наименование', dataIndex: 'name' },
+    { title: 'ИНН', dataIndex: 'inn_number' },
+    { title: 'КПП', dataIndex: 'kpp_number' },
+  ];
+
   return (
-    <div className={'space-y-4'}>
-      <div className={'flex gap-2'}>
-        <IconButton onClick={() => navigate(-1)} icon={TbChevronLeft} />
-        <PageHeader icon={CgOrganisation} title={'Организации'} />
-      </div>
-      <div className={'flex justify-end'}>
-        <Button
-          icon={<TbPlus />}
-          type={'primary'}
-          onClick={() => setModalOpen(true)}
-        >
-          Создать
-        </Button>
-      </div>
-      <OrganizationTable />
-      <CreateOrganizationModal
-        modalOpen={modalOpen}
-        onCancel={() => setModalOpen(false)}
-      />
-    </div>
+    <DictionaryPage
+      icon={CgOrganisation}
+      title={'Организации'}
+      columns={organizationColumns}
+      modalCreateTitle={'Создание новой организации'}
+      modalEditTitle={'Редактирование организации'}
+      queryKey={dictionaryQueryKey.organization()}
+      api={{
+        fetchItems: dictionaryApi.fetchAll,
+        createItem: dictionaryApi.create,
+        updateItem: dictionaryApi.update,
+        deleteItem: dictionaryApi.delete,
+      }}
+      formFields={
+        <>
+          <Form.Item
+            label={'Наименование'}
+            name={'name'}
+            rules={[
+              { required: true, message: 'Пожалуйста, введите наименование' },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            label={'ИНН'}
+            name={'inn_number'}
+            rules={[{ required: true, message: 'Пожалуйста, введите ИНН' }]}
+          >
+            <Input placeholder={'NNNNXXXXXC'} minLength={10} maxLength={12} />
+          </Form.Item>
+          <Form.Item
+            label={'КПП'}
+            name={'kpp_number'}
+            rules={[{ required: true, message: 'Пожалуйста, введите КПП' }]}
+          >
+            <Input placeholder={'NNNNXXCCC'} maxLength={12} />
+          </Form.Item>
+        </>
+      }
+    />
   );
 }

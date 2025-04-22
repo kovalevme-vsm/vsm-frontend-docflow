@@ -28,6 +28,10 @@ createRoot(document.getElementById('root')!).render(
           path={ROUTES.SETTINGS_DICTIONARY_LIST('organization')}
           element={<DictionaryOrganizationPage />}
         />
+        <Route
+          path={ROUTES.SETTINGS_DICTIONARY_LIST('degrees-confidentiality')}
+          element={<></>}
+        />
       </Route>
       <Route path={ROUTES.NOT_FOUND} element={<NotFoundRoutePath />} />
     </Routes>
