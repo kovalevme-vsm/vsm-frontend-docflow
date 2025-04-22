@@ -1,7 +1,7 @@
 import { ReactElement } from 'react';
 import { CgOrganisation } from 'react-icons/cg';
 import { GrSecure } from 'react-icons/gr';
-import { TbBook } from 'react-icons/tb';
+import { TbBook, TbUser } from 'react-icons/tb';
 
 import { DictionaryListItem } from 'pages/settings-dictionary-page/ui/dictionary-list-item.tsx';
 
@@ -23,6 +23,11 @@ export function SettingsDictionaryPage(): ReactElement {
           icon={GrSecure}
           title={'Степени конфиденциальности'}
           route={ROUTES.SETTINGS_DICTIONARY_LIST('degrees-confidentiality')}
+        />
+        <DictionaryListItem
+          icon={TbUser}
+          title={'Должности'}
+          route={ROUTES.SETTINGS_DICTIONARY_LIST('job-titles')}
         />
       </section>
     </div>

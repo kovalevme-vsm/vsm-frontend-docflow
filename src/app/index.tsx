@@ -3,8 +3,10 @@ import { createRoot } from 'react-dom/client';
 import { Route, Routes } from 'react-router';
 
 import { AuthenticatePage } from 'pages/authenticate-page';
+import { ConfidentialityLevelPage } from 'pages/confidentiality-level-page';
 import { DashboardPage } from 'pages/dashboard-page';
-import { DictionaryOrganizationPage } from 'pages/dictionary-organization-page/ui/page.tsx';
+import { DictionaryJobTitlePage } from 'pages/dictionary-job-title-page';
+import { DictionaryOrganizationPage } from 'pages/dictionary-organization-page';
 import { NotFoundRoutePath } from 'pages/not-found-route-path';
 import { SettingsDictionaryPage } from 'pages/settings-dictionary-page';
 
@@ -30,7 +32,11 @@ createRoot(document.getElementById('root')!).render(
         />
         <Route
           path={ROUTES.SETTINGS_DICTIONARY_LIST('degrees-confidentiality')}
-          element={<></>}
+          element={<ConfidentialityLevelPage />}
+        />{' '}
+        <Route
+          path={ROUTES.SETTINGS_DICTIONARY_LIST('job-titles')}
+          element={<DictionaryJobTitlePage />}
         />
       </Route>
       <Route path={ROUTES.NOT_FOUND} element={<NotFoundRoutePath />} />

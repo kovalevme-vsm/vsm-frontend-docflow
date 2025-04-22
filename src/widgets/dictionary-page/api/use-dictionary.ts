@@ -1,5 +1,6 @@
 // src/shared/api/hooks/useDictionary.ts
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useSearchParams } from 'react-router';
 
 import { DRFListPaginationResponse } from 'shared/lib/query';
 
@@ -21,19 +22,17 @@ export function useDictionary<T extends { id: string | number }>({
   queryKey,
 }: DictionaryApi<T> & { queryKey: string[] }) {
   const queryClient = useQueryClient();
-
-  // Запрос списка элементов
+  const [searchParams] = useSearchParams();
+  const page = searchParams.get('page') || '1';
+  // const pageSize = searchParams.get('pageSize') || '10';
 
   const {
     data: itemsData,
     isLoading,
     error,
   } = useQuery({
-    queryKey: [...queryKey, 'list'],
-    queryFn: ({ pageParam = 1 }) =>
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
-      fetchItems({ page: pageParam, pageSize: 10 }),
+    queryKey: [...queryKey, page],
+    queryFn: () => fetchItems({ page: Number(page), pageSize: 10 }),
   });
 
   // Мутация для создания

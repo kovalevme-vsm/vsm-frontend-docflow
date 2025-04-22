@@ -14,7 +14,7 @@ import dayjs from 'dayjs';
 import { createElement, ReactElement, ReactNode, useState } from 'react';
 import { IconType } from 'react-icons';
 import { TbChevronLeft, TbPencil, TbPlus, TbTrash } from 'react-icons/tb';
-import { useNavigate } from 'react-router';
+import { useNavigate, useSearchParams } from 'react-router';
 
 import { useDictionary } from 'widgets/dictionary-page/api/use-dictionary.ts';
 import { PageHeader } from 'widgets/page-header';
@@ -55,6 +55,7 @@ export function DictionaryPage<T extends { id: string | number }>({
   const navigate = useNavigate();
   const [modalOpen, setModalOpen] = useState(false);
   const [editingId, setEditingId] = useState<string | number | null>(null);
+  const [_searchParams, setSearchParams] = useSearchParams();
 
   const { items, total, isLoading, createItem, updateItem, deleteItem } =
     useDictionary<T>({
@@ -153,8 +154,15 @@ export function DictionaryPage<T extends { id: string | number }>({
       <Table
         columns={[...columns, ...baseColumn]}
         dataSource={items}
-        pagination={{ total: total }}
+        pagination={{
+          total: total,
+          size: 'default',
+          onChange: (page) => {
+            setSearchParams({ page: String(page) });
+          },
+        }}
         rowKey="id"
+        size={'small'}
         loading={isLoading}
       />
       <Modal

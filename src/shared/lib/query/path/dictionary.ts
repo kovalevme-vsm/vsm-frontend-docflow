@@ -5,4 +5,11 @@ export const dictionaryApiPath = {
   organization: 'dictionary/organization',
   organizationDetail: (organizationId: string | number | null) =>
     `dictionary/organization/${organizationId}`,
+  confidentialityLevel: 'dictionary/confidentiality-level',
+  confidentialityLevelDetail: (
+    confidentialityLevelId: string | number | null
+  ) => `dictionary/confidentiality-level/${confidentialityLevelId}`,
+  jobTitle: 'dictionary/job-title',
+  jobTitleDetail: (jobTitleId: string | number | null) =>
+    `dictionary/job-title/${jobTitleId}`,
 };

@@ -1,9 +1,9 @@
 export const dictionaryQueryKey = {
   all: ['dictionary'],
   organization: () => [...dictionaryQueryKey.all, 'organization'],
-  organizationDetail: (organizationId: string | null) => [
+  confidentialityLevel: () => [
     ...dictionaryQueryKey.all,
-    'organization',
-    organizationId,
+    'confidentiality-level',
   ],
+  jobTitle: () => [...dictionaryQueryKey.all, 'job-title'],
 };
