@@ -3,6 +3,7 @@ export const dictionaryApiPath = {
   recipient: 'dictionary/recipient',
   sender: 'dictionary/sender',
   organization: 'dictionary/organization',
+  organizationSelect: 'dictionary/organization-select',
   organizationDetail: (organizationId: string | number | null) =>
     `dictionary/organization/${organizationId}`,
   confidentialityLevel: 'dictionary/confidentiality-level',

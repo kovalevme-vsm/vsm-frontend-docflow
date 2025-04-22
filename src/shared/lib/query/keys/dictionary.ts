@@ -1,6 +1,11 @@
 export const dictionaryQueryKey = {
   all: ['dictionary'],
   organization: () => [...dictionaryQueryKey.all, 'organization'],
+  organizationSelect: () => [
+    ...dictionaryQueryKey.all,
+    'organization',
+    'select',
+  ],
   confidentialityLevel: () => [
     ...dictionaryQueryKey.all,
     'confidentiality-level',
