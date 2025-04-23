@@ -8,31 +8,57 @@ import {
   Select,
   SelectProps,
 } from 'antd';
-import { DefaultOptionType } from 'antd/es/select';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { useDebounce } from 'use-debounce';
+
+import { useApiInfiniteSelectQuery } from 'shared/lib/query';
 
 interface SelectWithAddItemProps<T = string> extends SelectProps {
-  items: DefaultOptionType[] | undefined;
   onAddItem: (newItem: string) => Promise<T>;
   queryKey: string[];
-  pagination?: {
-    hasMore: boolean;
-    isLoadingMore?: boolean;
-    onLoadMore: () => void;
-  };
+  path: string;
 }
 
 export function SelectWithAddItem<T>({
-  items,
   onAddItem,
   queryKey,
-  pagination,
+  path,
   ...selectProps
 }: SelectWithAddItemProps<T>) {
   const [newItemName, setNewItemName] = useState('');
   const inputRef = useRef<InputRef>(null);
+  const [searchValue, setSearchValue] = useState<string>('');
+  const [value] = useDebounce(searchValue, 500);
+  const [selectOptions, setSelectOptions] = useState<
+    { label: string; value: string }[]
+  >([]);
 
   const queryClient = useQueryClient();
+
+  const {
+    data: items,
+    refetch,
+    isPending,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    isRefetching,
+  } = useApiInfiniteSelectQuery({
+    path: path,
+    queryKey: queryKey,
+    search: value,
+  });
+
+  useEffect(() => {
+    refetch();
+  }, [value]);
+
+  useEffect(() => {
+    if (items && items.pages) {
+      const allItems = items.pages.flatMap((page) => page?.results || []) || [];
+      setSelectOptions(allItems);
+    }
+  }, [items]);
 
   const addItemMutation = useMutation({
     mutationFn: onAddItem,
@@ -61,10 +87,10 @@ export function SelectWithAddItem<T>({
     // Проверяем, что пользователь прокрутил до конца (с небольшим запасом)
     if (
       scrollTop + clientHeight >= scrollHeight - 10 &&
-      pagination?.hasMore &&
-      !pagination.isLoadingMore
+      hasNextPage &&
+      !isFetchingNextPage
     ) {
-      pagination.onLoadMore();
+      fetchNextPage();
     }
   };
 
@@ -102,9 +128,11 @@ export function SelectWithAddItem<T>({
   return (
     <Select
       dropdownRender={dropdownRender}
-      options={items}
+      options={selectOptions}
       onPopupScroll={handlePopupScroll}
-      loading={selectProps.loading || pagination?.isLoadingMore}
+      loading={isPending || isFetchingNextPage || isRefetching}
+      searchValue={searchValue}
+      onSearch={(search) => setSearchValue(search)}
       {...selectProps}
     />
   );
