@@ -127,7 +127,7 @@ export function SelectWithAddItem<T>({
 
   return (
     <Select
-      dropdownRender={dropdownRender}
+      dropdownRender={!!onAddItem && dropdownRender}
       options={selectOptions}
       onPopupScroll={handlePopupScroll}
       loading={isPending || isFetchingNextPage || isRefetching}
