@@ -1,4 +1,5 @@
-import { ReactElement } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
+import { useDebounce } from 'use-debounce';
 
 import { SelectWithAddItem } from 'widgets/select-with-add-item';
 
@@ -6,11 +7,15 @@ import { apiClient } from 'shared/lib/axios';
 import {
   dictionaryApiPath,
   dictionaryQueryKey,
-  DRFListPaginationResponse,
-  useApiQuery,
+  useApiInfiniteSelectQuery,
 } from 'shared/lib/query';
 
 export function OrganizationSelect(): ReactElement {
+  const [searchValue, setSearchValue] = useState<string>('');
+  const [value] = useDebounce(searchValue, 500);
+  const [selectOptions, setSelectOptions] = useState<
+    { label: string; value: string }[]
+  >([]);
   const addOrganization = async (name: string) => {
     const response = await apiClient.post(dictionaryApiPath.organization, {
       name,
@@ -21,22 +26,47 @@ export function OrganizationSelect(): ReactElement {
     return response.data;
   };
 
-  const { data, isPending } = useApiQuery<
-    DRFListPaginationResponse<{ value: string; label: string }>
-  >({
-    apiPath: dictionaryApiPath.organizationSelect,
+  const {
+    data: items,
+    refetch,
+    isPending,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useApiInfiniteSelectQuery({
+    path: dictionaryApiPath.organization,
     queryKey: dictionaryQueryKey.organizationSelect(),
-    staleTime: 1,
+    search: value,
   });
+
+  useEffect(() => {
+    if (value) {
+      refetch();
+    }
+  }, [value]);
+
+  useEffect(() => {
+    if (items && items.pages) {
+      const allItems = items.pages.flatMap((page) => page?.results || []) || [];
+      setSelectOptions(allItems);
+    }
+  }, [items]);
 
   return (
     <SelectWithAddItem
       placeholder={'Выберите организацию'}
       allowClear
-      items={data?.results}
-      loading={isPending}
+      showSearch
+      onSearch={(value) => console.log(value)}
+      items={selectOptions}
+      loading={isPending || isFetchingNextPage}
       onAddItem={addOrganization}
       queryKey={dictionaryQueryKey.organizationSelect()}
+      pagination={{
+        hasMore: hasNextPage,
+        isLoadingMore: isFetchingNextPage,
+        onLoadMore: fetchNextPage,
+      }}
     />
   );
 }

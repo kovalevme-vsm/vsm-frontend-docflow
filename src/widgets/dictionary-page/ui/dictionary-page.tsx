@@ -55,7 +55,7 @@ export function DictionaryPage<T extends { id: string | number }>({
   const navigate = useNavigate();
   const [modalOpen, setModalOpen] = useState(false);
   const [editingId, setEditingId] = useState<string | number | null>(null);
-  const [_searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const { items, total, isLoading, createItem, updateItem, deleteItem } =
     useDictionary<T>({
@@ -157,8 +157,14 @@ export function DictionaryPage<T extends { id: string | number }>({
         pagination={{
           total: total,
           size: 'default',
+          showTotal: (total) => (
+            <>
+              Всего: <b>{total}</b> элементов
+            </>
+          ),
+          current: Number(searchParams.get('page')) | 1,
           onChange: (page) => {
-            setSearchParams({ page: String(page) });
+            setSearchParams({ page: String(page) }, { replace: true });
           },
         }}
         rowKey="id"

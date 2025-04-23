@@ -15,12 +15,18 @@ interface SelectWithAddItemProps<T = string> extends SelectProps {
   items: DefaultOptionType[] | undefined;
   onAddItem: (newItem: string) => Promise<T>;
   queryKey: string[];
+  pagination?: {
+    hasMore: boolean;
+    isLoadingMore?: boolean;
+    onLoadMore: () => void;
+  };
 }
 
 export function SelectWithAddItem<T>({
   items,
   onAddItem,
   queryKey,
+  pagination,
   ...selectProps
 }: SelectWithAddItemProps<T>) {
   const [newItemName, setNewItemName] = useState('');
@@ -30,11 +36,8 @@ export function SelectWithAddItem<T>({
 
   const addItemMutation = useMutation({
     mutationFn: onAddItem,
-    onSuccess: (newItem) => {
-      queryClient.setQueryData(queryKey, (oldItems: T[] = []) => [
-        ...oldItems,
-        newItem,
-      ]);
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: queryKey });
       setNewItemName('');
       inputRef.current?.focus();
       message.success('Успешно добавлено');
@@ -49,6 +52,20 @@ export function SelectWithAddItem<T>({
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewItemName(e.target.value);
+  };
+
+  const handlePopupScroll: React.UIEventHandler<HTMLDivElement> = (e) => {
+    const { currentTarget } = e;
+    const { scrollTop, scrollHeight, clientHeight } = currentTarget;
+
+    // Проверяем, что пользователь прокрутил до конца (с небольшим запасом)
+    if (
+      scrollTop + clientHeight >= scrollHeight - 10 &&
+      pagination?.hasMore &&
+      !pagination.isLoadingMore
+    ) {
+      pagination.onLoadMore();
+    }
   };
 
   const dropdownRender = (menu: React.ReactNode) => (
@@ -71,7 +88,7 @@ export function SelectWithAddItem<T>({
           disabled={addItemMutation.isPending}
         />
         <Button
-          type="text"
+          type="default"
           onClick={handleAddItem}
           loading={addItemMutation.isPending}
           disabled={!newItemName.trim()}
@@ -83,6 +100,12 @@ export function SelectWithAddItem<T>({
   );
 
   return (
-    <Select dropdownRender={dropdownRender} options={items} {...selectProps} />
+    <Select
+      dropdownRender={dropdownRender}
+      options={items}
+      onPopupScroll={handlePopupScroll}
+      loading={selectProps.loading || pagination?.isLoadingMore}
+      {...selectProps}
+    />
   );
 }

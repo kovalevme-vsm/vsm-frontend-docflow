@@ -1,5 +1,6 @@
 // src/shared/api/hooks/useDictionary.ts
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useEffect } from 'react';
 import { useSearchParams } from 'react-router';
 
 import { DRFListPaginationResponse } from 'shared/lib/query';
@@ -22,9 +23,8 @@ export function useDictionary<T extends { id: string | number }>({
   queryKey,
 }: DictionaryApi<T> & { queryKey: string[] }) {
   const queryClient = useQueryClient();
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const page = searchParams.get('page') || '1';
-  // const pageSize = searchParams.get('pageSize') || '10';
 
   const {
     data: itemsData,
@@ -34,6 +34,12 @@ export function useDictionary<T extends { id: string | number }>({
     queryKey: [...queryKey, page],
     queryFn: () => fetchItems({ page: Number(page), pageSize: 10 }),
   });
+
+  useEffect(() => {
+    if (error && error.status === 404 && Number(page) > 1) {
+      setSearchParams({ page: String(Number(page) - 1) });
+    }
+  }, [error]);
 
   // Мутация для создания
   const createMutation = useMutation({
