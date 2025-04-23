@@ -1,9 +1,9 @@
 import {
   Button,
   Checkbox,
+  Drawer,
   Form,
   message,
-  Modal,
   Popconfirm,
   Space,
   Table,
@@ -172,10 +172,9 @@ export function DictionaryPage<T extends { id: string | number }>({
         loading={isLoading}
         scroll={{ x: 'max-content' }}
       />
-      <Modal
+      <Drawer
         open={modalOpen}
-        centered
-        onCancel={() => setModalOpen(false)}
+        onClose={() => setModalOpen(false)}
         footer={null}
       >
         <div className={'my-6 flex flex-col items-center justify-center gap-2'}>
@@ -201,7 +200,7 @@ export function DictionaryPage<T extends { id: string | number }>({
             </Button>
           </Form.Item>
         </Form>
-      </Modal>
+      </Drawer>
     </div>
   );
 }
