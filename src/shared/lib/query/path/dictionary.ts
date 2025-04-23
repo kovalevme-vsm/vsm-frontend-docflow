@@ -12,7 +12,7 @@ export const dictionaryApiPath = {
   jobTitle: 'dictionary/job-title',
   jobTitleDetail: (jobTitleId: string | number | null) =>
     `dictionary/job-title/${jobTitleId}`,
-  persons: 'dictionary/presons',
+  persons: 'dictionary/persons',
   personsDetail: (personId: string | number | null) =>
     `dictionary/persons/${personId}`,
 };
