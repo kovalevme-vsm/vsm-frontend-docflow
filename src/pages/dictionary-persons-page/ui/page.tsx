@@ -5,6 +5,7 @@ import { TbUsers } from 'react-icons/tb';
 import { DictionaryPage } from 'widgets/dictionary-page/ui/dictionary-page.tsx';
 
 import { OrganizationSelect } from 'entities/organization-select';
+import { PersonsRoleSelect } from 'entities/persons-role-select';
 
 import { dictionaryQueryKey } from 'shared/lib/query';
 
@@ -71,7 +72,7 @@ export function DictionaryPersonsPage(): ReactElement {
             name={'role'}
             rules={[{ required: true, message: 'Пожалуйста, выберите Роль' }]}
           >
-            <Input />
+            <PersonsRoleSelect />
           </Form.Item>
           <Form.Item
             label={'Организация'}
@@ -80,7 +81,7 @@ export function DictionaryPersonsPage(): ReactElement {
               { required: true, message: 'Пожалуйста, выберите Организацию' },
             ]}
           >
-            <OrganizationSelect />
+            <OrganizationSelect enabledFastCreate={false} />
           </Form.Item>
         </>
       }

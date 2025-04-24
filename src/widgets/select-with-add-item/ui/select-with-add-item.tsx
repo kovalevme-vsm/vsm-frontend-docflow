@@ -14,7 +14,7 @@ import { useDebounce } from 'use-debounce';
 import { useApiInfiniteSelectQuery } from 'shared/lib/query';
 
 interface SelectWithAddItemProps<T = string> extends SelectProps {
-  onAddItem: (newItem: string) => Promise<T>;
+  onAddItem?: (newItem: string) => Promise<T>;
   queryKey: string[];
   path: string;
 }
@@ -127,7 +127,7 @@ export function SelectWithAddItem<T>({
 
   return (
     <Select
-      dropdownRender={!!onAddItem && dropdownRender}
+      dropdownRender={onAddItem && dropdownRender}
       options={selectOptions}
       onPopupScroll={handlePopupScroll}
       loading={isPending || isFetchingNextPage || isRefetching}

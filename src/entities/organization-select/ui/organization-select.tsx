@@ -5,7 +5,13 @@ import { SelectWithAddItem } from 'widgets/select-with-add-item';
 import { apiClient } from 'shared/lib/axios';
 import { dictionaryApiPath, dictionaryQueryKey } from 'shared/lib/query';
 
-export function OrganizationSelect(): ReactElement {
+type OrganizationSelectProps = {
+  enabledFastCreate?: boolean;
+};
+
+export function OrganizationSelect({
+  enabledFastCreate = true,
+}: OrganizationSelectProps): ReactElement {
   const addOrganization = async (name: string) => {
     const response = await apiClient.post(dictionaryApiPath.organization, {
       name,
@@ -22,7 +28,7 @@ export function OrganizationSelect(): ReactElement {
       allowClear
       showSearch={true}
       filterOption={false}
-      onAddItem={addOrganization}
+      onAddItem={enabledFastCreate ? addOrganization : undefined}
       queryKey={dictionaryQueryKey.organizationSelect()}
       path={dictionaryApiPath.organization}
     />

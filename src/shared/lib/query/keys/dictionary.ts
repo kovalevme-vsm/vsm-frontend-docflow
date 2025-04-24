@@ -12,4 +12,9 @@ export const dictionaryQueryKey = {
   ],
   jobTitle: () => [...dictionaryQueryKey.all, 'job-title'],
   persons: () => [...dictionaryQueryKey.all, 'persons'],
+  personsRoleSelect: () => [
+    ...dictionaryQueryKey.all,
+    'persons-role',
+    'select',
+  ],
 };
