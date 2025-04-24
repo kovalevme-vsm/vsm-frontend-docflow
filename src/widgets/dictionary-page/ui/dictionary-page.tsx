@@ -176,6 +176,7 @@ export function DictionaryPage<T extends { id: string | number }>({
         open={modalOpen}
         onClose={() => setModalOpen(false)}
         footer={null}
+        classNames={{ wrapper: '!w-full md:!w-2/3 lg:!w-1/3' }}
       >
         <div className={'my-6 flex flex-col items-center justify-center gap-2'}>
           <div className={'w-fit rounded-3xl bg-gray-100 p-3 dark:bg-gray-50'}>
