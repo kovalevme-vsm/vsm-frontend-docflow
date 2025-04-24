@@ -4,7 +4,9 @@ import { ReactElement } from 'react';
 import {
   TbBook,
   TbCategory,
+  TbFiles,
   TbLayoutSidebarLeftCollapse,
+  TbMailDown,
   TbSettings,
 } from 'react-icons/tb';
 
@@ -29,6 +31,18 @@ export function SidebarMenu(): ReactElement {
               title={'Панель управления'}
               icon={TbCategory}
               route={ROUTES.DASHBOARD}
+            />
+            <SidebarMenuItem
+              title={'Документы'}
+              icon={TbFiles}
+              route={ROUTES.DOCUMENTS_BASE}
+              children={[
+                {
+                  title: 'Входящие',
+                  route: ROUTES.DOCUMENTS_INCOMING,
+                  icon: TbMailDown,
+                },
+              ]}
             />
             <SidebarMenuItem
               title={'Настройки'}

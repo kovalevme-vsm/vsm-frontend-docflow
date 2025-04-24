@@ -1,4 +1,4 @@
-import { Form, FormListFieldData } from 'antd';
+import { Form, FormListFieldData, Input } from 'antd';
 import { ReactElement } from 'react';
 
 import { SelectWithAddItem } from 'widgets/select-with-add-item';
@@ -19,12 +19,12 @@ export function OrganizationSelect({
   label = 'Организация',
   className,
 }: OrganizationSelectProps): ReactElement {
-  const addOrganization = async (name: string) => {
+  const addOrganization = async (value: any) => {
     const response = await apiClient.post(dictionaryApiPath.organization, {
-      name,
       inn_number: 'Не указано',
       kpp_number: 'Не указано',
       is_active: true,
+      ...value,
     });
     return response.data;
   };
@@ -45,6 +45,11 @@ export function OrganizationSelect({
         onAddItem={enabledFastCreate ? addOrganization : undefined}
         queryKey={dictionaryQueryKey.organizationSelect()}
         path={dictionaryApiPath.organization}
+        formItems={
+          <Form.Item name={'name'}>
+            <Input placeholder={'Название организации'} />
+          </Form.Item>
+        }
       />
     </Form.Item>
   );

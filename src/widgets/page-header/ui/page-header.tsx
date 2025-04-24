@@ -3,7 +3,6 @@ import { createElement, ReactElement } from 'react';
 import { IconType } from 'react-icons';
 
 type PageHeaderProps = {
-  backButtonActive?: boolean;
   icon: IconType;
   title: string;
 };

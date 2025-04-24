@@ -10,6 +10,11 @@ export const dictionaryQueryKey = {
     ...dictionaryQueryKey.all,
     'confidentiality-level',
   ],
+  confidentialityLevelSelect: () => [
+    ...dictionaryQueryKey.all,
+    'confidentiality-level',
+    'select',
+  ],
   jobTitle: () => [...dictionaryQueryKey.all, 'job-title'],
   persons: () => [...dictionaryQueryKey.all, 'persons'],
   personsSelect: () => [...dictionaryQueryKey.all, 'persons', 'select'],

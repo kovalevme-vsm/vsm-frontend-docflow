@@ -3,4 +3,5 @@ export const userApiPath = {
   userAuthenticateLogout: 'users/auth/logout',
   userAuthenticateValidate: 'users/auth/token/validate',
   userPageHeaderInfo: 'users/page-header-info',
+  userManagementList: 'users/management-list',
 };
