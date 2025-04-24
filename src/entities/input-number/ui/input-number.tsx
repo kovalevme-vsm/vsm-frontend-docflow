@@ -1,7 +1,11 @@
 import { Form, Input } from 'antd';
 import { ReactElement } from 'react';
 
-export function InputNumber(): ReactElement {
+type Props = {
+  label?: string;
+};
+
+export function InputNumber({ label }: Props): ReactElement {
   const formatPhoneNumber = (value: string) => {
     // Удаляем все, кроме цифр
     const cleaned = value.replace(/\D/g, '');
@@ -29,7 +33,7 @@ export function InputNumber(): ReactElement {
 
   return (
     <Form.Item
-      label={'Номер телефона'}
+      label={label}
       name={'phone_number'}
       initialValue={'+7 '}
       normalize={(value) => formatPhoneNumber(value)}
