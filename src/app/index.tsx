@@ -5,6 +5,7 @@ import { Route, Routes } from 'react-router';
 import { AuthenticatePage } from 'pages/authenticate-page';
 import { ConfidentialityLevelPage } from 'pages/confidentiality-level-page';
 import { DashboardPage } from 'pages/dashboard-page';
+import { DictionaryAppendixTypePage } from 'pages/dictionary-appendix-type-page';
 import { DictionaryJobTitlePage } from 'pages/dictionary-job-title-page';
 import { DictionaryOrganizationPage } from 'pages/dictionary-organization-page';
 import { DictionaryPersonsPage } from 'pages/dictionary-persons-page';
@@ -52,6 +53,10 @@ createRoot(document.getElementById('root')!).render(
         <Route
           path={ROUTES.SETTINGS_DICTIONARY_LIST('persons')}
           element={<DictionaryPersonsPage />}
+        />
+        <Route
+          path={ROUTES.SETTINGS_DICTIONARY_LIST('appendix-types')}
+          element={<DictionaryAppendixTypePage />}
         />
       </Route>
       <Route path={ROUTES.NOT_FOUND} element={<NotFoundRoutePath />} />

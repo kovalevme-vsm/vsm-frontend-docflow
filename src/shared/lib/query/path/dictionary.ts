@@ -16,4 +16,7 @@ export const dictionaryApiPath = {
   personsRole: 'dictionary/persons-roles',
   personsDetail: (personId: string | number | null) =>
     `dictionary/persons/${personId}`,
+  appendixType: 'dictionary/appendix-types',
+  appendixTypeDetail: (appendixTypeId: string | number | null) =>
+    `dictionary/appendix-types/${appendixTypeId}`,
 };

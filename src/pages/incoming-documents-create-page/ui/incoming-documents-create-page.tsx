@@ -15,6 +15,7 @@ import { useNavigate } from 'react-router';
 
 import { PageHeader } from 'widgets/page-header';
 
+import { AppendixTypesSelect } from 'entities/appendix-types-select';
 import { ConfidentialityLevelSelect } from 'entities/confidentiality-level-select';
 import { OrganizationSelect } from 'entities/organization-select';
 import { PersonSelect } from 'entities/person-select';
@@ -24,6 +25,9 @@ import { IconButton, Label } from 'shared/ui';
 
 export function IncomingDocumentsCreatePage(): ReactElement {
   const navigate = useNavigate();
+  const [form] = Form.useForm();
+  const currentAppendixType = Form.useWatch('appendix-type', form);
+  console.log(currentAppendixType, form);
   return (
     <div className={'space-y-4'}>
       <div className={'flex gap-2'}>
@@ -40,15 +44,9 @@ export function IncomingDocumentsCreatePage(): ReactElement {
             label: 'Общее',
             key: '21',
             children: (
-              <Form className={'grid grid-cols-1 gap-2'}>
+              <Form form={form} className={'grid grid-cols-1 gap-2'}>
                 <Card variant="borderless">
-                  <div className={'grid grid-cols-4 gap-2'}>
-                    <Form.Item className={'!mb-0'} name={'date'}>
-                      <DatePicker className={'!w-full'} placeholder={'Дата'} />
-                    </Form.Item>
-                    <Form.Item className={'!mb-0'}>
-                      <Input disabled placeholder={'Входящий номер'} />
-                    </Form.Item>
+                  <div className={'grid grid-cols-2 gap-2'}>
                     <UserManagementSelect label={''} />
                     <ConfidentialityLevelSelect label={''} />
                   </div>
@@ -77,18 +75,21 @@ export function IncomingDocumentsCreatePage(): ReactElement {
                       <InputNumber
                         className={'!w-full'}
                         min={1}
-                        placeholder={'Листов'}
+                        placeholder={'Количество листов'}
                       />
                     </Form.Item>
+                    <AppendixTypesSelect />
+
                     <Form.Item className={'!mb-0'}>
                       <InputNumber
                         min={0}
                         className={'!w-full'}
-                        placeholder={'Приложений'}
+                        placeholder={'Листов приложений'}
                       />
                     </Form.Item>
+
                     <Form.Item className={'!mb-0'}>
-                      <Checkbox>Бумажный носитель</Checkbox>
+                      <Checkbox>Бумажный носитель документа</Checkbox>
                     </Form.Item>
                     <Form.Item className={'col-span-4 !mb-0'}>
                       <Input.TextArea placeholder={'Содержание'} />

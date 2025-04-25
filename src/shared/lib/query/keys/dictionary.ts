@@ -23,4 +23,10 @@ export const dictionaryQueryKey = {
     'persons-role',
     'select',
   ],
+  appendixType: () => [...dictionaryQueryKey.all, 'appendix-types'],
+  appendixTypeSelect: () => [
+    ...dictionaryQueryKey.all,
+    'appendix-types',
+    'select',
+  ],
 };
