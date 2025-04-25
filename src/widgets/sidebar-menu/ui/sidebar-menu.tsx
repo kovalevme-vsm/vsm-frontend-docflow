@@ -7,6 +7,7 @@ import {
   TbFiles,
   TbLayoutSidebarLeftCollapse,
   TbMailDown,
+  TbRoute,
   TbSettings,
 } from 'react-icons/tb';
 
@@ -53,6 +54,11 @@ export function SidebarMenu(): ReactElement {
                   title: 'Справочники',
                   route: ROUTES.SETTINGS_DICTIONARY,
                   icon: TbBook,
+                },
+                {
+                  title: 'Маршруты',
+                  route: ROUTES.SETTINGS_ROUTES,
+                  icon: TbRoute,
                 },
               ]}
             />

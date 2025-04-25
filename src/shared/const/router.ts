@@ -11,7 +11,7 @@ export const ROUTES = {
   SETTINGS_DICTIONARY: '/settings/dictionaries',
   SETTINGS_DICTIONARY_LIST: (dictionaryType: string) =>
     `/settings/dictionaries/${dictionaryType}`,
-
+  SETTINGS_ROUTES: '/settings/routes',
   // Fallback route
   NOT_FOUND: '*',
 } as const;
