@@ -18,7 +18,7 @@ export function UserManagementSelect({
 }: UserManagementSelectProps): ReactElement {
   return (
     <Form.Item
-      name={'person'}
+      name={'recipient'}
       label={label}
       {...formListField}
       className={className}

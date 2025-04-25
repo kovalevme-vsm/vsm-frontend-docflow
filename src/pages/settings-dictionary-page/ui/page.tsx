@@ -1,7 +1,13 @@
 import { ReactElement } from 'react';
 import { CgOrganisation } from 'react-icons/cg';
 import { GrSecure } from 'react-icons/gr';
-import { TbBook, TbFiles, TbUser, TbUsers } from 'react-icons/tb';
+import {
+  TbBadges,
+  TbBook,
+  TbFiles,
+  TbHierarchy,
+  TbUsers,
+} from 'react-icons/tb';
 
 import { DictionaryListItem } from 'pages/settings-dictionary-page/ui/dictionary-list-item.tsx';
 
@@ -25,7 +31,12 @@ export function SettingsDictionaryPage(): ReactElement {
           route={ROUTES.SETTINGS_DICTIONARY_LIST('degrees-confidentiality')}
         />
         <DictionaryListItem
-          icon={TbUser}
+          icon={TbHierarchy}
+          title={'Дирекции и отделы'}
+          route={ROUTES.SETTINGS_DICTIONARY_LIST('departments')}
+        />
+        <DictionaryListItem
+          icon={TbBadges}
           title={'Должности'}
           route={ROUTES.SETTINGS_DICTIONARY_LIST('job-titles')}
         />

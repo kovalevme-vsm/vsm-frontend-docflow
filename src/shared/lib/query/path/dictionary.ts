@@ -19,4 +19,8 @@ export const dictionaryApiPath = {
   appendixType: 'dictionary/appendix-types',
   appendixTypeDetail: (appendixTypeId: string | number | null) =>
     `dictionary/appendix-types/${appendixTypeId}`,
+  department: 'dictionary/departments',
+  departmentDetail: (departmentId: string | number | null) =>
+    `dictionary/departments/${departmentId}`,
+  departmentCode: 'dictionary/department-codes',
 };

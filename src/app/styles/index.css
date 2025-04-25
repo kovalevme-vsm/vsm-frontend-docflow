@@ -55,3 +55,7 @@
 .ant-btn, .ant-input{
     box-shadow: none !important;
 }
+
+.ant-upload {
+    width: 100% !important;
+}

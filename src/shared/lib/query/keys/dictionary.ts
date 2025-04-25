@@ -29,4 +29,10 @@ export const dictionaryQueryKey = {
     'appendix-types',
     'select',
   ],
+  department: () => [...dictionaryQueryKey.all, 'department'],
+  departmentCodesSelect: () => [
+    ...dictionaryQueryKey.all,
+    'department-codes',
+    'select',
+  ],
 };

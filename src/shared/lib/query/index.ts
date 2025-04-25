@@ -6,4 +6,6 @@ export * from './keys/dictionary';
 export * from './keys/users';
 export * from './path/dictionary';
 export * from './path/user';
+export * from './keys/outgoing';
+export * from './path/outgoing';
 export { QueryProvider } from './provider';

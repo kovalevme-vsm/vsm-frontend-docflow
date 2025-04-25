@@ -1,24 +1,29 @@
 import { Form, Input } from 'antd';
 import { ReactElement } from 'react';
-import { TbBadges } from 'react-icons/tb';
+import { TbHierarchy } from 'react-icons/tb';
 
 import { DictionaryPage } from 'widgets/dictionary-page/ui/dictionary-page.tsx';
+
+import { DepartmentCodeSelect } from 'entities/department-code-select';
 
 import { dictionaryQueryKey } from 'shared/lib/query';
 
 import { dictionaryApi } from '../api';
 
-export function DictionaryJobTitlePage(): ReactElement {
-  const jobTitleColumns = [{ title: 'Наименование', dataIndex: 'name' }];
+export function DictionaryDepartmentPage(): ReactElement {
+  const columns = [
+    { title: 'Наименование', dataIndex: 'name' },
+    { title: 'Ключ', dataIndex: 'code' },
+  ];
 
   return (
     <DictionaryPage
-      icon={TbBadges}
-      title={'Должности'}
-      columns={jobTitleColumns}
-      modalCreateTitle={'Создание новой должности'}
-      modalEditTitle={'Редактирование должности'}
-      queryKey={dictionaryQueryKey.jobTitle()}
+      icon={TbHierarchy}
+      title={'Дирекции и отделы'}
+      columns={columns}
+      modalCreateTitle={'Создание новой записи'}
+      modalEditTitle={'Редактирование записи'}
+      queryKey={dictionaryQueryKey.department()}
       api={{
         fetchItems: dictionaryApi.fetchAll,
         createItem: dictionaryApi.create,
@@ -36,6 +41,7 @@ export function DictionaryJobTitlePage(): ReactElement {
           >
             <Input />
           </Form.Item>
+          <DepartmentCodeSelect />
         </>
       }
     />
