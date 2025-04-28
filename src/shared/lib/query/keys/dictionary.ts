@@ -35,4 +35,6 @@ export const dictionaryQueryKey = {
     'department-codes',
     'select',
   ],
+  status: () => [...dictionaryQueryKey.all, 'statuses'],
+  statusSelect: () => [...dictionaryQueryKey.all, 'statuses', 'select'],
 };

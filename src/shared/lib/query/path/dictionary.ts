@@ -23,4 +23,7 @@ export const dictionaryApiPath = {
   departmentDetail: (departmentId: string | number | null) =>
     `dictionary/departments/${departmentId}`,
   departmentCode: 'dictionary/department-codes',
+  status: 'dictionary/statuses',
+  statusDetail: (statusId: string | number | null) =>
+    `dictionary/statuses/${statusId}`,
 };

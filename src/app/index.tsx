@@ -21,8 +21,9 @@ import { BasePageLayout } from './layouts';
 import { Providers } from './providers';
 
 import '@ant-design/v5-patch-for-react-19';
-import { SettingsRoutesPage } from 'pages/settings-routes-page';
 import { SettingsRoutesCreatePage } from 'pages/settings-routes-create-page';
+import { SettingsRoutesPage } from 'pages/settings-routes-page';
+import { DictionaryStatusPage } from 'pages/dictionary-statuses-page';
 
 createRoot(document.getElementById('root')!).render(
   <Providers>
@@ -70,6 +71,10 @@ createRoot(document.getElementById('root')!).render(
         <Route
           path={ROUTES.SETTINGS_DICTIONARY_LIST('departments')}
           element={<DictionaryDepartmentPage />}
+        />
+        <Route
+          path={ROUTES.SETTINGS_DICTIONARY_LIST('statuses')}
+          element={<DictionaryStatusPage />}
         />
       </Route>
       <Route path={ROUTES.NOT_FOUND} element={<NotFoundRoutePath />} />

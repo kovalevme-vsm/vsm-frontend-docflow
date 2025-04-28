@@ -6,6 +6,7 @@ import {
   TbBook,
   TbFiles,
   TbHierarchy,
+  TbStatusChange,
   TbUsers,
 } from 'react-icons/tb';
 
@@ -49,6 +50,11 @@ export function SettingsDictionaryPage(): ReactElement {
           icon={TbFiles}
           title={'Типы приложений'}
           route={ROUTES.SETTINGS_DICTIONARY_LIST('appendix-types')}
+        />
+        <DictionaryListItem
+          icon={TbStatusChange}
+          title={'Статусы'}
+          route={ROUTES.SETTINGS_DICTIONARY_LIST('statuses')}
         />
       </section>
     </div>
