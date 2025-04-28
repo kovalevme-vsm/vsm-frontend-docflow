@@ -19,7 +19,10 @@ import { ROUTES } from 'shared/const';
 
 import { BasePageLayout } from './layouts';
 import { Providers } from './providers';
+
 import '@ant-design/v5-patch-for-react-19';
+import { SettingsRoutesPage } from 'pages/settings-routes-page';
+import { SettingsRoutesCreatePage } from 'pages/settings-routes-create-page';
 
 createRoot(document.getElementById('root')!).render(
   <Providers>
@@ -38,6 +41,11 @@ createRoot(document.getElementById('root')!).render(
         <Route
           path={ROUTES.SETTINGS_DICTIONARY}
           element={<SettingsDictionaryPage />}
+        />
+        <Route path={ROUTES.SETTINGS_ROUTES} element={<SettingsRoutesPage />} />
+        <Route
+          path={ROUTES.SETTINGS_ROUTES_CREATE}
+          element={<SettingsRoutesCreatePage />}
         />
         <Route
           path={ROUTES.SETTINGS_DICTIONARY_LIST('organization')}
