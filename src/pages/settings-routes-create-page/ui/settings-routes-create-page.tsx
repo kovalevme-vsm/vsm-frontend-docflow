@@ -1,10 +1,12 @@
-import { Background, Controls, ReactFlow } from '@xyflow/react';
+import { Background, Controls, type Node, ReactFlow } from '@xyflow/react';
 import { Button, Card, Form, Input, Radio } from 'antd';
 import { ReactElement, useState } from 'react';
 import { TbPlus, TbRoute } from 'react-icons/tb';
 
 import { useRouteCreate } from 'pages/settings-routes-create-page/api/useRouteCreate.ts';
+import { StepRoute } from 'pages/settings-routes-create-page/models/types.ts';
 import { CreateRouteStepModal } from 'pages/settings-routes-create-page/ui/create-route-step-modal.tsx';
+import { RouteStepItem } from 'pages/settings-routes-create-page/ui/route-step-item.tsx';
 
 import { PageHeader } from 'widgets/page-header';
 
@@ -17,11 +19,40 @@ export function SettingsRoutesCreatePage(): ReactElement {
   const handleOpenModal = () => setIsOpenModal(true);
   const handleCloseModal = () => setIsOpenModal(false);
   const { mutate: onCreateRoute, isPending } = useRouteCreate();
+  const [steps, setSteps] = useState<StepRoute[]>([]);
+
+  const [formRouteStep] = Form.useForm();
+  const [nodes, setNodes] = useState<Node[]>([]);
+
+  const onAddStep = (step: StepRoute): void => {
+    setSteps((el) => [...el, { ...step, order: el.length + 1 }]);
+    setNodes((el) => [
+      ...el,
+      {
+        id: String(el.length + 1),
+        position: { x: 0, y: 200 * el.length + 1 },
+        data: { label: step.name },
+      },
+    ]);
+    formRouteStep.resetFields();
+    handleCloseModal();
+  };
+  const onRemoveStep = (index: number): void => {
+    setSteps((prevSteps) => {
+      return prevSteps.filter((_, i) => i !== index);
+    });
+  };
+
+  console.log(nodes, steps);
   return (
     <div className={'space-y-4'}>
       <PageHeader icon={TbRoute} title={'Создание маршрута'} />
       <Card variant="borderless" size={'small'}>
-        <Form className={'grid grid-cols-4 gap-2'} onFinish={onCreateRoute}>
+        <Form
+          name="route"
+          className={'grid grid-cols-4 gap-2'}
+          onFinish={onCreateRoute}
+        >
           <RouteDocumentTypeSelect />
           <Form.Item
             name={'name'}
@@ -59,13 +90,22 @@ export function SettingsRoutesCreatePage(): ReactElement {
       <div className={'grid grid-cols-2 gap-4'}>
         <Card variant="borderless" size={'small'}>
           <div className={'h-96'}>
-            <ReactFlow>
+            <ReactFlow nodes={nodes}>
               <Background />
               <Controls />
             </ReactFlow>
           </div>
         </Card>
-        <Card variant="borderless" size={'small'} className={'h-fit'}>
+        <div className={'flex flex-col gap-2'}>
+          {steps.map((value, index) => (
+            <RouteStepItem
+              key={value.order}
+              {...value}
+              onRemoveStep={() => {
+                onRemoveStep(index);
+              }}
+            />
+          ))}
           <Button
             onClick={handleOpenModal}
             icon={<TbPlus />}
@@ -75,9 +115,14 @@ export function SettingsRoutesCreatePage(): ReactElement {
           >
             Создать новый шаг
           </Button>
-        </Card>
+        </div>
       </div>
-      <CreateRouteStepModal isOpen={isOpenModal} onClose={handleCloseModal} />
+      <CreateRouteStepModal
+        form={formRouteStep}
+        onAddNewStep={onAddStep}
+        isOpen={isOpenModal}
+        onClose={handleCloseModal}
+      />
     </div>
   );
 }

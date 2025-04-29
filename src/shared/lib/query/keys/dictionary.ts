@@ -16,6 +16,7 @@ export const dictionaryQueryKey = {
     'select',
   ],
   jobTitle: () => [...dictionaryQueryKey.all, 'job-title'],
+  jobTitleSelect: () => [...dictionaryQueryKey.all, 'job-title', 'select'],
   persons: () => [...dictionaryQueryKey.all, 'persons'],
   personsSelect: () => [...dictionaryQueryKey.all, 'persons', 'select'],
   personsRoleSelect: () => [
@@ -30,6 +31,7 @@ export const dictionaryQueryKey = {
     'select',
   ],
   department: () => [...dictionaryQueryKey.all, 'department'],
+  departmentSelect: () => [...dictionaryQueryKey.all, 'department', 'select'],
   departmentCodesSelect: () => [
     ...dictionaryQueryKey.all,
     'department-codes',

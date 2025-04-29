@@ -14,13 +14,15 @@ type PersonSelectProps = {
   formListField?: FormListFieldData;
   label?: string;
   className?: string;
+  placeholder?: string;
 };
 
 export function PersonSelect({
   enabledFastCreate = true,
   formListField,
-  label = 'Отправитель',
+  label,
   className,
+  placeholder = 'Выберите отправителя',
 }: PersonSelectProps): ReactElement {
   const addOrganization = async (value: never) => {
     const response = await apiClient.post(dictionaryApiPath.persons, {
@@ -38,10 +40,10 @@ export function PersonSelect({
       label={label}
       {...formListField}
       className={className}
-      rules={[{ required: true, message: 'Пожалуйста, выберите отправителя' }]}
+      rules={[{ required: true, message: 'Пожалуйста, выберите пользователя' }]}
     >
       <SelectWithAddItem
-        placeholder={'Выберите отправителя'}
+        placeholder={placeholder}
         allowClear
         showSearch={true}
         filterOption={false}

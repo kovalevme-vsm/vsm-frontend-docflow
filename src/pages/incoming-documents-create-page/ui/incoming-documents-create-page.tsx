@@ -55,7 +55,7 @@ export function IncomingDocumentsCreatePage(): ReactElement {
       >
         <Card variant="borderless" size={'small'}>
           <div className={'mt-2 grid grid-cols-2 gap-2'}>
-            <UserManagementSelect label={''} />
+            <UserManagementSelect />
             <ConfidentialityLevelSelect label={''} />
           </div>
         </Card>
@@ -71,7 +71,7 @@ export function IncomingDocumentsCreatePage(): ReactElement {
             <Form.Item className={'!mb-0'}>
               <Input placeholder={'Исходящий номер'} />
             </Form.Item>
-            <PersonSelect label={''} />
+            <PersonSelect />
             <OrganizationSelect label={''} />
           </div>
         </Card>
