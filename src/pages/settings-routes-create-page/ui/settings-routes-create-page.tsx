@@ -1,4 +1,10 @@
-import { Background, Controls, type Node, ReactFlow } from '@xyflow/react';
+import {
+  Background,
+  Controls,
+  type Edge,
+  type Node,
+  ReactFlow,
+} from '@xyflow/react';
 import { Button, Card, Form, Input, Radio } from 'antd';
 import { ReactElement, useState } from 'react';
 import { TbPlus, TbRoute } from 'react-icons/tb';
@@ -23,6 +29,7 @@ export function SettingsRoutesCreatePage(): ReactElement {
 
   const [formRouteStep] = Form.useForm();
   const [nodes, setNodes] = useState<Node[]>([]);
+  const [edges, setEdges] = useState<Edge[]>([]);
 
   const onAddStep = (step: StepRoute): void => {
     setSteps((el) => [...el, { ...step, order: el.length + 1 }]);
@@ -30,10 +37,20 @@ export function SettingsRoutesCreatePage(): ReactElement {
       ...el,
       {
         id: String(el.length + 1),
-        position: { x: 0, y: 200 * el.length + 1 },
+        position: { x: 0, y: 100 * el.length + 1 },
         data: { label: step.name },
       },
     ]);
+
+    setEdges((el) => [
+      ...el,
+      {
+        id: `${el.length + 1}-${el.length + 2}`,
+        source: String(el.length + 1),
+        target: String(el.length + 2),
+      },
+    ]);
+
     formRouteStep.resetFields();
     handleCloseModal();
   };
@@ -41,9 +58,14 @@ export function SettingsRoutesCreatePage(): ReactElement {
     setSteps((prevSteps) => {
       return prevSteps.filter((_, i) => i !== index);
     });
+    setNodes((prevSteps) => {
+      return prevSteps.filter((_, i) => i !== index);
+    });
+    setEdges((prevSteps) => {
+      return prevSteps.filter((_, i) => i !== index);
+    });
   };
 
-  console.log(nodes, steps);
   return (
     <div className={'space-y-4'}>
       <PageHeader icon={TbRoute} title={'Создание маршрута'} />
@@ -90,7 +112,7 @@ export function SettingsRoutesCreatePage(): ReactElement {
       <div className={'grid grid-cols-2 gap-4'}>
         <Card variant="borderless" size={'small'}>
           <div className={'h-96'}>
-            <ReactFlow nodes={nodes}>
+            <ReactFlow nodes={nodes} edges={edges} fitView>
               <Background />
               <Controls />
             </ReactFlow>
