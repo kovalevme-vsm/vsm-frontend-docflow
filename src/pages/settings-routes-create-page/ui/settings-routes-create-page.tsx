@@ -10,7 +10,10 @@ import { ReactElement, useState } from 'react';
 import { TbPlus, TbRoute } from 'react-icons/tb';
 
 import { useRouteCreate } from 'pages/settings-routes-create-page/api/useRouteCreate.ts';
-import { StepRoute } from 'pages/settings-routes-create-page/models/types.ts';
+import {
+  RouteCreateFormValue,
+  StepRoute,
+} from 'pages/settings-routes-create-page/models/types.ts';
 import { CreateRouteStepModal } from 'pages/settings-routes-create-page/ui/create-route-step-modal.tsx';
 import { RouteStepItem } from 'pages/settings-routes-create-page/ui/route-step-item.tsx';
 
@@ -73,7 +76,9 @@ export function SettingsRoutesCreatePage(): ReactElement {
         <Form
           name="route"
           className={'grid grid-cols-4 gap-2'}
-          onFinish={onCreateRoute}
+          onFinish={(values: RouteCreateFormValue) =>
+            onCreateRoute({ ...values, steps: steps })
+          }
         >
           <RouteDocumentTypeSelect />
           <Form.Item
