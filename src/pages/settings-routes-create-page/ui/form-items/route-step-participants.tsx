@@ -46,7 +46,7 @@ export function RouteStepParticipants(): ReactElement {
                   {currentParticipants &&
                     currentParticipants[name]?.participant_type &&
                     currentParticipants[name]?.participant_type ===
-                      ParticipantTypes.USER && (
+                      ParticipantTypes.SPECIFIC_USER && (
                       <div className={'flex-1'}>
                         <UserManagementSelect name={[name, 'user']} />
                       </div>

@@ -16,7 +16,7 @@ export function IncomingDocumentsPage(): ReactElement {
         type={'primary'}
         onClick={() => navigate(ROUTES.DOCUMENTS_INCOMING_CREATE)}
       >
-        Зарегистрировать
+        Создать новую карточку
       </Button>
       <Table />
     </div>

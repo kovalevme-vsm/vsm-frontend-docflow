@@ -10,10 +10,13 @@ import { DictionaryDepartmentPage } from 'pages/dictionary-departments-page';
 import { DictionaryJobTitlePage } from 'pages/dictionary-job-title-page';
 import { DictionaryOrganizationPage } from 'pages/dictionary-organization-page';
 import { DictionaryPersonsPage } from 'pages/dictionary-persons-page';
+import { DictionaryStatusPage } from 'pages/dictionary-statuses-page';
 import { IncomingDocumentsCreatePage } from 'pages/incoming-documents-create-page';
 import { IncomingDocumentsPage } from 'pages/incoming-documents-page';
 import { NotFoundRoutePath } from 'pages/not-found-route-path';
 import { SettingsDictionaryPage } from 'pages/settings-dictionary-page';
+import { SettingsRoutesCreatePage } from 'pages/settings-routes-create-page';
+import { SettingsRoutesPage } from 'pages/settings-routes-page';
 
 import { ROUTES } from 'shared/const';
 
@@ -21,9 +24,8 @@ import { BasePageLayout } from './layouts';
 import { Providers } from './providers';
 
 import '@ant-design/v5-patch-for-react-19';
-import { SettingsRoutesCreatePage } from 'pages/settings-routes-create-page';
-import { SettingsRoutesPage } from 'pages/settings-routes-page';
-import { DictionaryStatusPage } from 'pages/dictionary-statuses-page';
+
+import '@xyflow/react/dist/style.css';
 
 createRoot(document.getElementById('root')!).render(
   <Providers>

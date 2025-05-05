@@ -2,7 +2,7 @@ export interface RouteCreateFormValue {
   name: string;
   document_type: string;
   is_active: boolean;
-  steps: StepRoute[];
+  // steps: StepRoute[];
 }
 
 export interface StepRoute {
