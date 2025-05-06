@@ -34,13 +34,20 @@ import { IconButton, Label } from 'shared/ui';
 export function IncomingDocumentsCreatePage(): ReactElement {
   const navigate = useNavigate();
   const [form] = Form.useForm();
-  const currentAppendixType = Form.useWatch('appendix-type', form);
-  console.log(currentAppendixType, form);
+  const normFile = (e: any) => {
+    if (Array.isArray(e)) {
+      return e;
+    }
+    return e?.fileList;
+  };
   return (
     <div className={'space-y-4'}>
       <div className={'flex gap-2'}>
         <IconButton onClick={() => navigate(-1)} icon={TbChevronLeft} />
-        <PageHeader icon={TbMailDown} title={'Регистрация входящего'} />
+        <PageHeader
+          icon={TbMailDown}
+          title={'Создание новой карточки входящего документа'}
+        />
       </div>
       <div className={'flex w-full justify-end'}>
         <Tag>Черновик</Tag>
@@ -56,7 +63,7 @@ export function IncomingDocumentsCreatePage(): ReactElement {
         <Card variant="borderless" size={'small'}>
           <div className={'mt-2 grid grid-cols-2 gap-2'}>
             <UserManagementSelect />
-            <ConfidentialityLevelSelect label={''} />
+            <ConfidentialityLevelSelect />
           </div>
         </Card>
         <Card
@@ -65,10 +72,10 @@ export function IncomingDocumentsCreatePage(): ReactElement {
           size={'small'}
         >
           <div className={'grid grid-cols-4 gap-2'}>
-            <Form.Item className={'!mb-0'}>
+            <Form.Item className={'!mb-0'} name={'external_date'}>
               <DatePicker className={'!w-full'} placeholder={'Дата'} />
             </Form.Item>
-            <Form.Item className={'!mb-0'}>
+            <Form.Item className={'!mb-0'} name={'external_outgoing_number'}>
               <Input placeholder={'Исходящий номер'} />
             </Form.Item>
             <PersonSelect />
@@ -81,7 +88,7 @@ export function IncomingDocumentsCreatePage(): ReactElement {
           variant="borderless"
         >
           <div className={'grid grid-cols-4 gap-2'}>
-            <Form.Item className={'!mb-0'}>
+            <Form.Item className={'!mb-0'} name={'number_sheets'}>
               <InputNumber
                 className={'!w-full'}
                 min={1}
@@ -89,19 +96,22 @@ export function IncomingDocumentsCreatePage(): ReactElement {
               />
             </Form.Item>
             <AppendixTypesSelect />
-
-            <Form.Item className={'!mb-0'}>
+            <Form.Item className={'!mb-0'} name={'application_number_sheets'}>
               <InputNumber
                 min={0}
                 className={'!w-full'}
                 placeholder={'Листов приложений'}
               />
             </Form.Item>
-
-            <Form.Item className={'!mb-0'}>
+            <Form.Item
+              className={'!mb-0'}
+              initialValue={false}
+              valuePropName="checked"
+              name={'is_paper_document'}
+            >
               <Checkbox>Бумажный носитель документа</Checkbox>
             </Form.Item>
-            <Form.Item className={'col-span-4 !mb-0'}>
+            <Form.Item className={'col-span-4 !mb-0'} name={'content'}>
               <Input.TextArea placeholder={'Содержание'} />
             </Form.Item>
           </div>
@@ -121,11 +131,17 @@ export function IncomingDocumentsCreatePage(): ReactElement {
             variant="borderless"
             title={<Label icon={TbFiles} title={'Файлы'} />}
           >
-            <Upload listType="text">
-              <Button block variant={'filled'} color={'default'}>
-                Добавить файлы
-              </Button>
-            </Upload>
+            <Form.Item
+              name="files"
+              valuePropName="fileList"
+              getValueFromEvent={normFile}
+            >
+              <Upload listType="picture" beforeUpload={() => false}>
+                <Button block variant={'filled'} color={'default'}>
+                  Добавить файлы
+                </Button>
+              </Upload>
+            </Form.Item>
           </Card>
         </div>
         <div className={'mt-2 flex gap-2'}>

@@ -18,7 +18,7 @@ export function AppendixTypesSelect({
 }: Props): ReactElement {
   return (
     <Form.Item
-      name={'appendix-type'}
+      name={'appendix_type'}
       label={label}
       {...formListField}
       className={className}

@@ -13,7 +13,7 @@ type ConfidentialityLevelSelectProps = {
 
 export function ConfidentialityLevelSelect({
   formListField,
-  label = 'Уровень конфиденциальности',
+  label,
   className,
 }: ConfidentialityLevelSelectProps): ReactElement {
   return (
@@ -24,7 +24,7 @@ export function ConfidentialityLevelSelect({
       className={className}
       rules={[
         {
-          required: true,
+          required: false,
           message: 'Пожалуйста, выберите уровень конфиденциальности',
         },
       ]}

@@ -36,7 +36,7 @@ export function PersonSelect({
 
   return (
     <Form.Item
-      name={'sender'}
+      name={'external_sender'}
       label={label}
       {...formListField}
       className={className}
