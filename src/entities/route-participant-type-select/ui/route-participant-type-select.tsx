@@ -1,13 +1,13 @@
 import { Form, FormListFieldData } from 'antd';
 import type { NamePath } from 'rc-field-form/lib/interface';
-import { ReactElement } from 'react';
+import { ReactElement, ReactNode } from 'react';
 
 import { SelectWithAddItem } from 'widgets/select-with-add-item';
 
 import { routeApiPath, routeQueryKey } from 'shared/lib/query';
 
 type Props = {
-  label?: string;
+  label?: ReactNode;
   name?: NamePath;
   formListField?: FormListFieldData;
 };

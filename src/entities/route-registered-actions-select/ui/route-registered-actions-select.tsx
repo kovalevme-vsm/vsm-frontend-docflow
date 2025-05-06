@@ -1,6 +1,6 @@
 import { Form, SelectProps } from 'antd';
 import type { NamePath } from 'rc-field-form/lib/interface';
-import { ReactElement } from 'react';
+import { ReactElement, ReactNode } from 'react';
 
 import { SelectWithAddItem } from 'widgets/select-with-add-item';
 
@@ -8,7 +8,7 @@ import { documentActionsQueryKey } from 'shared/lib/query/keys/document-actions.
 import { documentActionsApiPath } from 'shared/lib/query/path/document-actions.ts';
 
 interface Props extends SelectProps {
-  label?: string;
+  label?: ReactNode;
   name: NamePath;
   placeholder?: string;
 }

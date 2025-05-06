@@ -8,8 +8,8 @@ import { Label } from 'shared/ui';
 export function RouteStepActions(): ReactElement {
   return (
     <>
-      <Label title={'Действия'} icon={TbActivity} />
       <RouteRegisteredActionsSelect
+        label={<Label title={'Действия'} icon={TbActivity} />}
         name={'allowed_action_codes'}
         mode={'multiple'}
       />
