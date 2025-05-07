@@ -20,33 +20,7 @@
 .hover-second-background-color {
     @apply hover:bg-gray-200 hover:dark:bg-gray-800/80
 }
-.button {
-    @apply cursor-pointer rounded-xl py-2 duration-300 select-none flex items-center gap-2 justify-center px-5 text-sm
-}
 
-.button-default {
-    @apply bg-gray-200/50  dark:bg-gray-800/50 hover:bg-gray-200 text-gray-950 dark:text-gray-50 hover:dark:bg-gray-800;
-}
-
-.button-primary {
-    @apply bg-blue-800  hover:bg-blue-800/80 text-gray-50 ;
-}
-
-.button-danger {
-    @apply bg-red-500/80 dark:bg-red-500 hover:bg-red-500/60 text-gray-50 ;
-}
-
-.button-disabled {
-    @apply bg-gray-300/60  text-gray-400/70 cursor-not-allowed dark:bg-gray-800/60 dark:text-gray-700;
-}
-
-.button-loading {
-    @apply bg-gray-300/60  text-gray-400/70 cursor-progress dark:bg-gray-800/60 dark:text-gray-700;
-}
-
-.button-danger-outline {
-    @apply border border-red-500 text-red-500 hover:bg-red-400 hover:text-gray-50;
-}
 .no-scroll-bar {
     scrollbar-width: none;  /* Для Firefox */
     -ms-overflow-style: none;  /* Для IE/Edge */

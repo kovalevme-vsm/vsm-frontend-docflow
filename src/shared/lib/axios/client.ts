@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { useEffect } from 'react';
+import { NavigateFunction, useNavigate } from 'react-router';
 
 import { ROUTES } from 'shared/const';
 
@@ -21,43 +23,62 @@ apiClient.interceptors.request.use((config) => {
   return config;
 });
 
-apiClient.interceptors.response.use(
-  (response) => response,
-  async (error) => {
-    const originalRequest = error.config;
-    const location = window.location.pathname;
-    // Если ошибка 401 и это не запрос на /refresh
-    if (
-      error.response.status === 401 &&
-      !originalRequest._retry &&
-      location !== ROUTES.LOGIN
-    ) {
+const setupResponseInterceptor = (navigate: NavigateFunction) => {
+  return apiClient.interceptors.response.use(
+    (response) => response,
+    async (error) => {
+      const originalRequest = error.config;
+
+      if (
+        error.response?.status !== 401 ||
+        originalRequest._retry ||
+        window.location.pathname === ROUTES.LOGIN
+      ) {
+        return Promise.reject(error);
+      }
+
       originalRequest._retry = true;
 
       try {
-        // Запрашиваем новый accessToken через refreshToken
-        const token = localStorage.getItem('refreshToken') || null;
+        const refreshToken = localStorage.getItem('refreshToken');
+        if (!refreshToken) throw new Error('No refresh token');
+
         const { data } = await axios.post(
           'users/auth/refresh',
-          { refresh: token },
-          { withCredentials: true, baseURL: import.meta.env.VITE_API_URL } // Куки (refreshToken) отправится автоматически
+          { refresh: refreshToken },
+          {
+            withCredentials: true,
+            baseURL: import.meta.env.VITE_API_URL,
+          }
         );
-        // Сохраняем новый accessToken
-        const newAccessToken = data.access;
+
         sessionStorage.setItem('accessToken', data.access);
         localStorage.setItem('refreshToken', data.refresh);
 
-        // Повторяем исходный запрос с новым токеном
-        originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+        originalRequest.headers.Authorization = `Bearer ${data.access}`;
         return apiClient(originalRequest);
       } catch (refreshError) {
-        // Если refreshToken невалиден - разлогиниваем пользователя
-        console.error('Refresh token failed', refreshError);
-        window.location.href = ROUTES.LOGIN; // Редирект на логин
+        console.error('Refresh token failed:', refreshError);
+        sessionStorage.removeItem('accessToken');
+        localStorage.removeItem('refreshToken');
+
+        // Используем navigate вместо window.location.href
+        navigate(ROUTES.LOGIN);
         return Promise.reject(refreshError);
       }
     }
+  );
+};
 
-    return Promise.reject(error);
-  }
-);
+export const useApiInterceptor = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const interceptor = setupResponseInterceptor(navigate);
+
+    return () => {
+      // Очистка интерцептора при размонтировании
+      apiClient.interceptors.response.eject(interceptor);
+    };
+  }, [navigate]);
+};
