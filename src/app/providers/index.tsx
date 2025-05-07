@@ -2,8 +2,8 @@ import { PropsWithChildren, ReactElement } from 'react';
 
 import { QueryProvider } from 'shared/lib/query';
 
-import { AntdLayoutProvider } from './antd-layout-provider.tsx';
-import { AuthenticateProvider } from './authenticate-provider.tsx';
+import { AntdLayoutProvider } from './antd-layout-provider';
+import { AuthenticateProvider } from './authenticate-provider';
 import { BrowserRouteProvider } from './browser-route-provider';
 import { ThemeProvider } from './theme-provider';
 

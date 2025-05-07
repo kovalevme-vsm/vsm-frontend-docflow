@@ -1,7 +1,10 @@
 import { ReactElement } from 'react';
-import { CompanyLogo } from 'shared/ui';
+
 import { AuthenticateForm } from 'pages/authenticate-page/ui/authenticate-form.tsx';
+
 import { SystemCopyright } from 'widgets/system-copyright';
+
+import { CompanyLogo } from 'shared/ui';
 
 export function AuthenticatePage(): ReactElement {
   return (

@@ -3,19 +3,22 @@ import { Navigate, useMatch } from 'react-router';
 
 import { ApplicationLogo } from 'widgets/application-logo';
 
-import { ROUTES } from 'shared/const/router.ts';
-import { useApiQuery, userApiPath } from 'shared/lib/query';
+import { QUERY_KEYS, QUERY_PATH } from 'shared/const';
+import { ROUTES } from 'shared/const/router';
+import { useApiInterceptor } from 'shared/lib/axios/client';
+import { useApiQuery } from 'shared/lib/query';
 
 export function AuthenticateProvider({
   children,
 }: PropsWithChildren): ReactElement {
+  useApiInterceptor();
   const match = useMatch(ROUTES.LOGIN);
 
   const [showChild, setShowChild] = useState(false);
 
   const { isPending, isError, error, isSuccess } = useApiQuery({
-    apiPath: userApiPath.userAuthenticateValidate,
-    queryKey: ['users', 'auth', 'validate'],
+    apiPath: QUERY_PATH.USER_AUTH_TOKEN_VALIDATE,
+    queryKey: QUERY_KEYS.USERS_AUTH_TOKEN_VALIDATE(),
     staleTime: 0,
     retry: false,
   });

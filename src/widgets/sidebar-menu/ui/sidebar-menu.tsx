@@ -1,17 +1,9 @@
-import { Button } from 'antd';
 import { motion } from 'framer-motion';
 import { ReactElement } from 'react';
-import {
-  TbBook,
-  TbCategory,
-  TbFiles,
-  TbLayoutSidebarLeftCollapse,
-  TbMailDown,
-  TbRoute,
-  TbSettings,
-} from 'react-icons/tb';
+import { TbBook, TbCategory, TbSettings } from 'react-icons/tb';
 
 import { ApplicationLogo } from 'widgets/application-logo';
+import { SidebarHiddenButton } from 'widgets/sidebar-menu/ui/sidebar-hidden-button.tsx';
 import { SidebarMenuItem } from 'widgets/sidebar-menu/ui/sidebar-menu-item.tsx';
 import { SignOutButton } from 'widgets/sign-out-button';
 import { SystemCopyright } from 'widgets/system-copyright';
@@ -34,18 +26,6 @@ export function SidebarMenu(): ReactElement {
               route={ROUTES.DASHBOARD}
             />
             <SidebarMenuItem
-              title={'Документы'}
-              icon={TbFiles}
-              route={ROUTES.DOCUMENTS_BASE}
-              children={[
-                {
-                  title: 'Входящие',
-                  route: ROUTES.DOCUMENTS_INCOMING,
-                  icon: TbMailDown,
-                },
-              ]}
-            />
-            <SidebarMenuItem
               title={'Настройки'}
               icon={TbSettings}
               route={ROUTES.SETTINGS_BASE}
@@ -55,11 +35,6 @@ export function SidebarMenu(): ReactElement {
                   route: ROUTES.SETTINGS_DICTIONARY,
                   icon: TbBook,
                 },
-                {
-                  title: 'Маршруты',
-                  route: ROUTES.SETTINGS_ROUTES,
-                  icon: TbRoute,
-                },
               ]}
             />
           </div>
@@ -67,20 +42,7 @@ export function SidebarMenu(): ReactElement {
 
         <div className={'mb-4 space-y-2 xl:mb-0'}>
           <SignOutButton />
-          <Button
-            className={'mt-4 !flex xl:!hidden'}
-            onClick={() => {
-              const element = document.getElementById('vsm-doc-sidebar');
-              if (element) {
-                element.classList.remove('block');
-                element.classList.add('hidden');
-              }
-            }}
-            block
-          >
-            <TbLayoutSidebarLeftCollapse />
-            Скрыть меню
-          </Button>
+          <SidebarHiddenButton />
           <div>
             <SystemCopyright />
           </div>
