@@ -22,6 +22,9 @@ const SettingsDictionary = lazy(() => import('pages/settings-dictionary'));
 const SettingsDictionaryConfidentialityLevel = lazy(
   () => import('pages/settings-dictionary-confidentiality-level')
 );
+const SettingsDictionaryDocumentAttachmentTypes = lazy(
+  () => import('pages/settings-dictionary-document-attachment-types')
+);
 
 createRoot(document.getElementById('root')!).render(
   <Providers>
@@ -36,6 +39,10 @@ createRoot(document.getElementById('root')!).render(
         <Route
           path={ROUTES.SETTINGS_DICTIONARY_CONFIDENTIALITY_LEVEL}
           element={<SettingsDictionaryConfidentialityLevel />}
+        />
+        <Route
+          path={ROUTES.SETTINGS_DICTIONARY_DOCUMENT_ATTACHMENT_TYPES}
+          element={<SettingsDictionaryDocumentAttachmentTypes />}
         />
       </Route>
       <Route path={ROUTES.NOT_FOUND} element={<NotFoundRoutePath />} />
