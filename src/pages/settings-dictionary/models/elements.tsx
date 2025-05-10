@@ -1,3 +1,4 @@
+import { PiTrafficSignalFill } from 'react-icons/pi';
 import {
   TbBuilding,
   TbFileFilled,
@@ -28,9 +29,9 @@ export const dictionaryElements = [
     icon: TbBuilding,
     route: ROUTES.SETTINGS_DICTIONARY_ORGANIZATIONS,
   },
-  // {
-  //   title: 'Типы приложений',
-  //   icon: GoPaperclip,
-  //   route: '',
-  // },
+  {
+    title: 'Статусы',
+    icon: PiTrafficSignalFill,
+    route: ROUTES.SETTINGS_DICTIONARY_STATUSES,
+  },
 ] as const;

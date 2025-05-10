@@ -32,6 +32,10 @@ const SettingsDictionaryExternalPersons = lazy(
 const SettingsDictionaryOrganizations = lazy(
   () => import('pages/settings-dictionary-organizations')
 );
+const SettingsDictionaryStatuses = lazy(
+  () => import('pages/settings-dictionary-statuses')
+);
+
 createRoot(document.getElementById('root')!).render(
   <Providers>
     <Routes>
@@ -57,6 +61,10 @@ createRoot(document.getElementById('root')!).render(
         <Route
           path={ROUTES.SETTINGS_DICTIONARY_ORGANIZATIONS}
           element={<SettingsDictionaryOrganizations />}
+        />
+        <Route
+          path={ROUTES.SETTINGS_DICTIONARY_STATUSES}
+          element={<SettingsDictionaryStatuses />}
         />
       </Route>
       <Route path={ROUTES.NOT_FOUND} element={<NotFoundRoutePath />} />
