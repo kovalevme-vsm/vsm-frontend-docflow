@@ -26,6 +26,12 @@ const SettingsDictionaryDocumentAttachmentTypes = lazy(
   () => import('pages/settings-dictionary-document-attachment-types')
 );
 
+const SettingsDictionaryExternalPersons = lazy(
+  () => import('pages/settings-dictionary-external-persons')
+);
+const SettingsDictionaryOrganizations = lazy(
+  () => import('pages/settings-dictionary-organizations')
+);
 createRoot(document.getElementById('root')!).render(
   <Providers>
     <Routes>
@@ -43,6 +49,14 @@ createRoot(document.getElementById('root')!).render(
         <Route
           path={ROUTES.SETTINGS_DICTIONARY_DOCUMENT_ATTACHMENT_TYPES}
           element={<SettingsDictionaryDocumentAttachmentTypes />}
+        />
+        <Route
+          path={ROUTES.SETTINGS_DICTIONARY_EXTERNAL_PERSONS}
+          element={<SettingsDictionaryExternalPersons />}
+        />
+        <Route
+          path={ROUTES.SETTINGS_DICTIONARY_ORGANIZATIONS}
+          element={<SettingsDictionaryOrganizations />}
         />
       </Route>
       <Route path={ROUTES.NOT_FOUND} element={<NotFoundRoutePath />} />

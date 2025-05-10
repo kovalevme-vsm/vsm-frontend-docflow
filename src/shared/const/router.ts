@@ -6,6 +6,8 @@ export const ROUTES = {
   SETTINGS_DICTIONARY: '/settings/dictionaries',
   SETTINGS_DICTIONARY_CONFIDENTIALITY_LEVEL: `/settings/dictionaries/confidentiality-level`,
   SETTINGS_DICTIONARY_DOCUMENT_ATTACHMENT_TYPES: `/settings/dictionaries/document-attachment-types`,
+  SETTINGS_DICTIONARY_EXTERNAL_PERSONS: `/settings/dictionaries/external-persons`,
+  SETTINGS_DICTIONARY_ORGANIZATIONS: `/settings/dictionaries/organizations`,
   // Fallback route
   NOT_FOUND: '*',
 } as const;
