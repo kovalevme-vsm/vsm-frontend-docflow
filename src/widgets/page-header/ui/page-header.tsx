@@ -25,7 +25,9 @@ export function PageHeader(props: PageHeaderProps): ReactElement {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            {createElement(props.icon, { className: 'text-lg md:text-xl' })}
+            {createElement(props.icon, {
+              className: 'text-lg md:text-xl text-blue-500',
+            })}
           </motion.div>
           <motion.h1
             initial={{ opacity: 0, x: -10 }}
