@@ -21,4 +21,16 @@ export const QUERY_PATH = {
   USER_MANAGEMENT_JOB_TITLE_LIST: 'users/job-titles',
   USER_MANAGEMENT_DEPARTMENTS_LIST: 'users/departments',
   USER_MANAGEMENT_GROUPS_LIST: 'users/groups',
+
+  //   ROUTE MANAGEMENT
+  ROUTE_MANAGEMENT_ROUTES_LIST: 'routes/template',
+  ROUTE_MANAGEMENT_ROUTE_STEPS_LIST: (routeId: string) =>
+    `routes/template/${routeId}/steps`,
+  ROUTE_MANAGEMENT_ROUTE_STEP_RETRIEVE: (stepId: string) =>
+    `routes/template/managed/step/${stepId}`,
+  ROUTE_MANAGEMENT_ROUTE_STEP_UPDATE: (stepId: string) =>
+    `routes/template/managed/step/${stepId}`,
+  ROUTE_MANAGEMENT_ROUTE_STEP_DELETE: (stepId: string) =>
+    `routes/template/managed/step/${stepId}`,
+  ROUTE_MANAGEMENT_ROUTE_STEP_CREATE: `routes/template/managed/step`,
 };

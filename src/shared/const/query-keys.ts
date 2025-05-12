@@ -41,4 +41,23 @@ export const QUERY_KEYS = {
     ...QUERY_KEYS.USER_MANAGEMENT_BASE,
     'groups-list',
   ],
+
+  //   ROUTE MANAGEMENT
+  ROUTE_MANAGEMENT_BASE: ['route-management'],
+  ROUTE_MANAGEMENT_ROUTES_LIST: () => [
+    ...QUERY_KEYS.USER_MANAGEMENT_BASE,
+    'routes-list',
+  ],
+  ROUTE_MANAGEMENT_ROUTE_STEPS_LIST: (routeId: string) => [
+    ...QUERY_KEYS.USER_MANAGEMENT_BASE,
+    'routes',
+    routeId,
+    'steps-list',
+  ],
+  ROUTE_MANAGEMENT_ROUTE_STEP_RETRIEVE: (stepId: string) => [
+    ...QUERY_KEYS.USER_MANAGEMENT_BASE,
+    'routes',
+    'step',
+    stepId,
+  ],
 };
