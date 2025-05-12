@@ -27,7 +27,7 @@ export function DictionaryManager<T extends { id: string }>({
   formFields,
 }: DictionaryManagerProps<T>): ReactElement {
   const navigate = useNavigate();
-  const { data, isPending, error } = useDictionaryItemList<T>(code);
+  const { data, isPending } = useDictionaryItemList<T>(code);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [id, setId] = useState<string | null>(null);
@@ -75,7 +75,6 @@ export function DictionaryManager<T extends { id: string }>({
         columns={allColumns}
         dataSource={data?.results}
         loading={isPending}
-        errorCode={error?.status}
       />
       <DrawerDictionaryManager<T>
         isOpen={isModalOpen}

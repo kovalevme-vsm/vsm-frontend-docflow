@@ -11,11 +11,11 @@ export function BasePageLayout(): ReactElement {
   return (
     <main
       className={
-        'flex h-dvh w-screen gap-4 overflow-y-auto bg-neutral-50 p-4 dark:bg-gray-950'
+        'flex h-dvh w-screen gap-4 overflow-hidden bg-neutral-50 p-4 dark:bg-gray-950'
       }
     >
       <SidebarMenu />
-      <div className={'flex h-full w-full flex-1 flex-col'}>
+      <div className={'flex h-full flex-1 flex-col overflow-hidden'}>
         <div
           className={
             'flex h-14 w-full items-center justify-between rounded-2xl py-2 xl:justify-end'
@@ -34,7 +34,9 @@ export function BasePageLayout(): ReactElement {
           />
           <UserHeaderCard />
         </div>
-        <Outlet />
+        <div className="flex-1 overflow-auto">
+          <Outlet />
+        </div>
       </div>
     </main>
   );

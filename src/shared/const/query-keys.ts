@@ -6,6 +6,7 @@ export const QUERY_KEYS = {
     'auth-token-validate',
   ],
   USERS_PAGE_HEADER_INFO: () => [...QUERY_KEYS.USERS_BASE, 'page-header-info'],
+
   //   DICTIONARY
   DICTIONARY_BASE: ['dictionary'],
   DICTIONARY: (dictionaryName: string) => [
@@ -16,5 +17,28 @@ export const QUERY_KEYS = {
     ...QUERY_KEYS.DICTIONARY_BASE,
     dictionaryName,
     id,
+  ],
+  //   USERS MANAGEMENT
+  USER_MANAGEMENT_BASE: ['users-management'],
+  USER_MANAGEMENT_USER_LIST: () => [
+    ...QUERY_KEYS.USER_MANAGEMENT_BASE,
+    'user-list',
+  ],
+  USER_MANAGEMENT_USER_DETAIL: (userId: string) => [
+    ...QUERY_KEYS.USER_MANAGEMENT_BASE,
+    'user-detail',
+    userId,
+  ],
+  USER_MANAGEMENT_JOB_TITLE_LIST: () => [
+    ...QUERY_KEYS.USER_MANAGEMENT_BASE,
+    'job-title-list',
+  ],
+  USER_MANAGEMENT_DEPARTMENTS_LIST: () => [
+    ...QUERY_KEYS.USER_MANAGEMENT_BASE,
+    'departments-list',
+  ],
+  USER_MANAGEMENT_GROUPS_LIST: () => [
+    ...QUERY_KEYS.USER_MANAGEMENT_BASE,
+    'groups-list',
   ],
 };

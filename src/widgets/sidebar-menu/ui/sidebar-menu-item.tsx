@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion';
 import { createElement, ReactElement, useState } from 'react';
 import { IconType } from 'react-icons';
-import { useMatch, useNavigate } from 'react-router';
 import { TbChevronDown, TbChevronRight } from 'react-icons/tb';
+import { useMatch, useNavigate } from 'react-router';
 
 interface Props {
   title: string;
@@ -37,12 +37,12 @@ export function SidebarMenuItem(props: Props): ReactElement {
     >
       <button
         onClick={handleClick}
-        className={`group flex w-full border-l-2 ${isLocationMatch ? '!border-blue-500 !text-blue-500' : 'text-gray-800 dark:text-gray-50'} border-gray-300 px-6 py-2.5 duration-300 hover:cursor-pointer hover:border-blue-500 dark:border-gray-600`}
+        className={`group flex w-full border-l-3 ${isLocationMatch ? '!border-blue-500 !text-blue-500' : 'text-gray-800 dark:text-gray-50'} border-gray-300 px-6 py-2.5 duration-300 hover:cursor-pointer hover:border-blue-500 dark:border-gray-600`}
       >
         <span
-          className={`flex ${props.isChild && 'ml-4'} w-full items-center justify-between text-sm font-medium duration-300 group-hover:translate-x-1.5 group-hover:!text-blue-500`}
+          className={`flex ${props.isChild && 'ml-2'} w-full items-center justify-between text-sm font-medium duration-300 group-hover:translate-x-1.5 group-hover:!text-blue-500`}
         >
-          <div className={'flex items-center gap-3'}>
+          <div className={'flex items-center gap-3 py-1 text-left'}>
             {createElement(props.icon, { className: 'text-lg' })}
             {props.title}
           </div>

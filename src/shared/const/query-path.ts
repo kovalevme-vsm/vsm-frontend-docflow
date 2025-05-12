@@ -9,4 +9,16 @@ export const QUERY_PATH = {
   DICTIONARY: (dictionaryName?: string) => `dictionary/${dictionaryName}`,
   DICTIONARY_DETAIL: (dictionaryName: string, id: string) =>
     `dictionary/${dictionaryName}/${id}`,
+
+  //   USERS MANAGEMENT
+  USER_MANAGEMENT_USER_LIST: 'users/management',
+  USER_MANAGEMENT_USER_CREATE: 'users/management',
+  USER_MANAGEMENT_USER_RETRIEVE: (userId: string) =>
+    `users/management/${userId}`,
+  USER_MANAGEMENT_USER_UPDATE: (userId: string) => `users/management/${userId}`,
+  USER_MANAGEMENT_USER_DELETE: (userId: string) => `users/management/${userId}`,
+
+  USER_MANAGEMENT_JOB_TITLE_LIST: 'users/job-titles',
+  USER_MANAGEMENT_DEPARTMENTS_LIST: 'users/departments',
+  USER_MANAGEMENT_GROUPS_LIST: 'users/groups',
 };

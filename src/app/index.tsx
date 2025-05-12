@@ -35,7 +35,27 @@ const SettingsDictionaryOrganizations = lazy(
 const SettingsDictionaryStatuses = lazy(
   () => import('pages/settings-dictionary-statuses')
 );
-
+const SettingsUsersManagement = lazy(
+  () => import('pages/settings-users-management')
+);
+const SettingsUsersManagementJobTitles = lazy(
+  () => import('pages/settings-users-management-job-titles')
+);
+const SettingsUsersManagementUsers = lazy(
+  () => import('pages/settings-users-management-users')
+);
+const SettingsUsersManagementDepartments = lazy(
+  () => import('pages/settings-users-management-departments')
+);
+const SettingsUsersManagementGroups = lazy(
+  () => import('pages/settings-users-management-groups')
+);
+const SettingsRoutesManagement = lazy(
+  () => import('pages/settings-routes-management')
+);
+const DocumentsIncoming = lazy(() => import('pages/documents-incoming'));
+const DocumentsOutgoing = lazy(() => import('pages/documents-outgoing'));
+const DocumentsContract = lazy(() => import('pages/documents-contract'));
 createRoot(document.getElementById('root')!).render(
   <Providers>
     <Routes>
@@ -65,6 +85,42 @@ createRoot(document.getElementById('root')!).render(
         <Route
           path={ROUTES.SETTINGS_DICTIONARY_STATUSES}
           element={<SettingsDictionaryStatuses />}
+        />
+        <Route
+          path={ROUTES.SETTINGS_USERS_MANAGEMENT}
+          element={<SettingsUsersManagement />}
+        />
+        <Route
+          path={ROUTES.SETTINGS_USERS_MANAGEMENT_JOB_TITLES}
+          element={<SettingsUsersManagementJobTitles />}
+        />
+        <Route
+          path={ROUTES.SETTINGS_USERS_MANAGEMENT_USERS}
+          element={<SettingsUsersManagementUsers />}
+        />
+        <Route
+          path={ROUTES.SETTINGS_USERS_MANAGEMENT_DEPARTMENTS}
+          element={<SettingsUsersManagementDepartments />}
+        />
+        <Route
+          path={ROUTES.SETTINGS_USERS_MANAGEMENT_GROUPS}
+          element={<SettingsUsersManagementGroups />}
+        />
+        <Route
+          path={ROUTES.SETTINGS_ROUTES_MANAGEMENT}
+          element={<SettingsRoutesManagement />}
+        />
+        <Route
+          path={ROUTES.DOCUMENTS_INCOMING}
+          element={<DocumentsIncoming />}
+        />
+        <Route
+          path={ROUTES.DOCUMENTS_OUTGOING}
+          element={<DocumentsOutgoing />}
+        />
+        <Route
+          path={ROUTES.DOCUMENTS_CONTRACT}
+          element={<DocumentsContract />}
         />
       </Route>
       <Route path={ROUTES.NOT_FOUND} element={<NotFoundRoutePath />} />
