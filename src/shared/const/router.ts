@@ -23,6 +23,7 @@ export const ROUTES = {
   SETTINGS_USERS_MANAGEMENT_GROUPS: '/settings/users-management/groups',
 
   SETTINGS_ROUTES_MANAGEMENT: '/settings/routes-management',
+  SETTINGS_ROUTES_MANAGEMENT_CREATE: '/settings/routes-management/create',
 
   // Fallback route
   NOT_FOUND: '*',

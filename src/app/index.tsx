@@ -53,6 +53,9 @@ const SettingsUsersManagementGroups = lazy(
 const SettingsRoutesManagement = lazy(
   () => import('pages/settings-routes-management')
 );
+const SettingsRoutesManagementCreate = lazy(
+  () => import('pages/settings-routes-management-create')
+);
 const DocumentsIncoming = lazy(() => import('pages/documents-incoming'));
 const DocumentsOutgoing = lazy(() => import('pages/documents-outgoing'));
 const DocumentsContract = lazy(() => import('pages/documents-contract'));
@@ -109,6 +112,10 @@ createRoot(document.getElementById('root')!).render(
         <Route
           path={ROUTES.SETTINGS_ROUTES_MANAGEMENT}
           element={<SettingsRoutesManagement />}
+        />
+        <Route
+          path={ROUTES.SETTINGS_ROUTES_MANAGEMENT_CREATE}
+          element={<SettingsRoutesManagementCreate />}
         />
         <Route
           path={ROUTES.DOCUMENTS_INCOMING}

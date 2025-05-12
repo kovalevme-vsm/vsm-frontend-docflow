@@ -2,7 +2,7 @@ import { Button, Tag } from 'antd';
 import dayjs from 'dayjs';
 import { ReactElement, useState } from 'react';
 import { IoFootstepsOutline } from 'react-icons/io5';
-import { TbChevronLeft, TbRoute2 } from 'react-icons/tb';
+import { TbChevronLeft, TbPlus, TbRoute2 } from 'react-icons/tb';
 import { useNavigate } from 'react-router';
 
 import { useRouteManagementItemsList } from 'pages/settings-routes-management/api/use-route-management-items-list.ts';
@@ -10,7 +10,8 @@ import { ViewerRouteStepModal } from 'pages/settings-routes-management/ui/viewer
 
 import { PageHeader } from 'widgets/page-header';
 
-import { IconButton, Table } from 'shared/ui';
+import { ROUTES } from 'shared/const';
+import { IconButton, Search, Table } from 'shared/ui';
 
 export function SettingsRoutesManagement(): ReactElement {
   const navigate = useNavigate();
@@ -32,6 +33,16 @@ export function SettingsRoutesManagement(): ReactElement {
       <div className={'flex gap-2'}>
         <IconButton onClick={() => navigate(-1)} icon={TbChevronLeft} />
         <PageHeader icon={TbRoute2} title={'Управление маршрутами'} />
+      </div>
+      <div className={'flex gap-4'}>
+        <Button
+          type={'primary'}
+          icon={<TbPlus />}
+          onClick={() => navigate(ROUTES.SETTINGS_ROUTES_MANAGEMENT_CREATE)}
+        >
+          Создать новый маршрут
+        </Button>
+        <Search />
       </div>
       <Table
         dataSource={data?.results}
