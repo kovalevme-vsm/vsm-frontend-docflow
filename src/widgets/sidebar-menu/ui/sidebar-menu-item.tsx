@@ -1,17 +1,11 @@
 import { motion } from 'framer-motion';
 import { createElement, ReactElement, useState } from 'react';
-import { IconType } from 'react-icons';
 import { TbChevronDown, TbChevronRight } from 'react-icons/tb';
 import { useMatch, useNavigate } from 'react-router';
 
-interface Props {
-  title: string;
-  icon: IconType;
-  route: string;
-  isChild?: boolean;
-  children?: Props[];
-}
-export function SidebarMenuItem(props: Props): ReactElement {
+import { ISidebarProps } from 'shared/lib/sidebar';
+
+export function SidebarMenuItem(props: ISidebarProps): ReactElement {
   const [isExpanded, setIsExpanded] = useState(false);
   const navigate = useNavigate();
   const isLocationMatch = useMatch(`${props.route}/*`);

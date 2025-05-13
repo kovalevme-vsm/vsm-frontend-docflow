@@ -3,7 +3,8 @@ import { TbLayoutSidebarLeftExpand } from 'react-icons/tb';
 import { Outlet } from 'react-router';
 
 import { SidebarMenu } from 'widgets/sidebar-menu';
-import { UserHeaderCard } from 'widgets/user-header-card';
+
+import { UserHeaderCard } from 'entities/user-header-card';
 
 import { IconButton } from 'shared/ui';
 

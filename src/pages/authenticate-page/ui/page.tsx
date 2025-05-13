@@ -2,7 +2,7 @@ import { ReactElement } from 'react';
 
 import { AuthenticateForm } from 'pages/authenticate-page/ui/authenticate-form.tsx';
 
-import { SystemCopyright } from 'widgets/system-copyright';
+import { SystemCopyright } from 'entities/system-copyright';
 
 import { CompanyLogo } from 'shared/ui';
 

@@ -1,7 +1,7 @@
 import { PropsWithChildren, ReactElement, useEffect, useState } from 'react';
 import { Navigate, useMatch } from 'react-router';
 
-import { ApplicationLogo } from 'widgets/application-logo';
+import { ApplicationLogo } from 'entities/application-logo';
 
 import { QUERY_KEYS, QUERY_PATH } from 'shared/const';
 import { ROUTES } from 'shared/const/router';

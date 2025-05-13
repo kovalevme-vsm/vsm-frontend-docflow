@@ -1,22 +1,14 @@
 import { motion } from 'framer-motion';
 import { ReactElement } from 'react';
-import { RiUserSettingsLine } from 'react-icons/ri';
-import {
-  TbBook,
-  TbCategory,
-  TbFile,
-  TbFiles,
-  TbMailDown,
-  TbMailUp,
-  TbRoute2,
-  TbSettings,
-} from 'react-icons/tb';
+import { TbCategory } from 'react-icons/tb';
 
-import { ApplicationLogo } from 'widgets/application-logo';
 import { SidebarHiddenButton } from 'widgets/sidebar-menu/ui/sidebar-hidden-button.tsx';
 import { SidebarMenuItem } from 'widgets/sidebar-menu/ui/sidebar-menu-item.tsx';
-import { SignOutButton } from 'widgets/sign-out-button';
-import { SystemCopyright } from 'widgets/system-copyright';
+
+import { SignOutButton } from 'features/sign-out-button';
+
+import { ApplicationLogo } from 'entities/application-logo';
+import { SystemCopyright } from 'entities/system-copyright';
 
 import { ROUTES } from 'shared/const';
 
@@ -34,50 +26,6 @@ export function SidebarMenu(): ReactElement {
               title={'Панель управления'}
               icon={TbCategory}
               route={ROUTES.DASHBOARD}
-            />
-            <SidebarMenuItem
-              title={'Документы'}
-              icon={TbFiles}
-              route={ROUTES.DOCUMENTS_BASE}
-              children={[
-                {
-                  title: 'Входящие',
-                  route: ROUTES.DOCUMENTS_INCOMING,
-                  icon: TbMailDown,
-                },
-                {
-                  title: 'Исходящие',
-                  route: ROUTES.DOCUMENTS_OUTGOING,
-                  icon: TbMailUp,
-                },
-                {
-                  title: 'Договоры',
-                  route: ROUTES.DOCUMENTS_CONTRACT,
-                  icon: TbFile,
-                },
-              ]}
-            />
-            <SidebarMenuItem
-              title={'Настройки системы'}
-              icon={TbSettings}
-              route={ROUTES.SETTINGS_BASE}
-              children={[
-                {
-                  title: 'Справочники',
-                  route: ROUTES.SETTINGS_DICTIONARY,
-                  icon: TbBook,
-                },
-                {
-                  title: 'Управление пользователями',
-                  route: ROUTES.SETTINGS_USERS_MANAGEMENT,
-                  icon: RiUserSettingsLine,
-                },
-                {
-                  title: 'Управление маршрутами',
-                  route: ROUTES.SETTINGS_ROUTES_MANAGEMENT,
-                  icon: TbRoute2,
-                },
-              ]}
             />
           </div>
         </div>

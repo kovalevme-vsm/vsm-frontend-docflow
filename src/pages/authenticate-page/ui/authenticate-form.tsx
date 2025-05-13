@@ -5,7 +5,7 @@ import { TbFingerprint } from 'react-icons/tb';
 import { useUserAuthenticateMutation } from 'pages/authenticate-page/api/use-authenticate.ts';
 import { AuthenticateFormValue } from 'pages/authenticate-page/types';
 
-import { ApplicationLogo } from 'widgets/application-logo';
+import { ApplicationLogo } from 'entities/application-logo';
 
 export function AuthenticateForm(): ReactElement {
   const { mutate: onAuthenticate, isPending } = useUserAuthenticateMutation();
