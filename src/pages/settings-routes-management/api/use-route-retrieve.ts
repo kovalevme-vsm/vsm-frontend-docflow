@@ -3,10 +3,10 @@ import { SettingsRouteStep } from 'pages/settings-routes-management/models/types
 import { QUERY_KEYS, QUERY_PATH } from 'shared/const';
 import { useApiQuery } from 'shared/lib/query';
 
-export const useStepRetrieve = (stepId: string | null) => {
+export const useRouteRetrieve = (routeId: string | null) => {
   return useApiQuery<SettingsRouteStep>({
-    apiPath: QUERY_PATH.ROUTE_MANAGEMENT_ROUTE_STEP_RETRIEVE(stepId || ''),
-    queryKey: QUERY_KEYS.ROUTE_MANAGEMENT_ROUTE_STEP_RETRIEVE(stepId || ''),
-    enabled: !!stepId,
+    apiPath: QUERY_PATH.ROUTE_MANAGEMENT_ROUTE_RETRIEVE(routeId || ''),
+    queryKey: QUERY_KEYS.ROUTE_MANAGEMENT_ROUTE_RETRIEVE(routeId || ''),
+    enabled: !!routeId,
   });
 };

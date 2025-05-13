@@ -60,4 +60,10 @@ export const QUERY_KEYS = {
     'step',
     stepId,
   ],
+
+  ROUTE_MANAGEMENT_ROUTE_RETRIEVE: (routeId: string) => [
+    ...QUERY_KEYS.USER_MANAGEMENT_BASE,
+    'routes',
+    routeId,
+  ],
 };

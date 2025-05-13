@@ -41,7 +41,7 @@ export function ViewerRouteStepModal(props: Props): ReactElement {
     <Modal
       open={props.isOpenStepsModal}
       onCancel={props.onCancel}
-      footer={false}
+      footer={null}
       centered
       className={'!w-full md:!w-3/4 lg:!w-1/3'}
     >

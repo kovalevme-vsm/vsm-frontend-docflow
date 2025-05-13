@@ -24,6 +24,14 @@ export const QUERY_PATH = {
 
   //   ROUTE MANAGEMENT
   ROUTE_MANAGEMENT_ROUTES_LIST: 'routes/template',
+  ROUTE_MANAGEMENT_ROUTES_CREATE: 'routes/template',
+  ROUTE_MANAGEMENT_ROUTE_DELETE: (routeId: string) =>
+    `routes/template/${routeId}`,
+  ROUTE_MANAGEMENT_ROUTE_RETRIEVE: (routeId: string) =>
+    `routes/template/${routeId}`,
+  ROUTE_MANAGEMENT_ROUTE_UPDATE: (routeId: string) =>
+    `routes/template/${routeId}`,
+
   ROUTE_MANAGEMENT_ROUTE_STEPS_LIST: (routeId: string) =>
     `routes/template/${routeId}/steps`,
   ROUTE_MANAGEMENT_ROUTE_STEP_RETRIEVE: (stepId: string) =>

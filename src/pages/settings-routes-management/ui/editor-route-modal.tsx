@@ -1,31 +1,30 @@
-import { Button, Divider, Form, Input, InputNumber, Modal, Radio } from 'antd';
+import { Button, Divider, Form, Input, Modal, Popconfirm, Radio } from 'antd';
 import { ReactElement, useEffect } from 'react';
 import { IoFootstepsOutline } from 'react-icons/io5';
 
-import { useStepDelete } from 'pages/settings-routes-management/api/use-step-delete.ts';
-import { useStepRetrieve } from 'pages/settings-routes-management/api/use-step-retrieve.ts';
-import { useStepUpdate } from 'pages/settings-routes-management/api/use-step-update.ts';
+import { useRouteDelete } from 'pages/settings-routes-management/api/use-route-delete.ts';
+import { useRouteRetrieve } from 'pages/settings-routes-management/api/use-route-retrieve.ts';
+import { useRouteUpdate } from 'pages/settings-routes-management/api/use-route-update.ts';
 
 interface Props {
   open: boolean;
   onCancel: () => void;
-  stepId: string;
   routeId: string | null;
 }
 
-export function EditorRouteStepModal(props: Props): ReactElement {
+export function EditorRouteModal(props: Props): ReactElement {
   const [form] = Form.useForm();
-  const { data, isPending } = useStepRetrieve(props.stepId);
+  const { data, isPending } = useRouteRetrieve(props.routeId);
   const {
     mutate: onUpdateStep,
     isPending: isPendingUpdate,
     isSuccess,
-  } = useStepUpdate(props.stepId);
+  } = useRouteUpdate(props.routeId || '');
   const {
     mutate: onDeleteStep,
     isPending: isPendingDelete,
     isSuccess: isSuccessDelete,
-  } = useStepDelete(props.stepId, props.routeId);
+  } = useRouteDelete(props.routeId);
 
   useEffect(() => {
     if (data) {
@@ -60,38 +59,39 @@ export function EditorRouteStepModal(props: Props): ReactElement {
         <div className="w-fit rounded-3xl bg-gray-100 p-3 dark:bg-gray-50">
           <IoFootstepsOutline className="text-5xl text-blue-500" />
         </div>
-        <h1 className="text-center text-xl font-medium">Редактирование шага</h1>
+        <h1 className="text-center text-xl font-medium">
+          Редактирование Маршрута
+        </h1>
       </div>
       <Form form={form} layout={'vertical'} onFinish={onUpdateStep}>
         <Form.Item
-          label={'Последовательность шага'}
-          name={'order'}
+          name={'name'}
           rules={[
             {
               required: true,
-              message: 'Пожалуйста, укажите последовательность шага!',
+              message: 'Пожалуйста, введите имя маршрута!',
             },
           ]}
         >
-          <InputNumber
-            min={1}
-            className={'!w-full'}
-            placeholder={'Последовательность шага'}
-          />
+          <Input placeholder={'Название маршрута'} />
         </Form.Item>
         <Form.Item
-          label={'Название шага'}
-          name={'name'}
-          rules={[{ required: true, message: 'Пожалуйста, введите имя шага!' }]}
+          name={'document_type'}
+          rules={[
+            {
+              required: true,
+              message: 'Пожалуйста, укажите тип документа!',
+            },
+          ]}
         >
-          <Input placeholder={'Название шага'} />
+          <Input placeholder={'Тип документа'} />
         </Form.Item>
-        <Form.Item name="is_required">
+        <Form.Item name="is_active" initialValue={true}>
           <Radio.Group
             block
             options={[
-              { label: 'Обязательный', value: true },
-              { label: 'Необязательный', value: false },
+              { label: 'Вкл.', value: true },
+              { label: 'Выкл.', value: false },
             ]}
             optionType="button"
             buttonStyle="solid"
@@ -100,23 +100,23 @@ export function EditorRouteStepModal(props: Props): ReactElement {
         <Divider />
         <Form.Item>
           <Button
-            type={'primary'}
+            block
             htmlType={'submit'}
             loading={isPendingUpdate}
-            block
+            type={'primary'}
           >
             Сохранить
           </Button>
         </Form.Item>
       </Form>
-      <Button
-        loading={isPendingDelete}
-        danger
-        block
-        onClick={() => onDeleteStep()}
+      <Popconfirm
+        title={'Вы уверены, что хотите удалить маршрут?'}
+        onConfirm={() => onDeleteStep()}
       >
-        Удалить
-      </Button>
+        <Button loading={isPendingDelete} danger block>
+          Удалить
+        </Button>
+      </Popconfirm>
     </Modal>
   );
 }

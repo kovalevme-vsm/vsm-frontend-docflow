@@ -1,11 +1,12 @@
-import { Button, Tag } from 'antd';
+import { Button, Space, Tag, Tooltip } from 'antd';
 import dayjs from 'dayjs';
 import { ReactElement, useState } from 'react';
-import { IoFootstepsOutline } from 'react-icons/io5';
+import { IoFootsteps, IoPencil } from 'react-icons/io5';
 import { TbChevronLeft, TbPlus, TbRoute2 } from 'react-icons/tb';
 import { useNavigate } from 'react-router';
 
 import { useRouteManagementItemsList } from 'pages/settings-routes-management/api/use-route-management-items-list.ts';
+import { EditorRouteModal } from 'pages/settings-routes-management/ui/editor-route-modal.tsx';
 import { ViewerRouteStepModal } from 'pages/settings-routes-management/ui/viewer-route-step-modal.tsx';
 
 import { PageHeader } from 'widgets/page-header';
@@ -17,6 +18,7 @@ export function SettingsRoutesManagement(): ReactElement {
   const navigate = useNavigate();
   const { data, isPending } = useRouteManagementItemsList();
   const [isOpenStepsModal, setIsOpenStepsModal] = useState(false);
+  const [isOpenRouteModal, setIsOpenRouteModal] = useState(false);
   const [selectedRouteId, setSelectedRouteId] = useState<string | null>(null);
 
   const onOpenStepsModal = (id: string) => {
@@ -25,6 +27,14 @@ export function SettingsRoutesManagement(): ReactElement {
   };
   const onCloseStepsModal = () => {
     setIsOpenStepsModal(false);
+    setSelectedRouteId(null);
+  };
+  const onOpenRouteModal = (id: string) => {
+    setIsOpenRouteModal(true);
+    setSelectedRouteId(id);
+  };
+  const onCloseRouteModal = () => {
+    setIsOpenRouteModal(false);
     setSelectedRouteId(null);
   };
 
@@ -85,14 +95,22 @@ export function SettingsRoutesManagement(): ReactElement {
             dataIndex: 'id',
             align: 'right',
             render: (value: string) => (
-              <Button
-                icon={<IoFootstepsOutline />}
-                type={'link'}
-                size={'small'}
-                onClick={() => onOpenStepsModal(value)}
-              >
-                Шаги маршрута
-              </Button>
+              <Space.Compact direction={'horizontal'}>
+                <Tooltip title={'Редактировать'}>
+                  <Button
+                    icon={<IoPencil />}
+                    size={'small'}
+                    onClick={() => onOpenRouteModal(value)}
+                  />
+                </Tooltip>
+                <Tooltip title={'Шаги маршрута'}>
+                  <Button
+                    icon={<IoFootsteps />}
+                    size={'small'}
+                    onClick={() => onOpenStepsModal(value)}
+                  />
+                </Tooltip>
+              </Space.Compact>
             ),
           },
         ]}
@@ -101,6 +119,11 @@ export function SettingsRoutesManagement(): ReactElement {
         isOpenStepsModal={isOpenStepsModal}
         routeId={selectedRouteId}
         onCancel={onCloseStepsModal}
+      />
+      <EditorRouteModal
+        open={isOpenRouteModal}
+        onCancel={onCloseRouteModal}
+        routeId={selectedRouteId}
       />
     </div>
   );

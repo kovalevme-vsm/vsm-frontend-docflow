@@ -31,5 +31,9 @@ export const useStepUpdate = (id: string) => {
       });
       message.success('Шаг успешно обновлен');
     },
+    onError: (error) => {
+      console.log(error);
+    },
+    throwOnError: false,
   });
 };

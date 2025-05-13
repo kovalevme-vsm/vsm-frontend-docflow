@@ -3,44 +3,66 @@ import { ReactElement } from 'react';
 import { TbChevronLeft, TbMinus, TbRoute2 } from 'react-icons/tb';
 import { useNavigate } from 'react-router';
 
+import { useRouteCreate } from 'pages/settings-routes-management-create/api/use-route-create.ts';
+
 import { PageHeader } from 'widgets/page-header';
 
 import { IconButton } from 'shared/ui';
 
 export function SettingsRoutesManagementCreate(): ReactElement {
   const navigate = useNavigate();
+  const { mutate: onCreateRoute, isPending } = useRouteCreate();
   return (
     <div className={'space-y-4'}>
       <div className={'flex gap-2'}>
         <IconButton onClick={() => navigate(-1)} icon={TbChevronLeft} />
         <PageHeader icon={TbRoute2} title={'Создание нового маршрута'} />
       </div>
-      <Form
-        onFinish={(values) => {
-          console.log(values);
-        }}
-      >
+      <Form onFinish={onCreateRoute}>
         <Card size={'small'}>
           <div className={'grid grid-cols-4 gap-2'}>
-            <Form.Item className={'!mb-0'} name={'name'}>
+            <Form.Item
+              className={'mb-0'}
+              name={'name'}
+              rules={[
+                {
+                  required: true,
+                  message: 'Пожалуйста, введите имя маршрута!',
+                },
+              ]}
+            >
               <Input placeholder={'Название маршрута'} />
             </Form.Item>
-            <Form.Item className={'!mb-0'} name={'document_type'}>
+            <Form.Item
+              className={'!mb-0'}
+              name={'document_type'}
+              rules={[
+                {
+                  required: true,
+                  message: 'Пожалуйста, укажите тип документа!',
+                },
+              ]}
+            >
               <Input placeholder={'Тип документа'} />
             </Form.Item>
-            <Form.Item name="is_required" initialValue={true}>
+            <Form.Item className={'!mb-0'} name="is_active" initialValue={true}>
               <Radio.Group
                 block
                 options={[
-                  { label: 'Обязательный', value: true },
-                  { label: 'Необязательный', value: false },
+                  { label: 'Вкл.', value: true },
+                  { label: 'Выкл.', value: false },
                 ]}
                 optionType="button"
                 buttonStyle="solid"
               />
             </Form.Item>
             <Form.Item className={'!mb-0'}>
-              <Button block htmlType={'submit'} type={'primary'}>
+              <Button
+                loading={isPending}
+                block
+                htmlType={'submit'}
+                type={'primary'}
+              >
                 Сохранить
               </Button>
             </Form.Item>
@@ -51,48 +73,86 @@ export function SettingsRoutesManagementCreate(): ReactElement {
         <Form.List name="steps">
           {(fields, { add, remove }) => (
             <>
-              {fields.map(({ key, name }) => (
-                <div key={key} className={'flex gap-2'}>
-                  <Form.Item name={[name, 'order']} className={'!mb-0 flex-1'}>
-                    <InputNumber
-                      className={'!w-full'}
-                      min={1}
-                      placeholder={'Последовательность шага'}
-                    />
-                  </Form.Item>
-                  <Form.Item name={[name, 'name']} className={'!mb-0 flex-1'}>
-                    <Input placeholder={'Наименование шага'} />
-                  </Form.Item>
-                  <Form.Item
-                    name={[name, 'is_required']}
-                    initialValue={true}
-                    className={'flex-1'}
-                  >
-                    <Radio.Group
-                      block
-                      options={[
-                        { label: 'Обязательный', value: true },
-                        { label: 'Необязательный', value: false },
+              {fields.map(({ key, name, ...restField }) => (
+                <Card className={'!mb-2'}>
+                  <div key={key} className={'flex gap-2'}>
+                    <Form.Item
+                      {...restField}
+                      name={[name, 'order']}
+                      className={'!mb-0 flex-1'}
+                      rules={[
+                        {
+                          required: true,
+                          message:
+                            'Пожалуйста, укажите последовательность шага!',
+                        },
+                        ({ getFieldValue }) => ({
+                          validator(_, value) {
+                            if (
+                              value &&
+                              getFieldValue('steps').filter(
+                                (el: { order: number }) => el.order === value
+                              ).length > 1
+                            ) {
+                              return Promise.reject(
+                                new Error(
+                                  'У вас уже существует шаг с такой последовательностью!'
+                                )
+                              );
+                            }
+                            return Promise.resolve();
+                          },
+                        }),
                       ]}
-                      optionType="button"
-                      buttonStyle="solid"
+                    >
+                      <InputNumber
+                        min={1}
+                        className={'!w-full'}
+                        placeholder={'Последовательность шага'}
+                      />
+                    </Form.Item>
+                    <Form.Item
+                      {...restField}
+                      name={[name, 'name']}
+                      className={'!mb-0 flex-1'}
+                      rules={[
+                        {
+                          required: true,
+                          message: 'Пожалуйста, укажите имя шага!',
+                        },
+                      ]}
+                    >
+                      <Input placeholder="Название шага" />
+                    </Form.Item>
+                    <Form.Item
+                      {...restField}
+                      name={[name, 'is_required']}
+                      className={'!mb-0 flex-1'}
+                      initialValue={true}
+                    >
+                      <Radio.Group
+                        block
+                        options={[
+                          { label: 'Обязательный', value: true },
+                          { label: 'Необязательный', value: false },
+                        ]}
+                        optionType="button"
+                        buttonStyle="solid"
+                      />
+                    </Form.Item>
+                    <Button
+                      icon={<TbMinus />}
+                      danger
+                      onClick={() => remove(name)}
                     />
-                  </Form.Item>
-                  <Button
-                    onClick={() => remove(name)}
-                    icon={<TbMinus />}
-                    danger
-                  />
-                </div>
+                  </div>
+                </Card>
               ))}
-              <Button
-                color={'primary'}
-                variant={'outlined'}
-                block
-                onClick={add}
-              >
-                Добавить новый шаг
-              </Button>
+              <Form.Item>
+                <Button type="dashed" onClick={() => add()} block>
+                  Добавить шаг
+                </Button>
+              </Form.Item>
             </>
           )}
         </Form.List>

@@ -28,7 +28,6 @@ export function CreateRouteStepModal(props: Props): ReactElement {
   };
 
   useEffect(() => {
-    form.setFieldValue('order', props.lastOrder + 1);
     form.setFieldValue('route', props.routeId);
   }, [props.lastOrder, props.routeId]);
 
@@ -46,15 +45,22 @@ export function CreateRouteStepModal(props: Props): ReactElement {
         </div>
         <h1 className="text-center text-xl font-medium">Добавление шага</h1>
       </div>
-      <Form form={form} onFinish={onCreateStep}>
+      <Form form={form} onFinish={onCreateStep} layout={'vertical'}>
         <Form.Item
+          label={'Последовательность шага'}
           name={'order'}
-          hidden
           rules={[
-            { required: true, message: 'Пожалуйста, введите нумерации шага!' },
+            {
+              required: true,
+              message: 'Пожалуйста, укажите последовательность шага!',
+            },
           ]}
         >
-          <InputNumber disabled placeholder={'Нумерация шага'} />
+          <InputNumber
+            min={1}
+            className={'!w-full'}
+            placeholder={'Последовательность шага'}
+          />
         </Form.Item>
         <Form.Item
           name={'route'}
@@ -64,6 +70,7 @@ export function CreateRouteStepModal(props: Props): ReactElement {
           <Input disabled placeholder={'Нумерация шага'} />
         </Form.Item>
         <Form.Item
+          label={'Название шага'}
           name={'name'}
           rules={[{ required: true, message: 'Пожалуйста, введите имя шага!' }]}
         >
