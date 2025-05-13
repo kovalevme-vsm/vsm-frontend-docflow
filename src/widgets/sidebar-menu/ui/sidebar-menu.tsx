@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
 import { ReactElement } from 'react';
-import { TbCategory } from 'react-icons/tb';
 
 import { SidebarHiddenButton } from 'widgets/sidebar-menu/ui/sidebar-hidden-button.tsx';
 import { SidebarMenuItem } from 'widgets/sidebar-menu/ui/sidebar-menu-item.tsx';
@@ -10,7 +9,7 @@ import { SignOutButton } from 'features/sign-out-button';
 import { ApplicationLogo } from 'entities/application-logo';
 import { SystemCopyright } from 'entities/system-copyright';
 
-import { ROUTES } from 'shared/const';
+import { SIDEBAR_ITEMS } from 'shared/lib/sidebar';
 
 export function SidebarMenu(): ReactElement {
   return (
@@ -22,11 +21,9 @@ export function SidebarMenu(): ReactElement {
         <div>
           <ApplicationLogo size={'small'} />
           <div className={'my-16 -ml-4'}>
-            <SidebarMenuItem
-              title={'Панель управления'}
-              icon={TbCategory}
-              route={ROUTES.DASHBOARD}
-            />
+            {SIDEBAR_ITEMS.map((value) => (
+              <SidebarMenuItem key={value.route} {...value} />
+            ))}
           </div>
         </div>
 

@@ -18,6 +18,7 @@ import { Providers } from './providers';
 
 dayjs.locale('ru');
 const DashboardPage = lazy(() => import('pages/dashboard-page'));
+const SystemSettings = lazy(() => import('pages/system-settings'));
 
 createRoot(document.getElementById('root')!).render(
   <Providers>
@@ -25,6 +26,7 @@ createRoot(document.getElementById('root')!).render(
       <Route path={ROUTES.LOGIN} element={<AuthenticatePage />} />
       <Route element={<BasePageLayout />}>
         <Route path={ROUTES.DASHBOARD} element={<DashboardPage />} />
+        <Route path={ROUTES.SYSTEM_SETTINGS} element={<SystemSettings />} />
       </Route>
       <Route path={ROUTES.NOT_FOUND} element={<NotFoundRoutePath />} />
     </Routes>
