@@ -94,7 +94,7 @@ export function UserManagementForm<T>(props: Props<T>): ReactElement {
       </Form.Item>
       <Form.Item>
         <Button loading={props.loading} htmlType={'submit'} type={'primary'} block>
-          Создать
+          Сохранить
         </Button>
       </Form.Item>
     </Form>

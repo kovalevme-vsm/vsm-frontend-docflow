@@ -2,25 +2,19 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { message, notification } from 'antd';
 import { AxiosError } from 'axios';
 
-import { UserManagerType } from 'widgets/user-management-tab/models/types.ts';
-
 import { QUERY } from 'shared/const';
 import { apiClient } from 'shared/lib/axios';
 import { DRFErrorResponse } from 'shared/lib/query';
 
-export const useCreateUsersManagement = () => {
+export const useDeleteUsersManagement = () => {
   const queryClient = useQueryClient();
-  return useMutation<
-    UserManagerType,
-    AxiosError<DRFErrorResponse>,
-    Omit<UserManagerType, 'id' | 'last_login' | 'is_ldap_user'>
-  >({
+  return useMutation<void, AxiosError<DRFErrorResponse>, { id: string }>({
     mutationFn: (variables) => {
-      return apiClient.post(QUERY.SYSTEM_SETTINGS_USER_MANAGEMENT.paths.index, variables);
+      return apiClient.delete(QUERY.SYSTEM_SETTINGS_USER_MANAGEMENT.paths.detail(variables.id));
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY.SYSTEM_SETTINGS_USER_MANAGEMENT.keys.list });
-      notification.success({ message: 'Успешно', description: 'Пользователь успешно создан' });
+      notification.success({ message: 'Успешно', description: 'Пользователь успешно удален' });
     },
     onError: (error) => {
       if (error.response) {

@@ -12,4 +12,5 @@ export interface UserManagerType {
   is_staff: boolean;
   is_superuser: boolean;
   last_login: string;
+  is_ldap_user: boolean;
 }

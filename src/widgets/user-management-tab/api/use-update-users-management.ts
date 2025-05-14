@@ -8,7 +8,7 @@ import { QUERY } from 'shared/const';
 import { apiClient } from 'shared/lib/axios';
 import { DRFErrorResponse } from 'shared/lib/query';
 
-export const useCreateUsersManagement = () => {
+export const useUpdateUsersManagement = (id: string) => {
   const queryClient = useQueryClient();
   return useMutation<
     UserManagerType,
@@ -16,11 +16,12 @@ export const useCreateUsersManagement = () => {
     Omit<UserManagerType, 'id' | 'last_login' | 'is_ldap_user'>
   >({
     mutationFn: (variables) => {
-      return apiClient.post(QUERY.SYSTEM_SETTINGS_USER_MANAGEMENT.paths.index, variables);
+      return apiClient.put(QUERY.SYSTEM_SETTINGS_USER_MANAGEMENT.paths.detail(id), variables);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY.SYSTEM_SETTINGS_USER_MANAGEMENT.keys.list });
-      notification.success({ message: 'Успешно', description: 'Пользователь успешно создан' });
+      queryClient.invalidateQueries({ queryKey: QUERY.SYSTEM_SETTINGS_USER_MANAGEMENT.keys.detail(id) });
+      notification.success({ message: 'Успешно', description: 'Пользователь успешно обновлен' });
     },
     onError: (error) => {
       if (error.response) {

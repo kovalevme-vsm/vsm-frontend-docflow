@@ -1,7 +1,10 @@
-import { Tag } from 'antd';
+import { Button, Tag } from 'antd';
 import dayjs from 'dayjs';
+import { TbUserEdit } from 'react-icons/tb';
 
-export const TABLE_COLUMNS = [
+import { UserManagementDeleteButton } from 'widgets/user-management-tab/ui/user-management-delete-button.tsx';
+
+export const TABLE_COLUMNS = (onEdit: (id: string) => void) => [
   {
     title: 'Имя пользователя',
     dataIndex: 'username',
@@ -33,6 +36,12 @@ export const TABLE_COLUMNS = [
     render: (value: boolean) => (value ? <Tag color={'success'}>Да</Tag> : <Tag color={'error'}>Нет</Tag>),
   },
   {
+    title: 'Загружен по LDAP',
+    dataIndex: 'is_ldap_user',
+    key: 'is_ldap_user',
+    render: (value: boolean) => (value ? <Tag color={'success'}>Да</Tag> : <Tag color={'error'}>Нет</Tag>),
+  },
+  {
     title: 'Группы',
     dataIndex: 'group_names',
     key: 'group_names',
@@ -43,5 +52,21 @@ export const TABLE_COLUMNS = [
     dataIndex: 'last_login',
     key: 'last_login',
     render: (value: string | null) => (value ? dayjs(value).format('HH:mm:ss DD MMM YYYY') : 'Не входил'),
+  },
+  {
+    dataIndex: '',
+    key: 'id',
+    render: (value: { is_ldap_user: boolean; id: string }) => {
+      return (
+        <div className={'flex gap-2'}>
+          {!value.is_ldap_user && (
+            <Button type={'link'} icon={<TbUserEdit />} onClick={() => onEdit(value.id)}>
+              Редактировать
+            </Button>
+          )}
+          <UserManagementDeleteButton id={value.id} />
+        </div>
+      );
+    },
   },
 ];
