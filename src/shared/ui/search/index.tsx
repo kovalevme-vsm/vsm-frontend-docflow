@@ -7,14 +7,13 @@ export function Search(): ReactElement {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const onSearch: SearchProps['onSearch'] = (value) => {
+    const newParams = new URLSearchParams(searchParams);
     if (value) {
-      setSearchParams(new URLSearchParams({ ...searchParams, search: value }));
+      newParams.set('search', value);
     } else {
-      const updatedSearchParams = Object.fromEntries(
-        Object.entries(searchParams).filter(([key]) => key !== 'search')
-      );
-      setSearchParams(new URLSearchParams(updatedSearchParams));
+      newParams.delete('search');
     }
+    setSearchParams(newParams);
   };
 
   return (

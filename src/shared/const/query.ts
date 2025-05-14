@@ -1,0 +1,18 @@
+export const QUERY = {
+  SYSTEM_SETTINGS_USER_MANAGEMENT: {
+    paths: { index: 'users/management', detail: (id: string) => `users/management/${id}` },
+    keys: { list: ['api', 'users', 'management'], detail: (id: string) => ['api', 'users', 'management', id] },
+  },
+  SYSTEM_SETTINGS_DEPARTMENT_MANAGEMENT: {
+    paths: { index: 'users/departments', detail: (id: string) => `users/departments/${id}` },
+    keys: { list: ['api', 'users', 'departments'], detail: (id: string) => ['api', 'users', 'departments', id] },
+  },
+  SYSTEM_SETTINGS_JOB_TITLE_MANAGEMENT: {
+    paths: { index: 'users/job-titles', detail: (id: string) => `users/job-titles/${id}` },
+    keys: { list: ['api', 'users', 'job-titles'], detail: (id: string) => ['api', 'users', 'job-titles', id] },
+  },
+  SYSTEM_SETTINGS_GROUPS_MANAGEMENT: {
+    paths: { index: 'users/groups', detail: (id: string) => `users/groups/${id}` },
+    keys: { list: ['api', 'users', 'groups'], detail: (id: string) => ['api', 'users', 'groups', id] },
+  },
+} as const;

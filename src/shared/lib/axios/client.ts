@@ -58,11 +58,8 @@ const setupResponseInterceptor = (navigate: NavigateFunction) => {
         originalRequest.headers.Authorization = `Bearer ${data.access}`;
         return apiClient(originalRequest);
       } catch (refreshError) {
-        console.error('Refresh token failed:', refreshError);
         sessionStorage.removeItem('accessToken');
         localStorage.removeItem('refreshToken');
-
-        // Используем navigate вместо window.location.href
         navigate(ROUTES.LOGIN);
         return Promise.reject(refreshError);
       }

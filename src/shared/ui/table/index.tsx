@@ -3,15 +3,22 @@ import { TableProps } from 'antd/es/table/InternalTable';
 import { ReactElement } from 'react';
 import { useSearchParams } from 'react-router';
 
-interface Props
-  extends Omit<TableProps, 'pagination' | 'scroll' | 'size' | 'rowKey'> {
+interface Props extends Omit<TableProps, 'pagination' | 'scroll' | 'size' | 'rowKey'> {
   total?: number;
 }
 
 export function Table({ total = 0, ...props }: Props): ReactElement {
   const [searchParams, setSearchParams] = useSearchParams();
+
   const page = parseInt(searchParams.get('page') || '1', 10);
-  const pageSize = parseInt(searchParams.get('pageSize') || '10', 10);
+  const pageSize = parseInt(searchParams.get('page_size') || '10', 10);
+
+  const handlePagination = (page: number, pageSize: number) => {
+    setSearchParams(
+      { ...Object.fromEntries(searchParams), page: String(page), page_size: String(pageSize) },
+      { replace: true }
+    );
+  };
 
   return (
     <ATable
@@ -20,18 +27,12 @@ export function Table({ total = 0, ...props }: Props): ReactElement {
         pageSize: pageSize,
         total: total,
         size: 'default',
-        showSizeChanger: false,
         showTotal: (count) => (
           <>
             Всего: <b>{count}</b> элементов
           </>
         ),
-        onChange: (page, pageSize) => {
-          setSearchParams(
-            { page: String(page), pageSize: String(pageSize) },
-            { replace: true }
-          );
-        },
+        onChange: handlePagination,
       }}
       rowKey="id"
       size={'small'}
