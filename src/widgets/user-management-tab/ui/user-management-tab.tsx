@@ -17,10 +17,10 @@ export function UserManagementTab(): ReactElement {
 
   return (
     <div className={'space-y-4'}>
-      <div className={'flex gap-2'}>
+      <div className={'flex flex-col gap-2 lg:flex-row'}>
         <Search />
         <Button icon={<TbUserPlus />} type={'primary'} onClick={handleOpenCreateModal}>
-          Создать локального пользователя
+          Создать пользователя
         </Button>
       </div>
       <Table
@@ -29,7 +29,7 @@ export function UserManagementTab(): ReactElement {
         dataSource={userManagementList?.results}
         total={userManagementList?.count}
       />
-      <UserManagementCreate isOpen={createModalActive} onClose={handleCloseCreateModal} />
+      <UserManagementCreate isOpen={createModalActive} onCloseModal={handleCloseCreateModal} />
     </div>
   );
 }

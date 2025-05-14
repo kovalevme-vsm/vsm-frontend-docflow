@@ -8,7 +8,7 @@ type DRFStandardizedErrorResponse = {
 
 export type DRFErrorResponse = {
   type: string;
-  error: DRFStandardizedErrorResponse[];
+  errors: DRFStandardizedErrorResponse[];
   status_code: string;
 };
 
