@@ -1,8 +1,11 @@
-import { Tag } from 'antd';
+import { Button, Tag } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import dayjs from 'dayjs';
+import { TbEdit } from 'react-icons/tb';
 
-export const TABLE_COLUMNS: ColumnsType = [
+import { JobTitleManagementDeleteButton } from 'widgets/job-title-management-tab/ui/job-title-management-delete-button.tsx';
+
+export const TABLE_COLUMNS = (onEdit: (id: string) => void): ColumnsType => [
   {
     title: 'Название должности',
     dataIndex: 'name',
@@ -27,5 +30,22 @@ export const TABLE_COLUMNS: ColumnsType = [
     key: 'from_ldap',
     align: 'center',
     render: (value: boolean) => (value ? <Tag color={'success'}>Да</Tag> : <Tag color={'error'}>Нет</Tag>),
+  },
+  {
+    dataIndex: '',
+    key: 'id',
+    fixed: 'right',
+    render: (value: { from_ldap: boolean; id: string }) => {
+      return (
+        <div className={'flex gap-2'}>
+          {value.from_ldap && (
+            <Button type={'link'} size={'small'} icon={<TbEdit />} onClick={() => onEdit(value.id)}>
+              Редактировать
+            </Button>
+          )}
+          <JobTitleManagementDeleteButton id={value.id} />
+        </div>
+      );
+    },
   },
 ];
