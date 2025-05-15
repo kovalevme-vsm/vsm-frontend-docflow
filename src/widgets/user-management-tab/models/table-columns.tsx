@@ -1,14 +1,16 @@
 import { Button, Tag } from 'antd';
+import { ColumnsType } from 'antd/es/table';
 import dayjs from 'dayjs';
 import { TbUserEdit } from 'react-icons/tb';
 
 import { UserManagementDeleteButton } from 'widgets/user-management-tab/ui/user-management-delete-button.tsx';
 
-export const TABLE_COLUMNS = (onEdit: (id: string) => void) => [
+export const TABLE_COLUMNS = (onEdit: (id: string) => void): ColumnsType => [
   {
     title: 'Имя пользователя',
     dataIndex: 'username',
     key: 'username',
+    fixed: 'left',
   },
   { title: 'E-mail', dataIndex: 'email', key: 'email' },
   { title: 'Имя', dataIndex: 'first_name', key: 'first_name' },
@@ -20,6 +22,7 @@ export const TABLE_COLUMNS = (onEdit: (id: string) => void) => [
     title: 'Статус',
     dataIndex: 'is_active',
     key: 'is_active',
+    align: 'center',
     render: (value: boolean) =>
       value ? <Tag color={'success'}>Активен</Tag> : <Tag color={'error'}>Деактивирован</Tag>,
   },
@@ -27,18 +30,21 @@ export const TABLE_COLUMNS = (onEdit: (id: string) => void) => [
     title: 'Администратор',
     dataIndex: 'is_superadmin',
     key: 'is_superadmin',
+    align: 'center',
     render: (value: boolean) => (value ? <Tag color={'success'}>Да</Tag> : <Tag color={'error'}>Нет</Tag>),
   },
   {
     title: 'Менеджер',
     dataIndex: 'is_staff',
     key: 'is_staff',
+    align: 'center',
     render: (value: boolean) => (value ? <Tag color={'success'}>Да</Tag> : <Tag color={'error'}>Нет</Tag>),
   },
   {
     title: 'Загружен по LDAP',
     dataIndex: 'is_ldap_user',
     key: 'is_ldap_user',
+    align: 'center',
     render: (value: boolean) => (value ? <Tag color={'success'}>Да</Tag> : <Tag color={'error'}>Нет</Tag>),
   },
   {
@@ -56,11 +62,12 @@ export const TABLE_COLUMNS = (onEdit: (id: string) => void) => [
   {
     dataIndex: '',
     key: 'id',
+    fixed: 'right',
     render: (value: { is_ldap_user: boolean; id: string }) => {
       return (
         <div className={'flex gap-2'}>
           {!value.is_ldap_user && (
-            <Button type={'link'} icon={<TbUserEdit />} onClick={() => onEdit(value.id)}>
+            <Button type={'link'} size={'small'} icon={<TbUserEdit />} onClick={() => onEdit(value.id)}>
               Редактировать
             </Button>
           )}

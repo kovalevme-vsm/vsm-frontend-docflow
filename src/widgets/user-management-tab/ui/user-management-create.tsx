@@ -3,9 +3,10 @@ import { ReactElement } from 'react';
 import { TbUserPlus } from 'react-icons/tb';
 
 import { useCreateUsersManagement } from 'widgets/user-management-tab/api/use-create-users-management.ts';
-import { useUserManagementConfirmCloseModal } from 'widgets/user-management-tab/models/hooks.ts';
 import { UserManagerType } from 'widgets/user-management-tab/models/types.ts';
 import { UserManagementForm } from 'widgets/user-management-tab/ui/user-management-form.tsx';
+
+import { useConfirmCloseModal } from 'shared/hooks';
 
 type Props = {
   isOpen: boolean;
@@ -15,7 +16,7 @@ type Props = {
 export function UserManagementCreate(props: Props): ReactElement {
   const [form] = Form.useForm();
   const { mutate: onCreateUser, isPending, isSuccess } = useCreateUsersManagement();
-  const { handleCancel, setIsDirty } = useUserManagementConfirmCloseModal(isSuccess, form, props.onCloseModal);
+  const { handleCancel, setIsDirty } = useConfirmCloseModal(isSuccess, form, props.onCloseModal);
 
   return (
     <Modal

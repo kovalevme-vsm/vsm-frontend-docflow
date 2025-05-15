@@ -4,9 +4,10 @@ import { TbUserEdit } from 'react-icons/tb';
 
 import { useRetrieveUsersManagement } from 'widgets/user-management-tab/api/use-retrieve-users-management.ts';
 import { useUpdateUsersManagement } from 'widgets/user-management-tab/api/use-update-users-management.ts';
-import { useUserManagementConfirmCloseModal } from 'widgets/user-management-tab/models/hooks.ts';
 import { UserManagerType } from 'widgets/user-management-tab/models/types.ts';
 import { UserManagementForm } from 'widgets/user-management-tab/ui/user-management-form.tsx';
+
+import { useConfirmCloseModal } from 'shared/hooks';
 
 type Props = {
   isOpen: boolean;
@@ -18,7 +19,7 @@ export function UserManagementUpdate(props: Props): ReactElement {
   const [form] = Form.useForm();
   const { data, isPending } = useRetrieveUsersManagement(props.userEditId);
   const { mutate: onUpdateUser, isPending: isPendingUpdate, isSuccess } = useUpdateUsersManagement(props.userEditId);
-  const { handleCancel, setIsDirty } = useUserManagementConfirmCloseModal(isSuccess, form, props.onCloseModal);
+  const { handleCancel, setIsDirty } = useConfirmCloseModal(isSuccess, form, props.onCloseModal);
 
   useEffect(() => {
     if (data) {

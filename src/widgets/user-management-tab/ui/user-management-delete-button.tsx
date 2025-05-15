@@ -15,6 +15,7 @@ export function UserManagementDeleteButton(props: Props): ReactElement {
       loading={isPendingDelete}
       type={'link'}
       danger
+      size={'small'}
       icon={<TbRowRemove />}
       onClick={() => onDeleteUser({ id: props.id })}
     >

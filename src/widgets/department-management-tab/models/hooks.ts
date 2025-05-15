@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 
-export const useUserManagementCreateModal = () => {
+export const useDepartmentManagementCreateModal = () => {
   const [createModalActive, setCreateModalActive] = useState<boolean>(false);
 
   const handleOpenCreateModal = useCallback(() => setCreateModalActive(true), []);
@@ -9,18 +9,18 @@ export const useUserManagementCreateModal = () => {
   return { createModalActive, handleCloseCreateModal, handleOpenCreateModal };
 };
 
-export const useUserManagementEditModal = () => {
+export const useDepartmentManagementEditModal = () => {
   const [updateModalActive, setUpdateModalActive] = useState<boolean>(false);
-  const [userEditId, setUserEditId] = useState<string | null>(null);
+  const [departmentEditId, setDepartmentEditId] = useState<string | null>(null);
 
   const handleOpenUpdateModal = useCallback((id: string) => {
-    setUserEditId(id);
+    setDepartmentEditId(id);
     setUpdateModalActive(true);
   }, []);
 
   const handleCloseUpdateModal = useCallback(() => {
     setUpdateModalActive(false);
-    setUserEditId(null);
+    setDepartmentEditId(null);
   }, []);
-  return { userEditId, updateModalActive, handleCloseUpdateModal, handleOpenUpdateModal };
+  return { departmentEditId, updateModalActive, handleCloseUpdateModal, handleOpenUpdateModal };
 };
