@@ -16,7 +16,7 @@ export const TAB_ITEMS = [
   },
   {
     label: `Должности`,
-    key: 'job_titles',
+    key: 'job-titles',
     children: <JobTitleManagementTab />,
   },
   {

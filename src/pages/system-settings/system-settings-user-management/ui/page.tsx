@@ -17,7 +17,7 @@ export default function SystemSettingsUserManagement(): ReactElement {
         description={'Настраивайте Роли пользователям, редактируйте информацию о пользователях и создавайте новых'}
       />
       <Tabs
-        activeKey={searchParams.get('tab') || 'users'}
+        activeKey={searchParams.get('tab') || TAB_ITEMS[0].key}
         type="card"
         onChange={(activeKey: string) => setSearchParams({ tab: activeKey })}
         size={'small'}

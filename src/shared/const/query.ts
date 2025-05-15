@@ -15,4 +15,14 @@ export const QUERY = {
     paths: { index: 'users/groups', detail: (id: string) => `users/groups/${id}` },
     keys: { list: ['api', 'users', 'groups'], detail: (id: string) => ['api', 'users', 'groups', id] },
   },
+  SYSTEM_SETTINGS_DICTIONARY_MANAGEMENT: {
+    paths: {
+      index: (dictionary: string) => `dictionary/${dictionary}`,
+      detail: (dictionary: string, id: string) => `dictionary/${dictionary}/${id}`,
+    },
+    keys: {
+      list: (dictionary: string) => ['api', 'dicrionary', dictionary],
+      detail: (dictionary: string, id: string) => ['api', 'dicrionary', dictionary, id],
+    },
+  },
 } as const;

@@ -3,11 +3,11 @@ import { TableProps } from 'antd/es/table/InternalTable';
 import { ReactElement } from 'react';
 import { useSearchParams } from 'react-router';
 
-interface Props extends Omit<TableProps, 'pagination' | 'scroll' | 'size' | 'rowKey'> {
+interface Props<T> extends Omit<TableProps<T>, 'pagination' | 'scroll' | 'size' | 'rowKey'> {
   total?: number;
 }
 
-export function Table({ total = 0, ...props }: Props): ReactElement {
+export function Table<T>({ total = 0, ...props }: Props<T>): ReactElement {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const page = parseInt(searchParams.get('page') || '1', 10);
@@ -21,7 +21,7 @@ export function Table({ total = 0, ...props }: Props): ReactElement {
   };
 
   return (
-    <ATable
+    <ATable<T>
       pagination={{
         current: page,
         pageSize: pageSize,
