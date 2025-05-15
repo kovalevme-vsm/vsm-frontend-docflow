@@ -15,7 +15,7 @@ type Props = {
 
 export function DepartmentManagementCreate(props: Props): ReactElement {
   const [form] = Form.useForm();
-  const { mutate: onCreateUser, isPending, isSuccess } = useCreateDepartmentManagement();
+  const { mutate: onCreateDepartment, isPending, isSuccess } = useCreateDepartmentManagement();
   const { handleCancel, setIsDirty } = useConfirmCloseModal(isSuccess, form, props.onCloseModal);
 
   return (
@@ -28,7 +28,7 @@ export function DepartmentManagementCreate(props: Props): ReactElement {
       </div>
       <DepartmentManagementForm<Omit<DepartmentManagerType, 'id' | 'created_at'>>
         form={form}
-        onFinish={onCreateUser}
+        onFinish={onCreateDepartment}
         loading={isPending}
         onValuesChange={() => setIsDirty(true)}
       />
