@@ -25,4 +25,4 @@ export const QUERY = {
       detail: (dictionary: string, id: string) => ['api', 'dicrionary', dictionary, id],
     },
   },
-} as const;
+};

@@ -1,10 +1,13 @@
-import { Button, Form, type FormInstance, Input, Radio, Select } from 'antd';
+import { Button, Form, type FormInstance, Input, Radio } from 'antd';
 import { ReactElement } from 'react';
 import { IoShieldCheckmarkSharp } from 'react-icons/io5';
 import { MdAdminPanelSettings, MdManageAccounts } from 'react-icons/md';
 
 import { formRules } from 'widgets/user-management-tab/models/form-rules.ts';
 
+import SelectInfinite from 'entities/select-infinite';
+
+import { QUERY } from 'shared/const';
 import { Label } from 'shared/ui';
 
 type Props<T> = {
@@ -38,10 +41,18 @@ export function UserManagementForm<T>(props: Props<T>): ReactElement {
       </div>
       <div className={'grid grid-cols-1 gap-2 lg:grid-cols-2'}>
         <Form.Item name={'department_id'} rules={formRules.departmentId}>
-          <Select placeholder={'Отдел'} />
+          <SelectInfinite
+            apiPath={QUERY.SYSTEM_SETTINGS_DEPARTMENT_MANAGEMENT.paths.index}
+            queryKey={QUERY.SYSTEM_SETTINGS_DEPARTMENT_MANAGEMENT.keys.list}
+            placeholder={'Группы пользователя'}
+          />
         </Form.Item>
         <Form.Item name={'job_title_id'} rules={formRules.jobTitleId}>
-          <Select placeholder={'Должность'} />
+          <SelectInfinite
+            apiPath={QUERY.SYSTEM_SETTINGS_JOB_TITLE_MANAGEMENT.paths.index}
+            queryKey={QUERY.SYSTEM_SETTINGS_JOB_TITLE_MANAGEMENT.keys.list}
+            placeholder={'Группы пользователя'}
+          />
         </Form.Item>
       </div>
       <Form.Item
@@ -90,7 +101,12 @@ export function UserManagementForm<T>(props: Props<T>): ReactElement {
         />
       </Form.Item>
       <Form.Item name="groups" label={<Label icon={MdManageAccounts} title={'Группы пользователя'} />}>
-        <Select mode={'tags'} placeholder={'Группы пользователя'} />
+        <SelectInfinite
+          apiPath={QUERY.SYSTEM_SETTINGS_GROUPS_MANAGEMENT.paths.index}
+          queryKey={QUERY.SYSTEM_SETTINGS_GROUPS_MANAGEMENT.keys.list}
+          mode={'tags'}
+          placeholder={'Группы пользователя'}
+        />
       </Form.Item>
       <Form.Item>
         <Button loading={props.loading} htmlType={'submit'} type={'primary'} block>
