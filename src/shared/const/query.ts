@@ -25,4 +25,20 @@ export const QUERY = {
       detail: (dictionary: string, id: string) => ['api', 'dicrionary', dictionary, id],
     },
   },
+  SYSTEM_SELECT_DOCUMENT_TYPES: {
+    paths: {
+      index: `routes/document-types`,
+    },
+    keys: {
+      list: ['api', 'routes', 'document-types'],
+    },
+  },
+  SYSTEM_SELECT_STEP_TYPES: {
+    paths: {
+      index: `routes/step-types`,
+    },
+    keys: {
+      list: ['api', 'routes', 'step-types'],
+    },
+  },
 };
