@@ -20,6 +20,8 @@ export interface ExternalPersonType extends BaseType {
   first_name: string;
   last_name: string;
   middle_name: string;
+  organizations: string[];
+  organization_ids: string[];
 }
 
 export interface OrganizationType extends BaseType {

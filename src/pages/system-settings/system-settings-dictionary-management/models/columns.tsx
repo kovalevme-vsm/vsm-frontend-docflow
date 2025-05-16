@@ -53,6 +53,12 @@ export const externalPersonsColumns: ColumnsType<ExternalPersonType> = [
     title: 'Отчество',
     dataIndex: 'middle_name',
   },
+  {
+    title: 'Организации',
+    dataIndex: 'organizations',
+    key: 'organizations',
+    render: (value: string[]) => value.map((tag) => <Tag>{tag}</Tag>),
+  },
   ...baseDictionaryColumns<ExternalPersonType>(),
 ];
 

@@ -38,7 +38,7 @@ export function DepartmentManagementTab(): ReactElement {
         <DepartmentManagementUpdate
           isOpen={updateModalActive}
           onCloseModal={handleCloseUpdateModal}
-          userEditId={departmentEditId}
+          editId={departmentEditId}
         />
       )}
     </div>
