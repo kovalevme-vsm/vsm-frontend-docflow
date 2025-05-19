@@ -18,7 +18,7 @@ export default function SystemSettingsLayout(): ReactElement {
             <SystemSettingsMenuItem key={value.title} {...value} />
           ))}
         </div>
-        <div className={'flex-1 overflow-auto'}>
+        <div className={'min-h-full flex-1 overflow-auto'}>
           <Outlet />
         </div>
       </div>

@@ -18,20 +18,15 @@ import { Providers } from './providers';
 
 dayjs.locale('ru');
 const DashboardPage = lazy(() => import('pages/dashboard-page'));
-const SystemSettingsLayout = lazy(
-  () => import('./layouts/system-settings-layout')
-);
-const SystemSettingsGeneral = lazy(
-  () => import('pages/system-settings/system-settings-general')
-);
+const SystemSettingsLayout = lazy(() => import('./layouts/system-settings-layout'));
+const SystemSettingsGeneral = lazy(() => import('pages/system-settings/system-settings-general'));
 const SystemSettingsDictionaryManagement = lazy(
   () => import('pages/system-settings/system-settings-dictionary-management')
 );
-const SystemSettingsUserManagement = lazy(
-  () => import('pages/system-settings/system-settings-user-management')
-);
-const SystemSettingsRouteManagement = lazy(
-  () => import('pages/system-settings/system-settings-route-management')
+const SystemSettingsUserManagement = lazy(() => import('pages/system-settings/system-settings-user-management'));
+const SystemSettingsRouteManagement = lazy(() => import('pages/system-settings/system-settings-route-management'));
+const SystemSettingsRouteManagementCreate = lazy(
+  () => import('pages/system-settings/system-settings-route-management-create')
 );
 const SystemSettingsIntegrationManagement = lazy(
   () => import('pages/system-settings/system-settings-integration-management')
@@ -39,9 +34,7 @@ const SystemSettingsIntegrationManagement = lazy(
 const SystemSettingsNotificationManagement = lazy(
   () => import('pages/system-settings/system-settings-notification-management')
 );
-const SystemSettingsAuditManagement = lazy(
-  () => import('pages/system-settings/system-settings-audit-management')
-);
+const SystemSettingsAuditManagement = lazy(() => import('pages/system-settings/system-settings-audit-management'));
 const SystemSettingsSecurityManagement = lazy(
   () => import('pages/system-settings/system-settings-security-management')
 );
@@ -53,19 +46,16 @@ createRoot(document.getElementById('root')!).render(
       <Route element={<BasePageLayout />}>
         <Route path={ROUTES.DASHBOARD} element={<DashboardPage />} />
         <Route path={ROUTES.SYSTEM_SETTINGS} element={<SystemSettingsLayout />}>
-          <Route index={true} element={<SystemSettingsGeneral />} />
-          <Route
-            path={ROUTES.SYSTEM_SETTINGS_DICTIONARY}
-            element={<SystemSettingsDictionaryManagement />}
-          />
-          <Route
-            path={ROUTES.SYSTEM_SETTINGS_USER_MANAGEMENT}
-            element={<SystemSettingsUserManagement />}
-          />
-          <Route
-            path={ROUTES.SYSTEM_SETTINGS_ROUTE_MANAGEMENT}
-            element={<SystemSettingsRouteManagement />}
-          />{' '}
+          <Route path={ROUTES.SYSTEM_SETTINGS_GENERAL} element={<SystemSettingsGeneral />} />
+          <Route path={ROUTES.SYSTEM_SETTINGS_DICTIONARY} element={<SystemSettingsDictionaryManagement />} />
+          <Route path={ROUTES.SYSTEM_SETTINGS_USER_MANAGEMENT} element={<SystemSettingsUserManagement />} />
+          <Route path={ROUTES.SYSTEM_SETTINGS_ROUTE_MANAGEMENT}>
+            <Route index element={<SystemSettingsRouteManagement />} />
+            <Route
+              path={ROUTES.SYSTEM_SETTINGS_ROUTE_MANAGEMENT_CREATE}
+              element={<SystemSettingsRouteManagementCreate />}
+            />
+          </Route>
           <Route
             path={ROUTES.SYSTEM_SETTINGS_INTEGRATION_MANAGEMENT}
             element={<SystemSettingsIntegrationManagement />}
@@ -74,14 +64,8 @@ createRoot(document.getElementById('root')!).render(
             path={ROUTES.SYSTEM_SETTINGS_NOTIFICATION_MANAGEMENT}
             element={<SystemSettingsNotificationManagement />}
           />
-          <Route
-            path={ROUTES.SYSTEM_SETTINGS_AUDIT_MANAGEMENT}
-            element={<SystemSettingsAuditManagement />}
-          />
-          <Route
-            path={ROUTES.SYSTEM_SETTINGS_SECURITY_MANAGEMENT}
-            element={<SystemSettingsSecurityManagement />}
-          />
+          <Route path={ROUTES.SYSTEM_SETTINGS_AUDIT_MANAGEMENT} element={<SystemSettingsAuditManagement />} />
+          <Route path={ROUTES.SYSTEM_SETTINGS_SECURITY_MANAGEMENT} element={<SystemSettingsSecurityManagement />} />
         </Route>
       </Route>
       <Route path={ROUTES.NOT_FOUND} element={<NotFoundRoutePath />} />

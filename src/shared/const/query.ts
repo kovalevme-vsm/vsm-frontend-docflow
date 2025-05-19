@@ -41,4 +41,12 @@ export const QUERY = {
       list: ['api', 'routes', 'step-types'],
     },
   },
+  SYSTEM_SELECT_PARTICIPANT_TYPES: {
+    paths: {
+      index: `routes/participant-types`,
+    },
+    keys: {
+      list: ['api', 'routes', 'participant-types'],
+    },
+  },
 };

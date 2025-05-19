@@ -1,23 +1,14 @@
-import {
-  TbApi,
-  TbBook,
-  TbBooks,
-  TbLock,
-  TbNotification,
-  TbRoute2,
-  TbSettings,
-  TbUsers,
-} from 'react-icons/tb';
-
-import { SettingsItem } from 'pages/system-settings/models/types.ts';
+import { TbApi, TbBook, TbBooks, TbLock, TbNotification, TbRoute2, TbSettings, TbUsers } from 'react-icons/tb';
 
 import { ROUTES } from 'shared/const';
+
+import { SettingsItem } from './types.ts';
 
 export const SettingsItems: SettingsItem[] = [
   {
     title: 'Общие настройки',
     icon: TbSettings,
-    path: ROUTES.SYSTEM_SETTINGS,
+    path: ROUTES.SYSTEM_SETTINGS_GENERAL,
   },
   {
     title: 'Справочники',
