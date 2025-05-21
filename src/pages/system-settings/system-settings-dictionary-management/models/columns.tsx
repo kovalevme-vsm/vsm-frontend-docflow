@@ -37,7 +37,10 @@ export const documentAttachmentTypesColumns: ColumnsType<DocumentAttachmentType>
 ];
 
 export const statusesColumns: ColumnsType<StatusType> = [
-  { title: 'Наименование', dataIndex: 'name' },
+  {
+    title: 'Наименование',
+    render: (value: StatusType) => <Tag color={value.color}>{value.name}</Tag>,
+  },
   ...baseDictionaryColumns<StatusType>(),
 ];
 export const externalPersonsColumns: ColumnsType<ExternalPersonType> = [

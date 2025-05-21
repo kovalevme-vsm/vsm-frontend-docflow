@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { ReactElement } from 'react';
 
+import CreateNewDocumentWidget from 'widgets/create-new-document-widget';
 import { SidebarHiddenButton } from 'widgets/sidebar-menu/ui/sidebar-hidden-button.tsx';
 import { SidebarMenuItem } from 'widgets/sidebar-menu/ui/sidebar-menu-item.tsx';
 
@@ -20,7 +21,9 @@ export function SidebarMenu(): ReactElement {
       <div className={'flex h-full flex-col justify-between'}>
         <div>
           <ApplicationLogo size={'small'} />
+
           <div className={'my-16 -ml-4'}>
+            <CreateNewDocumentWidget />
             {SIDEBAR_ITEMS.map((value) => (
               <SidebarMenuItem key={value.route} {...value} />
             ))}

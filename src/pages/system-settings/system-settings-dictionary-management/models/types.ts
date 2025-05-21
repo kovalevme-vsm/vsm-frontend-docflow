@@ -14,6 +14,7 @@ export interface DocumentAttachmentType extends BaseType {
 export interface StatusType extends BaseType {
   id: string;
   name: string;
+  color: string;
 }
 export interface ExternalPersonType extends BaseType {
   id: string;

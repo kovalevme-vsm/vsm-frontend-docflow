@@ -1,4 +1,4 @@
-import { Form, Input } from 'antd';
+import { ColorPicker, Form, Input } from 'antd';
 
 import {
   confidentialityLevelColumns,
@@ -76,17 +76,30 @@ export const TAB_ITEMS = [
         dictionaryKey={'statuses'}
         columns={statusesColumns}
         formFields={
-          <Form.Item
-            name={'name'}
-            rules={[
-              {
-                required: true,
-                message: 'Пожалуйста, укажите Наименование',
-              },
-            ]}
-          >
-            <Input placeholder={'Наименование'} />
-          </Form.Item>
+          <>
+            <Form.Item
+              name={'name'}
+              rules={[
+                {
+                  required: true,
+                  message: 'Пожалуйста, укажите Наименование',
+                },
+              ]}
+            >
+              <Input placeholder={'Наименование'} />
+            </Form.Item>
+            <Form.Item
+              name="color"
+              normalize={(value) => {
+                return value?.toHexString();
+              }}
+              getValueProps={(value) => {
+                return { value };
+              }}
+            >
+              <ColorPicker showText={(color) => <span>Цвет статуса ({color.toHexString()})</span>} />
+            </Form.Item>
+          </>
         }
       />
     ),

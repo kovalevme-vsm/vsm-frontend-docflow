@@ -1,4 +1,5 @@
-import { TbApi, TbBook, TbBooks, TbLock, TbNotification, TbRoute2, TbSettings, TbUsers } from 'react-icons/tb';
+import { IoGitBranch } from 'react-icons/io5';
+import { TbApi, TbBook, TbBooks, TbLock, TbNotification, TbSettings, TbUsers } from 'react-icons/tb';
 
 import { ROUTES } from 'shared/const';
 
@@ -22,7 +23,7 @@ export const SettingsItems: SettingsItem[] = [
   },
   {
     title: 'Управление маршрутами и этапами',
-    icon: TbRoute2,
+    icon: IoGitBranch,
     path: ROUTES.SYSTEM_SETTINGS_ROUTE_MANAGEMENT,
   },
   {

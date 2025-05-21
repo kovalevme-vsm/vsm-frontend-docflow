@@ -1,4 +1,4 @@
-import { Button } from 'antd';
+import { Button, Tag } from 'antd';
 import { ReactElement } from 'react';
 import { TbApi, TbSettings } from 'react-icons/tb';
 
@@ -18,7 +18,9 @@ export default function SystemSettingsIntegrationManagement(): ReactElement {
         description={'Подключайте новые сервисы, управляйте и просматривайте журналы интеграций'}
       />
       <div className={'grid grid-cols-2 gap-4'}>
-        <div className={'flex items-center justify-between rounded-2xl bg-white p-6'}>
+        <div
+          className={'flex items-center justify-between rounded-2xl bg-gradient-to-bl from-green-100/50 to-white p-6'}
+        >
           <div className={'space-y-2'}>
             <div
               className={
@@ -30,6 +32,9 @@ export default function SystemSettingsIntegrationManagement(): ReactElement {
             <div className={'flex flex-col'}>
               <span className={'font-semibold'}>Active Directory</span>
               <span className={'text-xs'}>Справочник пользователей</span>
+              <Tag color={'error'} className={'!mt-2 w-fit'}>
+                Несконфигурирован
+              </Tag>
             </div>
           </div>
           <div>
@@ -48,6 +53,9 @@ export default function SystemSettingsIntegrationManagement(): ReactElement {
             <div className={'flex flex-col'}>
               <span className={'font-semibold'}>1C:Предприятие</span>
               <span className={'text-xs'}>Интеграция с 1C:Бухгалтерия</span>
+              <Tag color={'error'} className={'!mt-2 w-fit'}>
+                Несконфигурирован
+              </Tag>
             </div>
           </div>
           <div>
@@ -66,6 +74,9 @@ export default function SystemSettingsIntegrationManagement(): ReactElement {
             <div className={'flex flex-col'}>
               <span className={'font-semibold'}>Контур Диадок</span>
               <span className={'text-xs'}>Интеграция ЭДО</span>
+              <Tag color={'error'} className={'!mt-2 w-fit'}>
+                Несконфигурирован
+              </Tag>
             </div>
           </div>
           <div>
@@ -84,6 +95,9 @@ export default function SystemSettingsIntegrationManagement(): ReactElement {
             <div className={'flex flex-col'}>
               <span className={'font-semibold'}>Контур Экстерн</span>
               <span className={'text-xs'}>Интеграция ЭДО</span>
+              <Tag color={'error'} className={'!mt-2 w-fit'}>
+                Несконфигурирован
+              </Tag>
             </div>
           </div>
           <div>
