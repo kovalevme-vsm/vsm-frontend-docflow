@@ -17,7 +17,7 @@ export default function SystemSettingsIntegrationManagement(): ReactElement {
         title={'Интеграции и API'}
         description={'Подключайте новые сервисы, управляйте и просматривайте журналы интеграций'}
       />
-      <div className={'grid grid-cols-3 gap-4'}>
+      <div className={'grid grid-cols-2 gap-4'}>
         <div className={'flex items-center justify-between rounded-2xl bg-white p-6'}>
           <div className={'space-y-2'}>
             <div
