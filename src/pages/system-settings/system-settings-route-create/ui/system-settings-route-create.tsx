@@ -38,11 +38,11 @@ function SystemSettingsRouteCreate(): ReactElement {
           <Divider />
           <Label title={'Этапы маршрута'} icon={IoGitCommit} />
           <Empty />
-
           <div className={'absolute right-0 bottom-0 left-4'}>
             <Divider />
             <div className={'flex w-full gap-2'}>
               <button
+                type={'button'}
                 className={
                   'flex flex-1 cursor-pointer flex-col gap-1 rounded-xl bg-gray-200/60 px-4 py-2 duration-300 hover:scale-95 hover:text-blue-500'
                 }

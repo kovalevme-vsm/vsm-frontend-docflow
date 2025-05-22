@@ -12,7 +12,7 @@ export function Empty(): ReactElement {
       </div>
       <div className={'mt-2 flex flex-col items-center justify-center'}>
         <span className={'text-sm font-medium text-gray-400 dark:text-gray-600'}>Объекты отсутствуют</span>
-        <span className={'text-xs text-gray-400 dark:text-gray-600'}>
+        <span className={'text-center text-xs text-gray-400 dark:text-gray-600'}>
           Пока нет данных. Мы сообщим вам, когда появятся обновления.
         </span>
       </div>
