@@ -1,1 +1,1 @@
-export { default } from './ui/page';
+export { default } from './ui/system-settings-route-management';

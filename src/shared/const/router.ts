@@ -4,6 +4,7 @@ const SYSTEM_SETTINGS = {
   SYSTEM_SETTINGS_DICTIONARY: '/system-settings/dictionary-management',
   SYSTEM_SETTINGS_USER_MANAGEMENT: '/system-settings/user-management',
   SYSTEM_SETTINGS_ROUTE_MANAGEMENT: '/system-settings/route-management',
+  SYSTEM_SETTINGS_ROUTE_MANAGEMENT_DETAIL: (id: string) => `/system-settings/route-management/${id}`,
   SYSTEM_SETTINGS_ROUTE_MANAGEMENT_CREATE: '/system-settings/route-management/create',
   SYSTEM_SETTINGS_INTEGRATION_MANAGEMENT: '/system-settings/integration-management',
   SYSTEM_SETTINGS_NOTIFICATION_MANAGEMENT: '/system-settings/notification-management',

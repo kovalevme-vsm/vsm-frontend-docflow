@@ -33,3 +33,7 @@
 .ant-upload {
     width: 100% !important;
 }
+
+.custom-switch.ant-switch-checked {
+    background-color: var(--color-green-500)   !important; /* Зелёный цвет */
+}

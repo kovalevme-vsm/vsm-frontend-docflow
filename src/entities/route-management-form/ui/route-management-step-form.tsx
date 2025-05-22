@@ -13,25 +13,25 @@ type Props = {
 export function RouteManagementStepForm({ form }: Props): ReactElement {
   return (
     <Form form={form}>
-      <Form.Item<IRouteStep> name={'name'} rules={[{ required: true, message: 'Пожалуйста, укажите имя шага' }]}>
-        <Input placeholder={'Название шага'} allowClear />
+      <Form.Item<IRouteStep> name={'name'} rules={[{ required: true, message: 'Пожалуйста, укажите имя этапа' }]}>
+        <Input placeholder={'Название этапа'} allowClear />
       </Form.Item>
-      <Form.Item<IRouteStep> name={'step_type'} rules={[{ required: true, message: 'Пожалуйста, укажите тип шага' }]}>
+      <Form.Item<IRouteStep> name={'step_type'} rules={[{ required: true, message: 'Пожалуйста, укажите тип этапа' }]}>
         <SelectInfinite
           apiPath={QUERY.SYSTEM_SELECT_STEP_TYPES.paths.index}
           queryKey={QUERY.SYSTEM_SELECT_STEP_TYPES.keys.list}
-          placeholder={'Тип шага'}
+          placeholder={'Тип этапа'}
           allowClear
         />
       </Form.Item>
       <Form.Item<IRouteStep>
         name={'status'}
-        rules={[{ required: true, message: 'Пожалуйста, укажите статус завершения шага' }]}
+        rules={[{ required: true, message: 'Пожалуйста, укажите статус завершения этапа' }]}
       >
         <SelectInfinite
           apiPath={QUERY.SYSTEM_SETTINGS_DICTIONARY_MANAGEMENT.paths.index('statuses')}
           queryKey={QUERY.SYSTEM_SETTINGS_DICTIONARY_MANAGEMENT.keys.list('statuses')}
-          placeholder={'Статус завершения шага'}
+          placeholder={'Статус завершения этапа'}
           allowClear
         />
       </Form.Item>

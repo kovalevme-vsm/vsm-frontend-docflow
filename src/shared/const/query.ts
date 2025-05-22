@@ -53,4 +53,8 @@ export const QUERY = {
     paths: { index: 'routes/template', detail: (id: string) => `routes/template/${id}` },
     keys: { list: ['api', 'routes', 'template'], detail: (id: string) => ['api', 'routes', 'template', id] },
   },
+  SYSTEM_SETTINGS_ROUTE_STEP_MANAGEMENT: {
+    paths: { index: 'routes/template', detail: (id: string) => `routes/template/${id}` },
+    keys: { list: ['api', 'routes', 'template'], detail: (id: string) => ['api', 'routes', 'template', id] },
+  },
 };
