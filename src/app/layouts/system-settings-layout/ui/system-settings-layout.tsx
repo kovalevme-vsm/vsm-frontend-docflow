@@ -13,7 +13,10 @@ export default function SystemSettingsLayout(): ReactElement {
     <div className={'h-full space-y-4'}>
       <PageHeader icon={TbSettings} title={'Системные настройки'} />
       <div className={'flex h-[calc(100%-3.5rem)] gap-4'}>
-        <div id={'sub-menu'} className={'flex h-full flex-col gap-2 border-r border-r-gray-200 pr-4'}>
+        <div
+          id={'sub-menu'}
+          className={'flex h-full flex-col gap-2 border-r border-r-gray-200 pr-4 dark:border-r-gray-800'}
+        >
           {SettingsItems.map((value) => (
             <SystemSettingsMenuItem key={value.title} {...value} />
           ))}
