@@ -1,4 +1,4 @@
-import { Form, FormInstance, Input, Radio } from 'antd';
+import { Form, Input, Radio } from 'antd';
 import { ReactElement } from 'react';
 
 import { IRoute } from 'entities/route-management-form/models/types.ts';
@@ -6,13 +6,9 @@ import SelectInfinite from 'entities/select-infinite';
 
 import { QUERY } from 'shared/const';
 
-type Props = {
-  form: FormInstance<IRoute>;
-};
-
-export function RouteManagementBaseForm({ form }: Props): ReactElement {
+export function RouteManagementBaseForm(): ReactElement {
   return (
-    <Form form={form}>
+    <>
       <Form.Item<IRoute> name={'name'} rules={[{ required: true, message: 'Пожалуйста, укажите имя маршрута' }]}>
         <Input placeholder={'Название маршрута'} allowClear />
       </Form.Item>
@@ -47,6 +43,6 @@ export function RouteManagementBaseForm({ form }: Props): ReactElement {
           style={{ resize: 'none' }}
         />
       </Form.Item>
-    </Form>
+    </>
   );
 }
