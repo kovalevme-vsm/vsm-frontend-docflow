@@ -13,7 +13,7 @@ type Props = {
 export function RouteManagementStepParticipantForm({ form }: Props): ReactElement {
   const participantType = Form.useWatch('participant_type', form);
   return (
-    <Form form={form}>
+    <>
       <Form.Item<IRouteStepParticipant>
         name={'participant_type'}
         rules={[{ required: true, message: 'Пожалуйста, укажите тип участника' }]}
@@ -54,6 +54,6 @@ export function RouteManagementStepParticipantForm({ form }: Props): ReactElemen
       <Form.Item<IRouteStepParticipant> name="can_delegate" valuePropName="checked" label={null}>
         <Checkbox>Может делегировать</Checkbox>
       </Form.Item>
-    </Form>
+    </>
   );
 }

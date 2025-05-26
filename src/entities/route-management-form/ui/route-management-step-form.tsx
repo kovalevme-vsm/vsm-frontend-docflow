@@ -1,4 +1,4 @@
-import { Form, FormInstance, Input, Radio } from 'antd';
+import { Form, Input, Radio } from 'antd';
 import { ReactElement } from 'react';
 
 import { IRouteStep } from 'entities/route-management-form/models/types.ts';
@@ -6,13 +6,9 @@ import SelectInfinite from 'entities/select-infinite';
 
 import { QUERY } from 'shared/const';
 
-type Props = {
-  form: FormInstance<IRouteStep>;
-};
-
-export function RouteManagementStepForm({ form }: Props): ReactElement {
+export function RouteManagementStepForm(): ReactElement {
   return (
-    <Form form={form}>
+    <>
       <Form.Item<IRouteStep> name={'name'} rules={[{ required: true, message: 'Пожалуйста, укажите имя этапа' }]}>
         <Input placeholder={'Название этапа'} allowClear />
       </Form.Item>
@@ -46,6 +42,6 @@ export function RouteManagementStepForm({ form }: Props): ReactElement {
           buttonStyle="solid"
         />
       </Form.Item>
-    </Form>
+    </>
   );
 }
