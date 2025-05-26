@@ -8,9 +8,7 @@ import { useNavigate } from 'react-router';
 
 import { useCreateRoute } from 'pages/system-settings/system-settings-route-create/api/use-create-route.ts';
 import { IRouteCreate } from 'pages/system-settings/system-settings-route-create/models/types.ts';
-import {
-  SystemSettingsRouteStepModal
-} from 'pages/system-settings/system-settings-route-create/ui/system-settings-route-step-modal.tsx';
+import { SystemSettingsRouteStepModal } from 'pages/system-settings/system-settings-route-create/ui/system-settings-route-step-modal.tsx';
 
 import { Empty } from 'entities/empty';
 import { RouteManagementBaseForm } from 'entities/route-management-form';
