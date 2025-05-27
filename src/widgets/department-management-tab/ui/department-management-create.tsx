@@ -7,6 +7,7 @@ import { DepartmentManagerType } from 'widgets/department-management-tab/models/
 import { DepartmentManagementForm } from 'widgets/department-management-tab/ui/department-management-form.tsx';
 
 import { useConfirmCloseModal } from 'shared/hooks';
+import { ModalHeader } from 'shared/ui';
 
 type Props = {
   isOpen: boolean;
@@ -20,6 +21,7 @@ export function DepartmentManagementCreate(props: Props): ReactElement {
 
   return (
     <Modal centered open={props.isOpen} onCancel={handleCancel} footer={null}>
+      <ModalHeader icon={AiOutlineUsergroupAdd} title={'Создание нового Отдела'} />
       <div className="my-6 flex flex-col items-center justify-center gap-2">
         <div className="w-fit rounded-3xl bg-gray-100 p-3 dark:bg-gray-50">
           <AiOutlineUsergroupAdd className="text-5xl text-blue-500" />

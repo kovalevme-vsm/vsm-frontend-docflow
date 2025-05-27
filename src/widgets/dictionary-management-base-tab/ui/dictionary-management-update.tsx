@@ -7,6 +7,7 @@ import { useUpdateDictionaryManagement } from 'widgets/dictionary-management-bas
 import { DictionaryManagementForm } from 'widgets/dictionary-management-base-tab/ui/dictionary-management-form.tsx';
 
 import { useConfirmCloseModal } from 'shared/hooks';
+import { ModalHeader } from 'shared/ui';
 
 type Props = {
   dictionary: string;
@@ -34,12 +35,7 @@ export function DictionaryManagementUpdate<T>(props: Props): ReactElement {
 
   return (
     <Modal centered loading={isPending} open={props.isOpen} onCancel={handleCancel} footer={null}>
-      <div className="my-6 flex flex-col items-center justify-center gap-2">
-        <div className="w-fit rounded-3xl bg-gray-100 p-3 dark:bg-gray-50">
-          <TbUserEdit className="text-5xl text-blue-500" />
-        </div>
-        <h1 className="text-center text-xl font-medium">Редактирование элемента</h1>
-      </div>
+      <ModalHeader icon={TbUserEdit} title={'Редактирование элемента'} />
       <DictionaryManagementForm<Omit<T, 'id' | 'created_at'>>
         form={form}
         onFinish={onUpdateDictionary}

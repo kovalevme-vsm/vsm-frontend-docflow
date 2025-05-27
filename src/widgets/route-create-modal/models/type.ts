@@ -1,6 +1,5 @@
-export interface IRouteCreate {
+export interface RouteCreateFormValues {
   name: string;
   description: string;
-  is_active: boolean;
   document_type: string;
 }

@@ -1,20 +1,15 @@
-import { Button, Skeleton } from 'antd';
-import { ReactElement, useCallback } from 'react';
+import { Button } from 'antd';
+import { ReactElement } from 'react';
 import { IoAdd, IoGitBranch } from 'react-icons/io5';
-import { useNavigate } from 'react-router';
 
-import { useListRouteManagement } from 'pages/system-settings/system-settings-route-management/api/use-list-route-management.ts';
-import { SystemSettingsRouteManagementItem } from 'pages/system-settings/system-settings-route-management/ui/system-settings-route-management-item.tsx';
+import RouteCreateModal from 'widgets/route-create-modal';
 
 import { SectionHeader } from 'entities/section-header';
 
-import { ROUTES } from 'shared/const';
+import { useOpenModal } from 'shared/hooks';
 
 export default function SystemSettingsRouteManagement(): ReactElement {
-  const { data: routesManagementList, isPending } = useListRouteManagement();
-  const navigate = useNavigate();
-  const handleCreateRoute = useCallback(() => navigate(ROUTES.SYSTEM_SETTINGS_ROUTE_MANAGEMENT_CREATE), []);
-
+  const { modalActive, handleCloseModal, handleOpenModal } = useOpenModal();
   return (
     <div className={'w-full space-y-4'}>
       <SectionHeader
@@ -22,22 +17,10 @@ export default function SystemSettingsRouteManagement(): ReactElement {
         title={'Управление маршрутами и этапами'}
         description={'Создавайте, редактируйте, удаляйте маршруты для каждого типа документов'}
       />
-      <Button onClick={handleCreateRoute} type={'primary'} icon={<IoAdd />}>
+      <Button onClick={handleOpenModal} type={'primary'} icon={<IoAdd />}>
         Добавить маршрут
       </Button>
-      <div className={'grid grid-cols-2 gap-4'}>
-        {isPending && (
-          <>
-            <Skeleton.Input active className={'!h-40 !w-full !rounded-2xl'} />
-            <Skeleton.Input active className={'!h-40 !w-full !rounded-2xl'} />
-            <Skeleton.Input active className={'!h-40 !w-full !rounded-2xl'} />
-            <Skeleton.Input active className={'!h-40 !w-full !rounded-2xl'} />
-            <Skeleton.Input active className={'!h-40 !w-full !rounded-2xl'} />
-            <Skeleton.Input active className={'!h-40 !w-full !rounded-2xl'} />
-          </>
-        )}
-        {routesManagementList?.results.map((value) => <SystemSettingsRouteManagementItem key={value.id} {...value} />)}
-      </div>
+      <RouteCreateModal isOpen={modalActive} onClose={handleCloseModal} />
     </div>
   );
 }

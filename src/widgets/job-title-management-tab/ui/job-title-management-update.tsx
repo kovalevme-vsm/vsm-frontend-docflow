@@ -8,6 +8,7 @@ import { JobTitleManagerType } from 'widgets/job-title-management-tab/models/typ
 import { JobTitleManagementForm } from 'widgets/job-title-management-tab/ui/job-title-management-from.tsx';
 
 import { useConfirmCloseModal } from 'shared/hooks';
+import { ModalHeader } from 'shared/ui';
 
 type Props = {
   isOpen: boolean;
@@ -33,12 +34,7 @@ export function JobTitleManagementUpdate(props: Props): ReactElement {
 
   return (
     <Modal centered loading={isPending} open={props.isOpen} onCancel={handleCancel} footer={null}>
-      <div className="my-6 flex flex-col items-center justify-center gap-2">
-        <div className="w-fit rounded-3xl bg-gray-100 p-3 dark:bg-gray-50">
-          <TbUserEdit className="text-5xl text-blue-500" />
-        </div>
-        <h1 className="text-center text-xl font-medium">Редактирование должности</h1>
-      </div>
+      <ModalHeader icon={TbUserEdit} title={'Редактирование должности'} />
       <JobTitleManagementForm<Omit<JobTitleManagerType, 'id' | 'created_at'>>
         form={form}
         onFinish={onUpdateJobTitle}

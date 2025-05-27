@@ -44,7 +44,7 @@ export default function SelectInfinite({ apiPath, queryKey, ...selectProps }: Pr
     <Select
       options={items}
       searchValue={searchValue}
-      onSearch={onChangeSearchValue}
+      onSearch={selectProps.showSearch ? onChangeSearchValue : undefined}
       loading={isPending || isFetchingNextPage}
       onPopupScroll={handlePopupScroll}
       {...selectProps}
