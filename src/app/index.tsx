@@ -25,6 +25,9 @@ const SystemSettingsDictionaryManagement = lazy(
 );
 const SystemSettingsUserManagement = lazy(() => import('pages/system-settings/system-settings-user-management'));
 const SystemSettingsRouteManagement = lazy(() => import('pages/system-settings/system-settings-route-management'));
+const SystemSettingsRouteDetailManagement = lazy(
+  () => import('pages/system-settings/system-settings-route-management-detail')
+);
 const SystemSettingsIntegrationManagement = lazy(
   () => import('pages/system-settings/system-settings-integration-management')
 );
@@ -48,6 +51,10 @@ createRoot(document.getElementById('root')!).render(
           <Route path={ROUTES.SYSTEM_SETTINGS_USER_MANAGEMENT} element={<SystemSettingsUserManagement />} />
           <Route path={ROUTES.SYSTEM_SETTINGS_ROUTE_MANAGEMENT}>
             <Route index element={<SystemSettingsRouteManagement />} />
+            <Route
+              path={ROUTES.SYSTEM_SETTINGS_ROUTE_MANAGEMENT_DETAIL(':id')}
+              element={<SystemSettingsRouteDetailManagement />}
+            />
           </Route>
           <Route
             path={ROUTES.SYSTEM_SETTINGS_INTEGRATION_MANAGEMENT}
