@@ -1,32 +1,69 @@
-import { Background, ReactFlow } from '@xyflow/react';
-import { Segmented, Tag } from 'antd';
+import { Background, Handle, Position, ReactFlow } from '@xyflow/react';
+import { Button, Divider, Segmented, Tag } from 'antd';
 import dayjs from 'dayjs';
 import { motion } from 'framer-motion';
-import { ReactElement } from 'react';
+import { ReactElement, useCallback, useMemo } from 'react';
+import { IoIosArrowBack } from 'react-icons/io';
 import { IoGitBranch } from 'react-icons/io5';
-import { useParams, useSearchParams } from 'react-router';
+import { useNavigate, useParams, useSearchParams } from 'react-router';
 
 import { useRetrieveRouteManagement } from 'pages/system-settings/system-settings-route-management-detail/api/use-retrieve-route-management.ts';
 import { RouteManagementBaseSegment } from 'pages/system-settings/system-settings-route-management-detail/ui/route-management-base-segment.tsx';
+import { RouteManagementStepSegment } from 'pages/system-settings/system-settings-route-management-detail/ui/route-management-step-segment.tsx';
 
 import { SectionHeader } from 'entities/section-header';
 
+import { ROUTES } from 'shared/const';
+
+function TextUpdaterNode({ data }) {
+  return (
+    <>
+      <Handle type="target" position={Position.Left} />
+      <div className={'flex min-w-64 flex-col gap-2 rounded-xl bg-gray-100 p-4'}>
+        <span className={'font-medium'}>{data.label}</span>
+        <Divider size={'small'} />
+        <div className={'flex gap-2'}>
+          <Tag>На подпись</Tag> <Tag>Подписано</Tag>
+        </div>
+      </div>
+      <Handle type="source" position={Position.Right} id="a" />
+    </>
+  );
+}
 export function SystemSettingsRouteManagementDetail(): ReactElement {
   const [searchParams, setSearchParams] = useSearchParams();
   const segment = searchParams.get('segment') || 'base';
   const { id } = useParams();
   const { data } = useRetrieveRouteManagement(id);
 
+  const navigate = useNavigate();
+
+  const handleBack = useCallback(() => {
+    navigate(ROUTES.SYSTEM_SETTINGS_ROUTE_MANAGEMENT);
+  }, []);
+
+  const nodeTypes = useMemo(() => ({ textUpdater: TextUpdaterNode }), []);
+
   return (
-    <div className={'flex h-full w-full space-y-4'}>
+    <div className={'flex h-full max-h-full w-full space-y-4 overflow-hidden'}>
       <div className={'h-full w-full flex-1/2'}>
-        <ReactFlow>
+        <ReactFlow
+          fitView
+          attributionPosition="bottom-left"
+          nodes={data?.nodes}
+          edges={data?.edges}
+          defaultEdgeOptions={{ animated: true }}
+          nodeTypes={nodeTypes}
+        >
+          <Button onClick={handleBack} className={'z-10 m-4'} icon={<IoIosArrowBack />}>
+            К списку маршрутов
+          </Button>
           {data && (
             <motion.div
               initial={{ y: -30, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.3 }}
-              className={'m-4 w-1/2 rounded-xl bg-neutral-50 p-4 shadow-lg/5'}
+              className={'fixed m-4 w-1/4 rounded-xl bg-neutral-50 p-4 shadow-lg/5'}
             >
               <div className={'flex items-start justify-between'}>
                 <div>
@@ -51,7 +88,7 @@ export function SystemSettingsRouteManagementDetail(): ReactElement {
           initial={{ x: 100, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.3 }}
-          className={'h-full w-full flex-1/6 p-4 shadow-lg'}
+          className={'relative h-full w-1/3 p-4 shadow-lg'}
         >
           <SectionHeader
             icon={IoGitBranch}
@@ -67,7 +104,10 @@ export function SystemSettingsRouteManagementDetail(): ReactElement {
             block
             onChange={(value) => setSearchParams({ segment: value })}
           />
-          <div className={'my-4'}>{segment === 'base' && <RouteManagementBaseSegment data={data} />}</div>
+          <div className={'my-4'}>
+            {segment === 'base' && <RouteManagementBaseSegment data={data} />}
+            {segment === 'route-steps' && <RouteManagementStepSegment />}
+          </div>
         </motion.div>
       )}
     </div>

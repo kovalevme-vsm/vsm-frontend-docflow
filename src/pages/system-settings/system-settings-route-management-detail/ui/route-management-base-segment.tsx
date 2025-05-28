@@ -1,9 +1,9 @@
 import { Button, Form, Input, Popconfirm, Radio } from 'antd';
-import { ReactElement, useCallback, useEffect } from 'react';
+import { ReactElement, useEffect } from 'react';
 import { BiSave } from 'react-icons/bi';
-import { IoIosArrowBack, IoIosWarning } from 'react-icons/io';
+import { IoIosWarning } from 'react-icons/io';
 import { TiDelete } from 'react-icons/ti';
-import { useNavigate, useParams } from 'react-router';
+import { useParams } from 'react-router';
 
 import { useDeleteRouteManagement } from 'pages/system-settings/system-settings-route-management-detail/api/use-delete-route-management.ts';
 import { useUpdateRouteManagement } from 'pages/system-settings/system-settings-route-management-detail/api/use-update-route-management.ts';
@@ -11,7 +11,7 @@ import { RouteData } from 'pages/system-settings/system-settings-route-managemen
 
 import SelectInfinite from 'entities/select-infinite';
 
-import { QUERY, ROUTES } from 'shared/const';
+import { QUERY } from 'shared/const';
 
 type Props = {
   data?: RouteData;
@@ -22,16 +22,10 @@ export function RouteManagementBaseSegment(props: Props): ReactElement {
   const { id } = useParams();
   const { mutate: onUpdateRoute, isPending } = useUpdateRouteManagement(id);
   const { mutate: onDeleteRoute, isPending: isPendingDelete } = useDeleteRouteManagement();
-  const navigate = useNavigate();
 
   useEffect(() => {
     if (props.data) form.setFieldsValue(props.data);
   }, [props.data]);
-
-  const handleBack = useCallback(() => {
-    form.resetFields();
-    navigate(ROUTES.SYSTEM_SETTINGS_ROUTE_MANAGEMENT);
-  }, []);
 
   return (
     <Form form={form} onFinish={onUpdateRoute}>
@@ -87,9 +81,6 @@ export function RouteManagementBaseSegment(props: Props): ReactElement {
       )}
       <Form.Item>
         <div className={'mt-4 flex justify-end gap-2'}>
-          <Button onClick={handleBack} icon={<IoIosArrowBack />}>
-            К списку маршрутов
-          </Button>
           {props.data && props.data.can_delete && (
             <Popconfirm
               title={'Вы уверены что хотите удалить шаблон маршрут'}
