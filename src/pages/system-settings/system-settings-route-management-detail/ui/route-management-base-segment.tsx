@@ -1,9 +1,11 @@
-import { Button, Form, Input, Radio } from 'antd';
+import { Button, Form, Input, Popconfirm, Radio } from 'antd';
 import { ReactElement, useCallback, useEffect } from 'react';
 import { BiSave } from 'react-icons/bi';
 import { IoIosArrowBack, IoIosWarning } from 'react-icons/io';
+import { TiDelete } from 'react-icons/ti';
 import { useNavigate, useParams } from 'react-router';
 
+import { useDeleteRouteManagement } from 'pages/system-settings/system-settings-route-management-detail/api/use-delete-route-management.ts';
 import { useUpdateRouteManagement } from 'pages/system-settings/system-settings-route-management-detail/api/use-update-route-management.ts';
 import { RouteData } from 'pages/system-settings/system-settings-route-management-detail/models/types.ts';
 
@@ -19,6 +21,7 @@ export function RouteManagementBaseSegment(props: Props): ReactElement {
   const [form] = Form.useForm();
   const { id } = useParams();
   const { mutate: onUpdateRoute, isPending } = useUpdateRouteManagement(id);
+  const { mutate: onDeleteRoute, isPending: isPendingDelete } = useDeleteRouteManagement();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -77,9 +80,9 @@ export function RouteManagementBaseSegment(props: Props): ReactElement {
           />
         </Form.Item>
       ) : (
-        <span className={'flex items-center gap-2 text-xs text-yellow-400'}>
+        <span className={'mt-4 flex items-center gap-2 text-xs text-yellow-400'}>
           <IoIosWarning />
-          Маршрут будет выключен, пока в нем нет ниодного шага.
+          Управление статусом маршрута недоступно - отсутсвуют этапы маршрута.
         </span>
       )}
       <Form.Item>
@@ -87,6 +90,18 @@ export function RouteManagementBaseSegment(props: Props): ReactElement {
           <Button onClick={handleBack} icon={<IoIosArrowBack />}>
             К списку маршрутов
           </Button>
+          {props.data && props.data.can_delete && (
+            <Popconfirm
+              title={'Вы уверены что хотите удалить шаблон маршрут'}
+              okButtonProps={{ danger: true, loading: isPendingDelete }}
+              okText={'Удалить'}
+              onConfirm={() => onDeleteRoute({ id })}
+            >
+              <Button loading={isPending} type={'primary'} danger icon={<TiDelete />}>
+                Удалить маршрут
+              </Button>
+            </Popconfirm>
+          )}
           <Button loading={isPending} htmlType={'submit'} type={'primary'} icon={<BiSave />}>
             Сохранить
           </Button>

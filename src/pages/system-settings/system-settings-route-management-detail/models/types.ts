@@ -7,4 +7,5 @@ export interface RouteData {
   document_type_display: string;
   steps_count: number;
   created_at: string;
+  can_delete: boolean;
 }
